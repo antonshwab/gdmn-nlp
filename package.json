@@ -1,0 +1,30 @@
+{
+  "name": "gdmn-nlp",
+  "version": "1.0.0",
+  "description": "gdmn-nlp",
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "tsc && jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gsbelarus/gdmn-nlp.git"
+  },
+  "keywords": [
+    "nlp"
+  ],
+  "author": "Golden Software of Belarus, Ltd",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/gsbelarus/gdmn-nlp/issues"
+  },
+  "homepage": "https://github.com/gsbelarus/gdmn-nlp#readme",
+  "devDependencies": {
+    "@types/jest": "^22.2.3",
+    "@types/node": "^9.6.7",
+    "jest": "^22.4.3",
+    "ts-jest": "^22.4.4",
+    "ts-node": "^6.0.2",
+    "typescript": "^2.8.3"
+  }
+}
