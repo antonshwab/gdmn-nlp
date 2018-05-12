@@ -10,7 +10,7 @@ export type SetParsedText = {
   readonly phrase?: Phrase;
 };
 
-const jison = require('../jison/lib/jison');
+const jison = require('jison');
 
 const parser = new jison.Parser(grammar);
 

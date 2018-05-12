@@ -4,7 +4,7 @@ const token_1 = require("../morphology/token");
 const morphAnalyzer_1 = require("../morphology/morphAnalyzer");
 const grammar_1 = require("./grammar");
 const semantics_1 = require("./semantics");
-const jison = require('../jison/lib/jison');
+const jison = require('jison');
 const parser = new jison.Parser(grammar_1.grammar);
 function recurs(words, curr, cmbn) {
     if (curr.length >= words.length - 1) {
