@@ -2,12 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Punctuation = ['.', ',', '!', '?', ';'];
 class Token {
-    constructor(kind, tkn) {
+    constructor(kind, tkn, startOffset) {
         this.getDisplayText = () => {
             return this.kind === 'space' ? this.tkn.replace(' ', String.fromCharCode(9251)) : this.tkn;
         };
         this.kind = kind;
         this.tkn = tkn;
+        this.startOffset = startOffset;
     }
 }
 exports.Token = Token;
@@ -36,7 +37,7 @@ function tokenize(text) {
             e++;
         }
         if (e - b) {
-            result.push(new Token(bKind, text.slice(b, e)));
+            result.push(new Token(bKind, text.slice(b, e), b));
         }
         b = e;
     }

@@ -3,12 +3,14 @@ export type TokenKind = 'space' | 'word' | 'punct' | 'nl' | 'spec';
 const Punctuation = ['.', ',', '!', '?', ';'];
 
 export class Token {
-  kind: TokenKind;
-  tkn: string;
+  readonly kind: TokenKind;
+  readonly tkn: string;
+  readonly startOffset: number;
 
-  constructor (kind: TokenKind, tkn: string) {
+  constructor (kind: TokenKind, tkn: string, startOffset: number) {
     this.kind = kind;
     this.tkn = tkn;
+    this.startOffset = startOffset;
   }
 
   getDisplayText = () => {
@@ -37,7 +39,7 @@ export function tokenize(text: string): Tokens {
   while (b < text.length) {
     let bKind: TokenKind = charBelongs(text, b), e: number = b + 1;
     while (e < text.length && bKind === charBelongs(text, e)) { e++; }
-    if (e - b) { result.push(new Token(bKind, text.slice(b, e))); }
+    if (e - b) { result.push(new Token(bKind, text.slice(b, e), b)); }
     b = e;
   }
   return result;

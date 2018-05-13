@@ -1,8 +1,9 @@
 export declare type TokenKind = 'space' | 'word' | 'punct' | 'nl' | 'spec';
 export declare class Token {
-    kind: TokenKind;
-    tkn: string;
-    constructor(kind: TokenKind, tkn: string);
+    readonly kind: TokenKind;
+    readonly tkn: string;
+    readonly startOffset: number;
+    constructor(kind: TokenKind, tkn: string, startOffset: number);
     getDisplayText: () => string;
 }
 export declare type Tokens = Token[];

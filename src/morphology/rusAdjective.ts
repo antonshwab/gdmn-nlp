@@ -157,7 +157,7 @@ export class RusAdjective extends Adjective {
       (this.word.startsWith(lexeme.stem2) ? lexeme.stem2 : ''));
     const divided = stem + (this.word === stem ? '' : '-' + this.word.slice(stem.length - this.word.length));
     const num = this.singular ? 'ед.ч.' : 'мн.ч.';
-    const cs = this.grammCase ? RusCaseNames[this.grammCase] : '';
+    const cs = typeof this.grammCase !== 'undefined' ? RusCaseNames[this.grammCase] : '';
     const anim = typeof this.animate === 'undefined' ? '' : (this.animate ? 'од; ' : 'неод; ');
     const gender = typeof this.gender === 'undefined' ? '' : RusGenderNames[this.gender] + ' род; ';
     const short = this.short ? 'кратк; ' : '';
@@ -171,7 +171,7 @@ export class RusAdjective extends Adjective {
   getSignature (): string {
     const lexeme = this.lexeme as RusAdjectiveLexeme;
     const num = this.singular ? 'Sing' : 'Plur';
-    const cs = this.grammCase ? ShortCaseNames[this.grammCase] : '';
+    const cs = typeof this.grammCase !== 'undefined' ? ShortCaseNames[this.grammCase] : '';
     // const anim = typeof this.animate === 'undefined' ? '' : (this.animate ? 'Anim' : 'Inan');
     const gender = typeof this.gender === 'undefined' ? '' : ShortGenderNames[this.gender];
     const short = this.short ? 'ADJS' : 'ADJF';
