@@ -17,5 +17,6 @@ export declare class RusAdjective extends Adjective {
     readonly short: boolean | undefined;
     constructor(word: string, lexeme: RusAdjectiveLexeme, morphSigns: RusAdjectiveMorphSigns);
     getDisplayText(): string;
+    static getSignature(short: boolean | undefined, category: RusAdjectiveCategory, gender: RusGender | undefined, singular: boolean, grammCase: RusCase | undefined): string;
     getSignature(): string;
 }

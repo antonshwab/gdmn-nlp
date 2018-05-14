@@ -1,23 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const chevrotain_1 = require("chevrotain");
 const token_1 = require("../morphology/token");
 const morphAnalyzer_1 = require("../morphology/morphAnalyzer");
-;
-;
+const morphTokens_1 = require("./morphTokens");
 function scan(text) {
-    const tokenTypes = {};
-    function getTokenType(w) {
-        const typeSignature = w.getSignature();
-        let result = tokenTypes[typeSignature];
-        if (!result) {
-            result = chevrotain_1.createToken({ name: typeSignature, pattern: chevrotain_1.Lexer.NA });
-            tokenTypes[typeSignature] = result;
-        }
-        return result;
-    }
     function createTokenInstance(w) {
-        const tokType = getTokenType(w);
+        const tokType = morphTokens_1.morphTokens[w.getSignature()];
+        if (!tokType) {
+            throw new Error(`Unknown type signature ${w.getSignature()} of word ${w.word}`);
+        }
         return {
             word: w,
             image: w.word,
@@ -44,10 +35,8 @@ function scan(text) {
     if (words.length) {
         recurs([]);
     }
-    return {
-        tokenTypes: Object.entries(tokenTypes).map(t => t[1]),
-        tokens: cmbn
-    };
+    return cmbn;
 }
 exports.scan = scan;
+;
 //# sourceMappingURL=lexer.js.map

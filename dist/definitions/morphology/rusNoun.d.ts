@@ -16,5 +16,6 @@ export declare class RusNoun extends Noun {
     readonly singular: boolean;
     constructor(word: string, lexeme: RusNounLexeme, grammCase: RusCase, singular: boolean);
     getDisplayText(): string;
+    static getSignature(animate: boolean, gender: RusGender, singular: boolean, grammCase: RusCase): string;
     getSignature(): string;
 }

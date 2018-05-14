@@ -164,13 +164,16 @@ class RusNoun extends morphology_1.Noun {
             decl + ' (' + lexeme.declensionZ + '); ' +
             num + '; ' + cs;
     }
+    static getSignature(animate, gender, singular, grammCase) {
+        const an = animate ? 'Anim' : 'Inan';
+        const gd = types_1.ShortGenderNames[gender];
+        const num = singular ? 'Sing' : 'Plur';
+        const cs = types_1.ShortCaseNames[grammCase];
+        return 'NOUN' + an + gd + num + cs;
+    }
     getSignature() {
         const lexeme = this.lexeme;
-        const num = this.singular ? 'Sing' : 'Plur';
-        const cs = types_1.ShortCaseNames[this.grammCase];
-        const an = lexeme.animate ? 'Anim' : 'Inan';
-        const gd = types_1.ShortGenderNames[lexeme.gender];
-        return 'NOUN' + an + gd + num + cs;
+        return RusNoun.getSignature(lexeme.animate, lexeme.gender, this.singular, this.grammCase);
     }
 }
 exports.RusNoun = RusNoun;

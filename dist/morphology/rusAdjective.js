@@ -150,14 +150,17 @@ class RusAdjective extends morphology_1.Adjective {
             ' скл. ' + lexeme.declensionZ + '; ' +
             num + '; ' + cs;
     }
+    static getSignature(short, category, gender, singular, grammCase) {
+        const sh = short ? 'ADJS' : 'ADJF';
+        const ct = types_1.ShortAdjectiveCategoryNames[category];
+        const gd = typeof gender === 'undefined' ? '' : types_1.ShortGenderNames[gender];
+        const num = singular ? 'Sing' : 'Plur';
+        const cs = typeof grammCase !== 'undefined' ? types_1.ShortCaseNames[grammCase] : '';
+        return sh + ct + gd + num + cs;
+    }
     getSignature() {
         const lexeme = this.lexeme;
-        const num = this.singular ? 'Sing' : 'Plur';
-        const cs = typeof this.grammCase !== 'undefined' ? types_1.ShortCaseNames[this.grammCase] : '';
-        // const anim = typeof this.animate === 'undefined' ? '' : (this.animate ? 'Anim' : 'Inan');
-        const gender = typeof this.gender === 'undefined' ? '' : types_1.ShortGenderNames[this.gender];
-        const short = this.short ? 'ADJS' : 'ADJF';
-        return short + types_1.ShortAdjectiveCategoryNames[lexeme.category] + gender + num + cs;
+        return RusAdjective.getSignature(this.short, lexeme.category, this.gender, this.singular, this.grammCase);
     }
 }
 exports.RusAdjective = RusAdjective;

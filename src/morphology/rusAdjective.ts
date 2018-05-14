@@ -168,13 +168,23 @@ export class RusAdjective extends Adjective {
       num + '; ' + cs;
   }
 
+  static getSignature(
+    short: boolean | undefined,
+    category: RusAdjectiveCategory,
+    gender: RusGender | undefined,
+    singular: boolean,
+    grammCase: RusCase | undefined): string
+  {
+    const sh = short ? 'ADJS' : 'ADJF';
+    const ct = ShortAdjectiveCategoryNames[category];
+    const gd = typeof gender === 'undefined' ? '' : ShortGenderNames[gender];
+    const num = singular ? 'Sing' : 'Plur';
+    const cs = typeof grammCase !== 'undefined' ? ShortCaseNames[grammCase] : '';
+    return sh + ct + gd + num + cs;
+  }
+
   getSignature (): string {
     const lexeme = this.lexeme as RusAdjectiveLexeme;
-    const num = this.singular ? 'Sing' : 'Plur';
-    const cs = typeof this.grammCase !== 'undefined' ? ShortCaseNames[this.grammCase] : '';
-    // const anim = typeof this.animate === 'undefined' ? '' : (this.animate ? 'Anim' : 'Inan');
-    const gender = typeof this.gender === 'undefined' ? '' : ShortGenderNames[this.gender];
-    const short = this.short ? 'ADJS' : 'ADJF';
-    return short + ShortAdjectiveCategoryNames[lexeme.category] + gender + num + cs;
+    return RusAdjective.getSignature(this.short, lexeme.category, this.gender, this.singular, this.grammCase);
   }
 }

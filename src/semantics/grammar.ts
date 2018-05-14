@@ -38,8 +38,12 @@ export const grammar = {
       ['NOUN_ACCS'],
     'NOUN_ACCS':
       [
-        'NOUNAnimMascPlurAccs', 'NOUNAnimFemnPlurAccs', 'NOUNAnimNeutPlurAccs',
-        'NOUNInanMascPlurAccs', 'NOUNInanFemnPlurAccs', 'NOUNInanNeutPlurAccs'
+        'NOUNAnimMascPlurAccs',
+        'NOUNAnimFemnPlurAccs',
+        'NOUNAnimNeutPlurAccs',
+        'NOUNInanMascPlurAccs',
+        'NOUNInanFemnPlurAccs',
+        'NOUNInanNeutPlurAccs'
       ],
     'PP':
       [['PREP PP_NOUN', 'yy.node("PP", [$1, ...$2])']],

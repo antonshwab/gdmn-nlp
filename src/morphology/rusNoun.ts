@@ -193,12 +193,16 @@ export class RusNoun extends Noun {
       num + '; ' + cs;
   }
 
+  static getSignature(animate: boolean, gender: RusGender, singular: boolean, grammCase: RusCase): string {
+    const an = animate ? 'Anim' : 'Inan';
+    const gd = ShortGenderNames[gender];
+    const num = singular ? 'Sing' : 'Plur';
+    const cs = ShortCaseNames[grammCase];
+    return 'NOUN' + an + gd + num + cs;
+  }
+
   getSignature (): string {
     const lexeme = this.lexeme as RusNounLexeme;
-    const num = this.singular ? 'Sing' : 'Plur';
-    const cs = ShortCaseNames[this.grammCase];
-    const an = lexeme.animate ? 'Anim' : 'Inan';
-    const gd = ShortGenderNames[lexeme.gender];
-    return 'NOUN' + an + gd + num + cs;
+    return RusNoun.getSignature(lexeme.animate, lexeme.gender, this.singular, this.grammCase);
   }
 }

@@ -16,7 +16,7 @@ class RusConjunctionLexeme extends morphology_1.ConjunctionLexeme {
 }
 exports.RusConjunctionLexeme = RusConjunctionLexeme;
 const rusConjunctions = ['и', 'или'];
-exports.RusConjunctionLexemes = rusConjunctions.map(p => new RusConjunctionLexeme(p));
+exports.RusConjunctionLexemes = rusConjunctions.map(с => new RusConjunctionLexeme(с));
 class RusConjunction extends morphology_1.Conjunction {
     getDisplayText() {
         return this.word + '; союз';

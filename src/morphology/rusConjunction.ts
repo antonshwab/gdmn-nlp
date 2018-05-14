@@ -20,7 +20,7 @@ export class RusConjunctionLexeme extends ConjunctionLexeme {
 const rusConjunctions = ['и', 'или'];
 
 export const RusConjunctionLexemes: RusConjunctionLexeme[] = rusConjunctions.map(
-  p => new RusConjunctionLexeme(p)
+  с => new RusConjunctionLexeme(с)
 );
 
 export class RusConjunction extends Conjunction {

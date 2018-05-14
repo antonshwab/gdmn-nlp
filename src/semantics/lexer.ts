@@ -2,31 +2,17 @@ import { IToken, TokenType, createToken, Lexer } from 'chevrotain';
 import { Word } from '../morphology/morphology';
 import { tokenize } from '../morphology/token';
 import { morphAnalyzer } from '../morphology/morphAnalyzer';
+import { IMorphToken, morphTokens } from './morphTokens';
 
-export interface IMorphToken extends IToken {
-  word: Word;
-};
-
-export interface ITokenTypes {
-  [name: string]: TokenType
-};
-
-export function scan(text: string): { tokenTypes: TokenType[], tokens: IMorphToken[][] }
+export function scan(text: string): IMorphToken[][]
 {
-  const tokenTypes: ITokenTypes = {};
-
-  function getTokenType(w: Word): TokenType {
-    const typeSignature = w.getSignature();
-    let result = tokenTypes[typeSignature];
-    if (!result) {
-      result = createToken({ name: typeSignature, pattern: Lexer.NA });
-      tokenTypes[typeSignature] = result;
-    }
-    return result;
-  }
-
   function createTokenInstance(w: Word): IMorphToken {
-    const tokType = getTokenType(w);
+    const tokType = morphTokens[w.getSignature()];
+
+    if (!tokType) {
+      throw new Error(`Unknown type signature ${w.getSignature()} of word ${w.word}`);
+    }
+
     return {
       word: w,
       image: w.word,
@@ -59,8 +45,5 @@ export function scan(text: string): { tokenTypes: TokenType[], tokens: IMorphTok
     recurs([]);
   }
 
-  return {
-    tokenTypes: Object.entries(tokenTypes).map( t => t[1] ),
-    tokens: cmbn
-  }
-}
+  return cmbn;
+};
