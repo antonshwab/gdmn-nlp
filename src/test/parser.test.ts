@@ -1,4 +1,4 @@
-import { parsePhrase } from "../semantics/parser";
+import { parsePhrase } from "../syntax/parser";
 import { parseSemantics } from "..";
 
 test("parser", () => {

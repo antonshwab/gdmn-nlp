@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const lexer_1 = require("../semantics/lexer");
+const lexer_1 = require("../syntax/lexer");
 test('scan', () => {
     const tokens = lexer_1.scan('большое поле');
     expect(tokens.length).toBe(6);

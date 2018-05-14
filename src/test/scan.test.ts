@@ -1,4 +1,4 @@
-import { scan } from "../semantics/lexer";
+import { scan } from "../syntax/lexer";
 
 test('scan', () => {
 
