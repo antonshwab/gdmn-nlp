@@ -4,7 +4,7 @@ const chevrotain_1 = require("chevrotain");
 const morphTokens_1 = require("./morphTokens");
 const lexer_1 = require("./lexer");
 const __1 = require("..");
-class SyntaxParser extends chevrotain_1.Parser {
+class VPParser extends chevrotain_1.Parser {
     constructor(input) {
         super(input, morphTokens_1.morphTokens, { outputCst: true });
         this.sentence = this.RULE('sentence', () => this.SUBRULE(this.vp));
@@ -69,8 +69,8 @@ class SyntaxParser extends chevrotain_1.Parser {
     ;
 }
 ;
-const parser = new SyntaxParser([]);
-const BaseVPVisitor = parser.getBaseCstVisitorConstructor();
+const vpParser = new VPParser([]);
+const BaseVPVisitor = vpParser.getBaseCstVisitorConstructor();
 class VPVisitor extends BaseVPVisitor {
     constructor() {
         super();
@@ -147,20 +147,20 @@ class VPVisitor extends BaseVPVisitor {
     }
 }
 ;
-const toAstVisitorInstance = new VPVisitor();
+const toVPInstance = new VPVisitor();
 function parsePhrase(text) {
     let value;
     let parsedText = [];
     lexer_1.scan(text).some(t => {
-        parser.input = t;
-        value = parser.sentence();
+        vpParser.input = t;
+        value = vpParser.sentence();
         parsedText = [t.reduce((x, y) => x + ' ' + y.word.getSignature(), '')];
-        return !parser.errors.length;
+        return !vpParser.errors.length;
     });
     if (value) {
         return {
             parsedText,
-            phrase: toAstVisitorInstance.visit(value)
+            phrase: toVPInstance.visit(value)
         };
     }
     else {

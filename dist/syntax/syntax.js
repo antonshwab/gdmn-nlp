@@ -45,4 +45,4 @@ exports.ANP = ANP;
 class PP extends NP {
 }
 exports.PP = PP;
-//# sourceMappingURL=semantics.js.map
+//# sourceMappingURL=syntax.js.map

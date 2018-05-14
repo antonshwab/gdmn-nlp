@@ -11,7 +11,7 @@ import { ITokenTypes, morphTokens } from './morphTokens';
 import { scan } from './lexer';
 import { VP, NP, PP, ANP, SetParsedText, Phrase } from '..';
 
-class SyntaxParser extends Parser {
+class VPParser extends Parser {
   constructor(input: IToken[]) {
     super(input, morphTokens, { outputCst: true });
     Parser.performSelfAnalysis(this);
@@ -89,9 +89,9 @@ class SyntaxParser extends Parser {
   });
 };
 
-const parser = new SyntaxParser([]);
+const vpParser = new VPParser([]);
 
-const BaseVPVisitor = parser.getBaseCstVisitorConstructor();
+const BaseVPVisitor = vpParser.getBaseCstVisitorConstructor();
 
 class VPVisitor extends BaseVPVisitor {
   constructor() {
@@ -182,7 +182,7 @@ class VPVisitor extends BaseVPVisitor {
 
 };
 
-const toAstVisitorInstance = new VPVisitor();
+const toVPInstance = new VPVisitor();
 
 export type SetParsedText = {
   readonly parsedText: string[];
@@ -194,16 +194,16 @@ export function parsePhrase(text: string): SetParsedText {
   let parsedText: string[] = [];
 
   scan(text).some( t => {
-    parser.input = t;
-    value = parser.sentence();
+    vpParser.input = t;
+    value = vpParser.sentence();
     parsedText = [t.reduce( (x, y) => x + ' ' + y.word.getSignature(), '' )];
-    return !parser.errors.length;
+    return !vpParser.errors.length;
   })
 
   if (value) {
     return {
       parsedText,
-      phrase: toAstVisitorInstance.visit(value)
+      phrase: toVPInstance.visit(value)
     }
   } else {
     return {

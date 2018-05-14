@@ -16,5 +16,5 @@ export * from './morphology/rusVerbsData';
 export * from './morphology/token';
 export * from './morphology/types';
 export * from './morphology/utility';
-export * from './syntax/semantics';
+export * from './syntax/syntax';
 export * from './syntax/parser';

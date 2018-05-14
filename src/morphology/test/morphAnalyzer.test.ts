@@ -1,4 +1,6 @@
-import { morphAnalyzer, RusAdjective, RusCase } from "..";
+import { morphAnalyzer } from "../morphAnalyzer";
+import { RusAdjective } from "../rusAdjective";
+import { RusCase } from "../types";
 
 test("morphAnalyzer", () => {
 
