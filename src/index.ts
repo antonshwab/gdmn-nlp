@@ -19,3 +19,4 @@ export * from './morphology/utility';
 export * from './syntax/grammar';
 export * from './syntax/semantics';
 export * from './syntax/semanticsParser';
+export * from './syntax/parser';
