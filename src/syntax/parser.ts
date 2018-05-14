@@ -9,6 +9,7 @@ import {
 } from 'chevrotain';
 import { ITokenTypes, morphTokens } from './morphTokens';
 import { scan } from './lexer';
+import { VP, NP, PP, ANP, SetParsedText } from '..';
 
 class SyntaxParser extends Parser {
   constructor(input: IToken[]) {
@@ -88,20 +89,121 @@ class SyntaxParser extends Parser {
   });
 };
 
-// reuse the same parser instance.
 const parser = new SyntaxParser([]);
 
-export function parsePhrase(text: string) {
-  const lexResult = scan(text);
-  let value;
+const BaseVPVisitor = parser.getBaseCstVisitorConstructor();
 
-  const found = lexResult.some( t => {
+class VPVisitor extends BaseVPVisitor {
+  constructor() {
+    super();
+    this.validateVisitor();
+  }
+
+  public sentence = (ctx: any) => {
+    return this.visit(ctx.vp);
+  }
+
+  public vp = (ctx: any) => {
+    return this.visit(ctx.imperativeVP);
+  }
+
+  public imperativeVP = (ctx: any) => {
+    const imperativeVerb = this.visit(ctx.imperativeVerb);
+    const imperativeNP = this.visit(ctx.imperativeNP);
+
+    return new VP([imperativeVerb, imperativeNP]);
+  }
+
+  public imperativeVerb = (ctx: any) => {
+    return ctx.VERBTranPerfSingImpr[0].word;
+  }
+
+  public imperativeNP = (ctx: any) => {
+    if (ctx.pp) {
+      return new NP([this.visit(ctx.qualImperativeNoun), this.visit(ctx.pp)]);
+    } else {
+      return new NP([this.visit(ctx.qualImperativeNoun)]);
+    }
+  }
+
+  public qualImperativeNoun = (ctx: any) => {
+    if (ctx.imperativeDets) {
+      return new ANP([this.visit(ctx.imperativeDets), this.visit(ctx.imperativeNoun)]);
+    } else {
+      return this.visit(ctx.imperativeNoun);
+    };
+  }
+
+  public imperativeDets = (ctx: any) => {
+    return this.visit(ctx.imperativeDet);
+  }
+
+  public imperativeDet = (ctx: any) => {
+    return ctx.ADJFAProPlurAccs ? ctx.ADJFAProPlurAccs[0].word
+      : ctx.ADJFQualPlurAccs ? ctx.ADJFQualPlurAccs[0].word
+      : undefined;
+  }
+
+  public imperativeNoun = (ctx: any) => {
+    return this.visit(ctx.nounAccs);
+  }
+
+  public nounAccs = (ctx: any) => {
+    return ctx.NOUNAnimMascPlurAccs ? ctx.NOUNAnimMascPlurAccs[0].word
+      : ctx.NOUNAnimFemnPlurAccs ? ctx.NOUNAnimFemnPlurAccs[0].word
+      : ctx.NOUNAnimNeutPlurAccs ? ctx.NOUNAnimNeutPlurAccs[0].word
+      : ctx.NOUNInanMascPlurAccs ? ctx.NOUNInanMascPlurAccs[0].word
+      : ctx.NOUNInanFemnPlurAccs ? ctx.NOUNInanFemnPlurAccs[0].word
+      : ctx.NOUNInanNeutPlurAccs ? ctx.NOUNInanNeutPlurAccs[0].word
+      : undefined;
+  }
+
+  public pp = (ctx: any) => {
+    return new PP([this.visit(ctx.prep), this.visit(ctx.ppNoun)]);
+  }
+
+  public prep = (ctx: any) => {
+    return ctx.PREPPlce[0].word;
+  }
+
+  public ppNoun = (ctx: any) => {
+    return this.visit(ctx.nounGent);
+  }
+
+  public nounGent = (ctx: any) => {
+    return ctx.NOUNInanMascSingGent ? ctx.NOUNInanMascSingGent[0].word
+      : ctx.NOUNInanFemnSingGent ? ctx.NOUNInanFemnSingGent[0].word
+      : ctx.NOUNInanNeutSingGent ? ctx.NOUNInanNeutSingGent[0].word
+      : ctx.NOUNInanMascPlurGent ? ctx.NOUNInanMascPlurGent[0].word
+      : ctx.NOUNInanFemnPlurGent ? ctx.NOUNInanFemnPlurGent[0].word
+      : ctx.NOUNInanNeutPlurGent ? ctx.NOUNInanNeutPlurGent[0].word
+      : undefined;
+  }
+
+};
+
+const toAstVisitorInstance = new VPVisitor();
+
+export function parsePhrase(text: string): SetParsedText {
+  let value;
+  let parsedText: string[] = [];
+
+  scan(text).some( t => {
     parser.input = t;
     value = parser.sentence();
+    parsedText = [t.reduce( (x, y) => x + ' ' + y.word.getSignature(), '' )];
     return !parser.errors.length;
   })
 
-  if (found) {
-    return value;
+  if (value) {
+    return {
+      parsedText,
+      phrase: toAstVisitorInstance.visit(value)
+    }
+  } else {
+    return {
+      parsedText
+    }
   }
 }
+

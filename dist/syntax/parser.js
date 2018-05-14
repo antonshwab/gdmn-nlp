@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const chevrotain_1 = require("chevrotain");
 const morphTokens_1 = require("./morphTokens");
 const lexer_1 = require("./lexer");
+const __1 = require("..");
 class SyntaxParser extends chevrotain_1.Parser {
     constructor(input) {
         super(input, morphTokens_1.morphTokens, { outputCst: true });
@@ -68,18 +69,104 @@ class SyntaxParser extends chevrotain_1.Parser {
     ;
 }
 ;
-// reuse the same parser instance.
 const parser = new SyntaxParser([]);
+const BaseVPVisitor = parser.getBaseCstVisitorConstructor();
+class VPVisitor extends BaseVPVisitor {
+    constructor() {
+        super();
+        this.sentence = (ctx) => {
+            return this.visit(ctx.vp);
+        };
+        this.vp = (ctx) => {
+            return this.visit(ctx.imperativeVP);
+        };
+        this.imperativeVP = (ctx) => {
+            const imperativeVerb = this.visit(ctx.imperativeVerb);
+            const imperativeNP = this.visit(ctx.imperativeNP);
+            return new __1.VP([imperativeVerb, imperativeNP]);
+        };
+        this.imperativeVerb = (ctx) => {
+            return ctx.VERBTranPerfSingImpr[0].word;
+        };
+        this.imperativeNP = (ctx) => {
+            if (ctx.pp) {
+                return new __1.NP([this.visit(ctx.qualImperativeNoun), this.visit(ctx.pp)]);
+            }
+            else {
+                return new __1.NP([this.visit(ctx.qualImperativeNoun)]);
+            }
+        };
+        this.qualImperativeNoun = (ctx) => {
+            if (ctx.imperativeDets) {
+                return new __1.ANP([this.visit(ctx.imperativeDets), this.visit(ctx.imperativeNoun)]);
+            }
+            else {
+                return this.visit(ctx.imperativeNoun);
+            }
+            ;
+        };
+        this.imperativeDets = (ctx) => {
+            return this.visit(ctx.imperativeDet);
+        };
+        this.imperativeDet = (ctx) => {
+            return ctx.ADJFAProPlurAccs ? ctx.ADJFAProPlurAccs[0].word
+                : ctx.ADJFQualPlurAccs ? ctx.ADJFQualPlurAccs[0].word
+                    : undefined;
+        };
+        this.imperativeNoun = (ctx) => {
+            return this.visit(ctx.nounAccs);
+        };
+        this.nounAccs = (ctx) => {
+            return ctx.NOUNAnimMascPlurAccs ? ctx.NOUNAnimMascPlurAccs[0].word
+                : ctx.NOUNAnimFemnPlurAccs ? ctx.NOUNAnimFemnPlurAccs[0].word
+                    : ctx.NOUNAnimNeutPlurAccs ? ctx.NOUNAnimNeutPlurAccs[0].word
+                        : ctx.NOUNInanMascPlurAccs ? ctx.NOUNInanMascPlurAccs[0].word
+                            : ctx.NOUNInanFemnPlurAccs ? ctx.NOUNInanFemnPlurAccs[0].word
+                                : ctx.NOUNInanNeutPlurAccs ? ctx.NOUNInanNeutPlurAccs[0].word
+                                    : undefined;
+        };
+        this.pp = (ctx) => {
+            return new __1.PP([this.visit(ctx.prep), this.visit(ctx.ppNoun)]);
+        };
+        this.prep = (ctx) => {
+            return ctx.PREPPlce[0].word;
+        };
+        this.ppNoun = (ctx) => {
+            return this.visit(ctx.nounGent);
+        };
+        this.nounGent = (ctx) => {
+            return ctx.NOUNInanMascSingGent ? ctx.NOUNInanMascSingGent[0].word
+                : ctx.NOUNInanFemnSingGent ? ctx.NOUNInanFemnSingGent[0].word
+                    : ctx.NOUNInanNeutSingGent ? ctx.NOUNInanNeutSingGent[0].word
+                        : ctx.NOUNInanMascPlurGent ? ctx.NOUNInanMascPlurGent[0].word
+                            : ctx.NOUNInanFemnPlurGent ? ctx.NOUNInanFemnPlurGent[0].word
+                                : ctx.NOUNInanNeutPlurGent ? ctx.NOUNInanNeutPlurGent[0].word
+                                    : undefined;
+        };
+        this.validateVisitor();
+    }
+}
+;
+const toAstVisitorInstance = new VPVisitor();
 function parsePhrase(text) {
-    const lexResult = lexer_1.scan(text);
     let value;
-    const found = lexResult.some(t => {
+    let parsedText = [];
+    lexer_1.scan(text).some(t => {
         parser.input = t;
         value = parser.sentence();
+        parsedText = [t.reduce((x, y) => x + ' ' + y.word.getSignature(), '')];
         return !parser.errors.length;
     });
-    if (found) {
-        return value;
+    if (value) {
+        return {
+            parsedText,
+            phrase: toAstVisitorInstance.visit(value)
+        };
+    }
+    else {
+        return {
+            parsedText
+        };
     }
 }
 exports.parsePhrase = parsePhrase;
