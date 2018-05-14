@@ -13,9 +13,6 @@ export interface ITokenTypes {
 
 const signatures = [
   'VERBTranPerfSingImpr',
-  'ADJFAProPlurAccs',
-  'ADJFQualPlurAccs',
-  'ADJFQualNeutSingNomn',
   'PREPPlce',
   'CONJ'
 ];
@@ -31,10 +28,12 @@ export const morphTokens = (() => {
     )
   );
 
-  [RusGender.Masc, RusGender.Femn, RusGender.Neut].forEach( gender =>
-    [true, false].forEach( singular =>
-      [RusCase.Nomn, RusCase.Gent, RusCase.Datv, RusCase.Accs, RusCase.Ablt, RusCase.Loct].forEach( grammCase =>
-        signatures.push(RusAdjective.getSignature(false, RusAdjectiveCategory.Qual, gender, singular, grammCase))
+  [RusAdjectiveCategory.Qual, RusAdjectiveCategory.Pron].forEach( category =>
+    [undefined, RusGender.Masc, RusGender.Femn, RusGender.Neut].forEach( gender =>
+      [true, false].forEach( singular =>
+        [undefined, RusCase.Nomn, RusCase.Gent, RusCase.Datv, RusCase.Accs, RusCase.Ablt, RusCase.Loct].forEach( grammCase => {
+          signatures.push(RusAdjective.getSignature(false, category, gender, singular, grammCase));
+        })
       )
     )
   );

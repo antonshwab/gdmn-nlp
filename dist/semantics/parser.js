@@ -5,45 +5,24 @@ const morphTokens_1 = require("./morphTokens");
 const lexer_1 = require("./lexer");
 class SyntaxParser extends chevrotain_1.Parser {
     constructor(input) {
-        super(input, morphTokens_1.morphTokens);
+        super(input, morphTokens_1.morphTokens, { outputCst: true });
         this.sentence = this.RULE('sentence', () => this.SUBRULE(this.vp));
         this.vp = this.RULE('vp', () => this.SUBRULE(this.imperativeVP));
         this.imperativeVP = this.RULE('imperativeVP', () => {
-            this.OR([
-                { ALT: () => {
-                        this.SUBRULE(this.imperativeVerb);
-                        this.SUBRULE(this.imperativeNP);
-                    } },
-                { ALT: () => this.SUBRULE(this.imperativeVerb) }
-            ]);
+            this.SUBRULE(this.imperativeVerb);
+            this.SUBRULE(this.imperativeNP);
         });
         this.imperativeVerb = this.RULE('imperativeVerb', () => this.CONSUME(morphTokens_1.morphTokens.VERBTranPerfSingImpr));
         this.imperativeNP = this.RULE('imperativeNP', () => {
-            this.OR([
-                { ALT: () => {
-                        this.SUBRULE(this.qualImperativeNoun);
-                        this.SUBRULE(this.pp);
-                    } },
-                { ALT: () => this.SUBRULE(this.qualImperativeNoun) }
-            ]);
+            this.SUBRULE(this.qualImperativeNoun);
+            this.OPTION(() => this.SUBRULE(this.pp));
         });
         this.qualImperativeNoun = this.RULE('qualImperativeNoun', () => {
-            this.OR([
-                { ALT: () => {
-                        this.SUBRULE(this.imperativeDets);
-                        this.SUBRULE(this.imperativeNoun);
-                    } },
-                { ALT: () => this.SUBRULE(this.imperativeNoun) }
-            ]);
+            this.OPTION(() => this.SUBRULE(this.imperativeDets));
+            this.SUBRULE(this.imperativeNoun);
         });
         this.imperativeDets = this.RULE('imperativeDets', () => {
-            this.OR([
-                { ALT: () => {
-                        this.SUBRULE(this.imperativeDets);
-                        this.SUBRULE(this.imperativeDet);
-                    } },
-                { ALT: () => this.SUBRULE(this.imperativeDet) }
-            ]);
+            this.SUBRULE(this.imperativeDet);
         });
         this.imperativeDet = this.RULE('imperativeDet', () => {
             this.OR([
@@ -66,16 +45,13 @@ class SyntaxParser extends chevrotain_1.Parser {
             this.SUBRULE(this.prep);
             this.SUBRULE(this.ppNoun);
         });
-        this.prep = this.RULE('prep', () => this.CONSUME(morphTokens_1.morphTokens.prepPlace));
+        this.prep = this.RULE('prep', () => this.CONSUME(morphTokens_1.morphTokens.PREPPlce));
         this.ppNoun = this.RULE('ppNoun', () => {
-            this.OR([
-                { ALT: () => {
-                        this.SUBRULE(this.ppNoun);
-                        this.CONSUME(morphTokens_1.morphTokens.conj);
-                        this.SUBRULE(this.nounGent);
-                    } },
-                { ALT: () => this.SUBRULE(this.nounGent) }
-            ]);
+            this.SUBRULE(this.nounGent);
+            this.OPTION(() => {
+                this.CONSUME(morphTokens_1.morphTokens.CONJ);
+                this.SUBRULE(this.ppNoun);
+            });
         });
         this.nounGent = this.RULE('nounGent', () => {
             this.OR([

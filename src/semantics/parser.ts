@@ -12,7 +12,7 @@ import { scan } from './lexer';
 
 class SyntaxParser extends Parser {
   constructor(input: IToken[]) {
-    super(input, morphTokens);
+    super(input, morphTokens, { outputCst: true });
     Parser.performSelfAnalysis(this);
   };
 
@@ -21,45 +21,24 @@ class SyntaxParser extends Parser {
   public vp = this.RULE('vp', () => this.SUBRULE(this.imperativeVP) );
 
   public imperativeVP = this.RULE('imperativeVP', () => {
-    this.OR([
-      { ALT: () => {
-        this.SUBRULE(this.imperativeVerb);
-        this.SUBRULE(this.imperativeNP);
-      }},
-      { ALT: () => this.SUBRULE(this.imperativeVerb) }
-    ]);
+    this.SUBRULE(this.imperativeVerb);
+    this.SUBRULE(this.imperativeNP);
   });
 
   public imperativeVerb = this.RULE('imperativeVerb', () => this.CONSUME(morphTokens.VERBTranPerfSingImpr) );
 
   public imperativeNP = this.RULE('imperativeNP', () => {
-    this.OR([
-      { ALT: () => {
-        this.SUBRULE(this.qualImperativeNoun);
-        this.SUBRULE(this.pp);
-      }},
-      { ALT: () => this.SUBRULE(this.qualImperativeNoun) }
-    ]);
+    this.SUBRULE(this.qualImperativeNoun);
+    this.OPTION( () => this.SUBRULE(this.pp) );
   });
 
   public qualImperativeNoun = this.RULE('qualImperativeNoun', () => {
-    this.OR([
-      { ALT: () => {
-        this.SUBRULE(this.imperativeDets);
-        this.SUBRULE(this.imperativeNoun);
-      }},
-      { ALT: () => this.SUBRULE(this.imperativeNoun) }
-    ]);
+    this.OPTION( () => this.SUBRULE(this.imperativeDets) );
+    this.SUBRULE(this.imperativeNoun);
   });
 
   public imperativeDets = this.RULE('imperativeDets', () => {
-    this.OR([
-      { ALT: () => {
-        this.SUBRULE(this.imperativeDets);
-        this.SUBRULE(this.imperativeDet);
-      }},
-      { ALT: () => this.SUBRULE(this.imperativeDet) }
-    ]);
+    this.SUBRULE(this.imperativeDet);
   });
 
   public imperativeDet = this.RULE('imperativeDet', () => {
@@ -87,17 +66,14 @@ class SyntaxParser extends Parser {
     this.SUBRULE(this.ppNoun);
   });
 
-  public prep = this.RULE('prep', () => this.CONSUME(morphTokens.prepPlace) );
+  public prep = this.RULE('prep', () => this.CONSUME(morphTokens.PREPPlce) );
 
   public ppNoun = this.RULE('ppNoun', () => {
-    this.OR([
-      { ALT: () => {
-        this.SUBRULE(this.ppNoun);
-        this.CONSUME(morphTokens.conj);
-        this.SUBRULE(this.nounGent);
-      }},
-      { ALT: () => this.SUBRULE(this.nounGent) }
-    ]);
+    this.SUBRULE(this.nounGent);
+    this.OPTION( () => {
+      this.CONSUME(morphTokens.CONJ);
+      this.SUBRULE(this.ppNoun);
+    });
   });
 
   public nounGent = this.RULE('nounGent', () => {
