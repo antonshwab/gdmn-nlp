@@ -21,8 +21,6 @@ __export(require("./morphology/rusVerbsData"));
 __export(require("./morphology/token"));
 __export(require("./morphology/types"));
 __export(require("./morphology/utility"));
-__export(require("./syntax/grammar"));
 __export(require("./syntax/semantics"));
-__export(require("./syntax/semanticsParser"));
 __export(require("./syntax/parser"));
 //# sourceMappingURL=index.js.map

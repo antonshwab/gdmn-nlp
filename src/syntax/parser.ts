@@ -9,7 +9,7 @@ import {
 } from 'chevrotain';
 import { ITokenTypes, morphTokens } from './morphTokens';
 import { scan } from './lexer';
-import { VP, NP, PP, ANP, SetParsedText } from '..';
+import { VP, NP, PP, ANP, SetParsedText, Phrase } from '..';
 
 class SyntaxParser extends Parser {
   constructor(input: IToken[]) {
@@ -183,6 +183,11 @@ class VPVisitor extends BaseVPVisitor {
 };
 
 const toAstVisitorInstance = new VPVisitor();
+
+export type SetParsedText = {
+  readonly parsedText: string[];
+  readonly phrase?: Phrase;
+};
 
 export function parsePhrase(text: string): SetParsedText {
   let value;
