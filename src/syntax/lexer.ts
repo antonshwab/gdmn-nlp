@@ -1,6 +1,6 @@
 import { IToken, TokenType, createToken, Lexer } from 'chevrotain';
 import { Word } from '../morphology/morphology';
-import { tokenizer, RusWord } from '../syntax/tokenizer';
+import { tokenizer, RusWord, tokenize } from '../syntax/tokenizer';
 import { morphAnalyzer } from '../morphology/morphAnalyzer';
 import { IMorphToken, morphTokens } from './rusMorphTokens';
 
@@ -22,13 +22,7 @@ export function scan(text: string): IMorphToken[][]
     }
   }
 
-  const tokenized = tokenizer.tokenize(text);
-
-  if (tokenized.errors.length) {
-    throw new Error(`Invalid text ${text}. Errors: ${JSON.stringify(tokenized.errors, undefined, 2)}`);
-  }
-
-  const words = tokenized.tokens.reduce(
+  const words = tokenize(text).reduce(
     (p, t) => {
       if (t.tokenType === RusWord) {
         p.push(morphAnalyzer(t.image));

@@ -17,11 +17,7 @@ function scan(text) {
             tokenType: tokType
         };
     }
-    const tokenized = tokenizer_1.tokenizer.tokenize(text);
-    if (tokenized.errors.length) {
-        throw new Error(`Invalid text ${text}. Errors: ${JSON.stringify(tokenized.errors, undefined, 2)}`);
-    }
-    const words = tokenized.tokens.reduce((p, t) => {
+    const words = tokenizer_1.tokenize(text).reduce((p, t) => {
         if (t.tokenType === tokenizer_1.RusWord) {
             p.push(morphAnalyzer_1.morphAnalyzer(t.image));
         }

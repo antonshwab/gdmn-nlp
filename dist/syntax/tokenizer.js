@@ -31,4 +31,12 @@ const allTokens = [
     exports.Other
 ];
 exports.tokenizer = new chevrotain_1.Lexer(allTokens);
+function tokenize(text) {
+    const tokenized = exports.tokenizer.tokenize(text);
+    if (tokenized.errors.length) {
+        throw new Error(`Invalid text "${text}". Tokenizer errors: ${JSON.stringify(tokenized.errors, undefined, 2)}`);
+    }
+    return tokenized.tokens;
+}
+exports.tokenize = tokenize;
 //# sourceMappingURL=tokenizer.js.map

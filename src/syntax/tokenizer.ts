@@ -1,4 +1,4 @@
-import { createToken, Lexer, TokenType } from 'chevrotain';
+import { createToken, Lexer, TokenType, IToken } from 'chevrotain';
 
 export const WhiteSpace = createToken({
   name: 'WhiteSpace',
@@ -36,3 +36,14 @@ const allTokens = [
 ];
 
 export const tokenizer = new Lexer(allTokens);
+
+export function tokenize(text: string): IToken[] {
+  const tokenized = tokenizer.tokenize(text);
+
+  if (tokenized.errors.length) {
+    throw new Error(`Invalid text "${text}". Tokenizer errors: ${JSON.stringify(tokenized.errors, undefined, 2)}`);
+  }
+
+  return tokenized.tokens;
+}
+
