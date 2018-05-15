@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const chevrotain_1 = require("chevrotain");
 exports.WhiteSpace = chevrotain_1.createToken({
     name: 'WhiteSpace',
-    pattern: /\s+/,
+    pattern: /[ \t]+/,
     line_breaks: false
 });
 exports.LineBreak = chevrotain_1.createToken({
@@ -21,7 +21,7 @@ exports.RusWord = chevrotain_1.createToken({
 });
 exports.Other = chevrotain_1.createToken({
     name: 'Other',
-    pattern: /.+/
+    pattern: /[A-Za-z0-9]+/
 });
 const allTokens = [
     exports.LineBreak,

@@ -2,7 +2,7 @@ import { createToken, Lexer, TokenType, IToken } from 'chevrotain';
 
 export const WhiteSpace = createToken({
   name: 'WhiteSpace',
-  pattern: /\s+/,
+  pattern: /[ \t]+/,
   line_breaks: false
 });
 
@@ -24,7 +24,7 @@ export const RusWord = createToken({
 
 export const Other = createToken({
   name: 'Other',
-  pattern: /.+/
+  pattern: /[A-Za-z0-9]+/
 })
 
 const allTokens = [
