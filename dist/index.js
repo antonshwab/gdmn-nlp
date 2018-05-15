@@ -18,7 +18,7 @@ __export(require("./morphology/rusPronounsData"));
 __export(require("./morphology/rusVerb"));
 __export(require("./morphology/rusVerbEndings"));
 __export(require("./morphology/rusVerbsData"));
-__export(require("./syntax/token"));
+__export(require("./syntax/tokenizer"));
 __export(require("./morphology/types"));
 __export(require("./morphology/utility"));
 __export(require("./syntax/syntax"));

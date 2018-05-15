@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const token_1 = require("../syntax/token");
+const tokenizer_1 = require("../syntax/tokenizer");
 const morphAnalyzer_1 = require("../morphology/morphAnalyzer");
 const rusMorphTokens_1 = require("./rusMorphTokens");
 function scan(text) {
@@ -17,9 +17,13 @@ function scan(text) {
             tokenType: tokType
         };
     }
-    const words = token_1.tokenize(text).reduce((p, t) => {
-        if (t.kind === 'word') {
-            p.push(morphAnalyzer_1.morphAnalyzer(t.tkn));
+    const tokenized = tokenizer_1.tokenizer.tokenize(text);
+    if (tokenized.errors.length) {
+        throw new Error(`Invalid text ${text}. Errors: ${JSON.stringify(tokenized.errors, undefined, 2)}`);
+    }
+    const words = tokenized.tokens.reduce((p, t) => {
+        if (t.tokenType === tokenizer_1.RusWord) {
+            p.push(morphAnalyzer_1.morphAnalyzer(t.image));
         }
         return p;
     }, []);
