@@ -1,19 +1,19 @@
 "use strict";
 /** Parse word from open corpora dictionary and returns morphological signs */
 Object.defineProperty(exports, "__esModule", { value: true });
-const types_1 = require("../types");
+var types_1 = require("../types");
 function parseWord(line) {
-    const arr = line.replace(/\s/g, ',').replace(/,,/g, ',').split(',');
+    var arr = line.replace(/\s/g, ',').replace(/,,/g, ',').split(',');
     var pos;
-    let aspect;
-    let transitivity;
-    let tense;
-    let singular;
-    let gender;
-    let person;
-    let mood;
-    let involvement;
-    for (let i = 2; i < arr.length; i++) {
+    var aspect;
+    var transitivity;
+    var tense;
+    var singular;
+    var gender;
+    var person;
+    var mood;
+    var involvement;
+    for (var i = 2; i < arr.length; i++) {
         switch (arr[i]) {
             case 'VERB':
                 pos = 'VERB';
@@ -78,15 +78,15 @@ function parseWord(line) {
     }
     return ({
         word: arr[0],
-        pos,
-        aspect,
-        transitivity,
-        tense,
-        singular,
-        gender,
-        person,
-        mood,
-        involvement
+        pos: pos,
+        aspect: aspect,
+        transitivity: transitivity,
+        tense: tense,
+        singular: singular,
+        gender: gender,
+        person: person,
+        mood: mood,
+        involvement: involvement
     });
 }
 exports.parseWord = parseWord;

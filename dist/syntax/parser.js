@@ -1,122 +1,136 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
-const chevrotain_1 = require("chevrotain");
-const rusMorphTokens_1 = require("./rusMorphTokens");
-const lexer_1 = require("./lexer");
-const __1 = require("..");
-class VPParser extends chevrotain_1.Parser {
-    constructor(input) {
-        super(input, rusMorphTokens_1.morphTokens, { outputCst: true });
-        this.sentence = this.RULE('sentence', () => this.SUBRULE(this.vp));
-        this.vp = this.RULE('vp', () => this.SUBRULE(this.imperativeVP));
-        this.imperativeVP = this.RULE('imperativeVP', () => {
-            this.SUBRULE(this.imperativeVerb);
-            this.SUBRULE(this.imperativeNP);
+var chevrotain_1 = require("chevrotain");
+var rusMorphTokens_1 = require("./rusMorphTokens");
+var lexer_1 = require("./lexer");
+var __1 = require("..");
+var VPParser = /** @class */ (function (_super) {
+    __extends(VPParser, _super);
+    function VPParser(input) {
+        var _this = _super.call(this, input, rusMorphTokens_1.morphTokens, { outputCst: true }) || this;
+        _this.sentence = _this.RULE('sentence', function () { return _this.SUBRULE(_this.vp); });
+        _this.vp = _this.RULE('vp', function () { return _this.SUBRULE(_this.imperativeVP); });
+        _this.imperativeVP = _this.RULE('imperativeVP', function () {
+            _this.SUBRULE(_this.imperativeVerb);
+            _this.SUBRULE(_this.imperativeNP);
         });
-        this.imperativeVerb = this.RULE('imperativeVerb', () => this.CONSUME(rusMorphTokens_1.morphTokens.VERBTranPerfSingImpr));
-        this.imperativeNP = this.RULE('imperativeNP', () => {
-            this.SUBRULE(this.qualImperativeNoun);
-            this.OPTION(() => this.SUBRULE(this.pp));
+        _this.imperativeVerb = _this.RULE('imperativeVerb', function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.VERBTranPerfSingImpr); });
+        _this.imperativeNP = _this.RULE('imperativeNP', function () {
+            _this.SUBRULE(_this.qualImperativeNoun);
+            _this.OPTION(function () { return _this.SUBRULE(_this.pp); });
         });
-        this.qualImperativeNoun = this.RULE('qualImperativeNoun', () => {
-            this.OPTION(() => this.SUBRULE(this.imperativeDets));
-            this.SUBRULE(this.imperativeNoun);
+        _this.qualImperativeNoun = _this.RULE('qualImperativeNoun', function () {
+            _this.OPTION(function () { return _this.SUBRULE(_this.imperativeDets); });
+            _this.SUBRULE(_this.imperativeNoun);
         });
-        this.imperativeDets = this.RULE('imperativeDets', () => {
-            this.SUBRULE(this.imperativeDet);
+        _this.imperativeDets = _this.RULE('imperativeDets', function () {
+            _this.SUBRULE(_this.imperativeDet);
         });
-        this.imperativeDet = this.RULE('imperativeDet', () => {
-            this.OR([
-                { ALT: () => this.CONSUME(rusMorphTokens_1.morphTokens.ADJFAProPlurAccs) },
-                { ALT: () => this.CONSUME(rusMorphTokens_1.morphTokens.ADJFQualPlurAccs) }
+        _this.imperativeDet = _this.RULE('imperativeDet', function () {
+            _this.OR([
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.ADJFAProPlurAccs); } },
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.ADJFQualPlurAccs); } }
             ]);
         });
-        this.imperativeNoun = this.RULE('imperativeNoun', () => this.SUBRULE(this.nounAccs));
-        this.nounAccs = this.RULE('nounAccs', () => {
-            this.OR([
-                { ALT: () => this.CONSUME(rusMorphTokens_1.morphTokens.NOUNAnimMascPlurAccs) },
-                { ALT: () => this.CONSUME(rusMorphTokens_1.morphTokens.NOUNAnimFemnPlurAccs) },
-                { ALT: () => this.CONSUME(rusMorphTokens_1.morphTokens.NOUNAnimNeutPlurAccs) },
-                { ALT: () => this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanMascPlurAccs) },
-                { ALT: () => this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanFemnPlurAccs) },
-                { ALT: () => this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanNeutPlurAccs) },
+        _this.imperativeNoun = _this.RULE('imperativeNoun', function () { return _this.SUBRULE(_this.nounAccs); });
+        _this.nounAccs = _this.RULE('nounAccs', function () {
+            _this.OR([
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.NOUNAnimMascPlurAccs); } },
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.NOUNAnimFemnPlurAccs); } },
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.NOUNAnimNeutPlurAccs); } },
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanMascPlurAccs); } },
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanFemnPlurAccs); } },
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanNeutPlurAccs); } },
             ]);
         });
-        this.pp = this.RULE('pp', () => {
-            this.SUBRULE(this.prep);
-            this.SUBRULE(this.ppNoun);
+        _this.pp = _this.RULE('pp', function () {
+            _this.SUBRULE(_this.prep);
+            _this.SUBRULE(_this.ppNoun);
         });
-        this.prep = this.RULE('prep', () => this.CONSUME(rusMorphTokens_1.morphTokens.PREPPlce));
-        this.ppNoun = this.RULE('ppNoun', () => {
-            this.SUBRULE(this.nounGent);
-            this.OPTION(() => {
-                this.CONSUME(rusMorphTokens_1.morphTokens.CONJ);
-                this.SUBRULE(this.ppNoun);
+        _this.prep = _this.RULE('prep', function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.PREPPlce); });
+        _this.ppNoun = _this.RULE('ppNoun', function () {
+            _this.SUBRULE(_this.nounGent);
+            _this.OPTION(function () {
+                _this.CONSUME(rusMorphTokens_1.morphTokens.CONJ);
+                _this.SUBRULE(_this.ppNoun);
             });
         });
-        this.nounGent = this.RULE('nounGent', () => {
-            this.OR([
-                { ALT: () => this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanMascSingGent) },
-                { ALT: () => this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanFemnSingGent) },
-                { ALT: () => this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanNeutSingGent) },
-                { ALT: () => this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanMascPlurGent) },
-                { ALT: () => this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanFemnPlurGent) },
-                { ALT: () => this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanNeutPlurGent) },
+        _this.nounGent = _this.RULE('nounGent', function () {
+            _this.OR([
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanMascSingGent); } },
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanFemnSingGent); } },
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanNeutSingGent); } },
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanMascPlurGent); } },
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanFemnPlurGent); } },
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.NOUNInanNeutPlurGent); } },
             ]);
         });
-        chevrotain_1.Parser.performSelfAnalysis(this);
+        chevrotain_1.Parser.performSelfAnalysis(_this);
+        return _this;
     }
     ;
-}
+    return VPParser;
+}(chevrotain_1.Parser));
 ;
-const vpParser = new VPParser([]);
-const BaseVPVisitor = vpParser.getBaseCstVisitorConstructor();
-class VPVisitor extends BaseVPVisitor {
-    constructor() {
-        super();
-        this.sentence = (ctx) => {
-            return this.visit(ctx.vp);
+var vpParser = new VPParser([]);
+var BaseVPVisitor = vpParser.getBaseCstVisitorConstructor();
+var VPVisitor = /** @class */ (function (_super) {
+    __extends(VPVisitor, _super);
+    function VPVisitor() {
+        var _this = _super.call(this) || this;
+        _this.sentence = function (ctx) {
+            return _this.visit(ctx.vp);
         };
-        this.vp = (ctx) => {
-            return this.visit(ctx.imperativeVP);
+        _this.vp = function (ctx) {
+            return _this.visit(ctx.imperativeVP);
         };
-        this.imperativeVP = (ctx) => {
-            const imperativeVerb = this.visit(ctx.imperativeVerb);
-            const imperativeNP = this.visit(ctx.imperativeNP);
+        _this.imperativeVP = function (ctx) {
+            var imperativeVerb = _this.visit(ctx.imperativeVerb);
+            var imperativeNP = _this.visit(ctx.imperativeNP);
             return new __1.VP([imperativeVerb, imperativeNP]);
         };
-        this.imperativeVerb = (ctx) => {
+        _this.imperativeVerb = function (ctx) {
             return ctx.VERBTranPerfSingImpr[0].word;
         };
-        this.imperativeNP = (ctx) => {
+        _this.imperativeNP = function (ctx) {
             if (ctx.pp) {
-                return new __1.NP([this.visit(ctx.qualImperativeNoun), this.visit(ctx.pp)]);
+                return new __1.NP([_this.visit(ctx.qualImperativeNoun), _this.visit(ctx.pp)]);
             }
             else {
-                return new __1.NP([this.visit(ctx.qualImperativeNoun)]);
+                return new __1.NP([_this.visit(ctx.qualImperativeNoun)]);
             }
         };
-        this.qualImperativeNoun = (ctx) => {
+        _this.qualImperativeNoun = function (ctx) {
             if (ctx.imperativeDets) {
-                return new __1.ANP([this.visit(ctx.imperativeDets), this.visit(ctx.imperativeNoun)]);
+                return new __1.ANP([_this.visit(ctx.imperativeDets), _this.visit(ctx.imperativeNoun)]);
             }
             else {
-                return this.visit(ctx.imperativeNoun);
+                return _this.visit(ctx.imperativeNoun);
             }
             ;
         };
-        this.imperativeDets = (ctx) => {
-            return this.visit(ctx.imperativeDet);
+        _this.imperativeDets = function (ctx) {
+            return _this.visit(ctx.imperativeDet);
         };
-        this.imperativeDet = (ctx) => {
+        _this.imperativeDet = function (ctx) {
             return ctx.ADJFAProPlurAccs ? ctx.ADJFAProPlurAccs[0].word
                 : ctx.ADJFQualPlurAccs ? ctx.ADJFQualPlurAccs[0].word
                     : undefined;
         };
-        this.imperativeNoun = (ctx) => {
-            return this.visit(ctx.nounAccs);
+        _this.imperativeNoun = function (ctx) {
+            return _this.visit(ctx.nounAccs);
         };
-        this.nounAccs = (ctx) => {
+        _this.nounAccs = function (ctx) {
             return ctx.NOUNAnimMascPlurAccs ? ctx.NOUNAnimMascPlurAccs[0].word
                 : ctx.NOUNAnimFemnPlurAccs ? ctx.NOUNAnimFemnPlurAccs[0].word
                     : ctx.NOUNAnimNeutPlurAccs ? ctx.NOUNAnimNeutPlurAccs[0].word
@@ -125,16 +139,16 @@ class VPVisitor extends BaseVPVisitor {
                                 : ctx.NOUNInanNeutPlurAccs ? ctx.NOUNInanNeutPlurAccs[0].word
                                     : undefined;
         };
-        this.pp = (ctx) => {
-            return new __1.PP([this.visit(ctx.prep), this.visit(ctx.ppNoun)]);
+        _this.pp = function (ctx) {
+            return new __1.PP([_this.visit(ctx.prep), _this.visit(ctx.ppNoun)]);
         };
-        this.prep = (ctx) => {
+        _this.prep = function (ctx) {
             return ctx.PREPPlce[0].word;
         };
-        this.ppNoun = (ctx) => {
-            return this.visit(ctx.nounGent);
+        _this.ppNoun = function (ctx) {
+            return _this.visit(ctx.nounGent);
         };
-        this.nounGent = (ctx) => {
+        _this.nounGent = function (ctx) {
             return ctx.NOUNInanMascSingGent ? ctx.NOUNInanMascSingGent[0].word
                 : ctx.NOUNInanFemnSingGent ? ctx.NOUNInanFemnSingGent[0].word
                     : ctx.NOUNInanNeutSingGent ? ctx.NOUNInanNeutSingGent[0].word
@@ -143,29 +157,31 @@ class VPVisitor extends BaseVPVisitor {
                                 : ctx.NOUNInanNeutPlurGent ? ctx.NOUNInanNeutPlurGent[0].word
                                     : undefined;
         };
-        this.validateVisitor();
+        _this.validateVisitor();
+        return _this;
     }
-}
+    return VPVisitor;
+}(BaseVPVisitor));
 ;
-const toVPInstance = new VPVisitor();
+var toVPInstance = new VPVisitor();
 function parsePhrase(text) {
-    let value;
-    let parsedText = [];
-    lexer_1.scan(text).some(t => {
+    var value;
+    var parsedText = [];
+    lexer_1.scan(text).some(function (t) {
         vpParser.input = t;
         value = vpParser.sentence();
-        parsedText = [t.reduce((x, y) => x + ' ' + y.word.getSignature(), '')];
+        parsedText = [t.reduce(function (x, y) { return x + ' ' + y.word.getSignature(); }, '')];
         return !vpParser.errors.length;
     });
     if (value) {
         return {
-            parsedText,
+            parsedText: parsedText,
             phrase: toVPInstance.visit(value)
         };
     }
     else {
         return {
-            parsedText
+            parsedText: parsedText
         };
     }
 }

@@ -1,21 +1,35 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const chevrotain_1 = require("chevrotain");
-const types_1 = require("../morphology/types");
-const __1 = require("..");
+var chevrotain_1 = require("chevrotain");
+var types_1 = require("../morphology/types");
+var __1 = require("..");
 ;
 ;
-const signatures = [
+var signatures = [
     'VERBTranPerfSingImpr',
     'PREPPlce',
     'CONJ'
 ];
-exports.morphTokens = (() => {
-    [true, false].forEach(an => [types_1.RusGender.Masc, types_1.RusGender.Femn, types_1.RusGender.Neut].forEach(gender => [true, false].forEach(singular => [types_1.RusCase.Nomn, types_1.RusCase.Gent, types_1.RusCase.Datv, types_1.RusCase.Accs, types_1.RusCase.Ablt, types_1.RusCase.Loct].forEach(grammCase => signatures.push(__1.RusNoun.getSignature(an, gender, singular, grammCase))))));
-    [types_1.RusAdjectiveCategory.Qual, types_1.RusAdjectiveCategory.Pron].forEach(category => [undefined, types_1.RusGender.Masc, types_1.RusGender.Femn, types_1.RusGender.Neut].forEach(gender => [true, false].forEach(singular => [undefined, types_1.RusCase.Nomn, types_1.RusCase.Gent, types_1.RusCase.Datv, types_1.RusCase.Accs, types_1.RusCase.Ablt, types_1.RusCase.Loct].forEach(grammCase => {
-        signatures.push(__1.RusAdjective.getSignature(false, category, gender, singular, grammCase));
-    }))));
-    return signatures.reduce((p, s) => {
+exports.morphTokens = (function () {
+    [true, false].forEach(function (an) {
+        return [types_1.RusGender.Masc, types_1.RusGender.Femn, types_1.RusGender.Neut].forEach(function (gender) {
+            return [true, false].forEach(function (singular) {
+                return [types_1.RusCase.Nomn, types_1.RusCase.Gent, types_1.RusCase.Datv, types_1.RusCase.Accs, types_1.RusCase.Ablt, types_1.RusCase.Loct].forEach(function (grammCase) {
+                    return signatures.push(__1.RusNoun.getSignature(an, gender, singular, grammCase));
+                });
+            });
+        });
+    });
+    [types_1.RusAdjectiveCategory.Qual, types_1.RusAdjectiveCategory.Pron].forEach(function (category) {
+        return [undefined, types_1.RusGender.Masc, types_1.RusGender.Femn, types_1.RusGender.Neut].forEach(function (gender) {
+            return [true, false].forEach(function (singular) {
+                return [undefined, types_1.RusCase.Nomn, types_1.RusCase.Gent, types_1.RusCase.Datv, types_1.RusCase.Accs, types_1.RusCase.Ablt, types_1.RusCase.Loct].forEach(function (grammCase) {
+                    signatures.push(__1.RusAdjective.getSignature(false, category, gender, singular, grammCase));
+                });
+            });
+        });
+    });
+    return signatures.reduce(function (p, s) {
         p[s] = chevrotain_1.createToken({ name: s, pattern: chevrotain_1.Lexer.NA });
         return p;
     }, {});

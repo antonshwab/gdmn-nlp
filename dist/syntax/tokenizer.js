@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const chevrotain_1 = require("chevrotain");
+var chevrotain_1 = require("chevrotain");
 exports.WhiteSpace = chevrotain_1.createToken({
     name: 'WhiteSpace',
     pattern: /[ \t]+/,
@@ -23,7 +23,7 @@ exports.Other = chevrotain_1.createToken({
     name: 'Other',
     pattern: /[A-Za-z0-9]+/
 });
-const allTokens = [
+var allTokens = [
     exports.LineBreak,
     exports.WhiteSpace,
     exports.PunctuationMark,
@@ -32,9 +32,9 @@ const allTokens = [
 ];
 exports.tokenizer = new chevrotain_1.Lexer(allTokens);
 function tokenize(text) {
-    const tokenized = exports.tokenizer.tokenize(text);
+    var tokenized = exports.tokenizer.tokenize(text);
     if (tokenized.errors.length) {
-        throw new Error(`Invalid text "${text}". Tokenizer errors: ${JSON.stringify(tokenized.errors, undefined, 2)}`);
+        throw new Error("Invalid text \"" + text + "\". Tokenizer errors: " + JSON.stringify(tokenized.errors, undefined, 2));
     }
     return tokenized.tokens;
 }

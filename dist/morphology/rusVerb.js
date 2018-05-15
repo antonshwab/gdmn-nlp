@@ -1,30 +1,42 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
-const types_1 = require("./types");
-const morphology_1 = require("./morphology");
-const rusVerbsData_1 = require("./rusVerbsData");
-const rusVerbEndings_1 = require("./rusVerbEndings");
-const utility_1 = require("./utility");
-class RusVerbLexeme extends morphology_1.VerbLexeme {
-    constructor(stem, stem1, stem2, aspect, transitivity, conjZ) {
-        super(stem, stem1, stem2);
-        this.aspect = aspect;
-        this.transitivity = transitivity;
-        this.conjZ = conjZ;
-        this.conjZEnding = rusVerbEndings_1.RusConjugationZEndings.find((c) => c.conjZ === this.conjZ && c.aspect === this.aspect && c.transitivity === this.transitivity);
+var types_1 = require("./types");
+var morphology_1 = require("./morphology");
+var rusVerbsData_1 = require("./rusVerbsData");
+var rusVerbEndings_1 = require("./rusVerbEndings");
+var utility_1 = require("./utility");
+var RusVerbLexeme = /** @class */ (function (_super) {
+    __extends(RusVerbLexeme, _super);
+    function RusVerbLexeme(stem, stem1, stem2, aspect, transitivity, conjZ) {
+        var _this = _super.call(this, stem, stem1, stem2) || this;
+        _this.aspect = aspect;
+        _this.transitivity = transitivity;
+        _this.conjZ = conjZ;
+        _this.conjZEnding = rusVerbEndings_1.RusConjugationZEndings.find(function (c) { return c.conjZ === _this.conjZ && c.aspect === _this.aspect && c.transitivity === _this.transitivity; });
+        return _this;
     }
-    hasImprMood() {
+    RusVerbLexeme.prototype.hasImprMood = function () {
         if (!this.conjZEnding) {
             throw 'Conjugation \'' + this.conjZ + '\' not found';
         }
-        return (typeof this.conjZEnding.endings.find(e => e.mood === types_1.RusMood.Impr) !== 'undefined');
-    }
-    getWordForm(morphSigns) {
+        return (typeof this.conjZEnding.endings.find(function (e) { return e.mood === types_1.RusMood.Impr; }) !== 'undefined');
+    };
+    RusVerbLexeme.prototype.getWordForm = function (morphSigns) {
         if (morphSigns.infn) {
             if (!this.conjZEnding) {
                 throw 'Conjugation \'' + this.conjZ + '\' not found';
             }
-            let wrd;
+            var wrd = void 0;
             if (this.conjZ.indexOf('-ся') !== -1) {
                 wrd = this.stem + this.conjZEnding.suffix + 'ся';
             }
@@ -34,12 +46,12 @@ class RusVerbLexeme extends morphology_1.VerbLexeme {
             return new RusVerb(wrd, this, { infn: true });
         }
         if (this.conjZEnding) {
-            const ending = this.conjZEnding.endings.find(e => e.tense === morphSigns.tense
+            var ending = this.conjZEnding.endings.find(function (e) { return e.tense === morphSigns.tense
                 && e.person === morphSigns.person
                 && e.gender === morphSigns.gender
                 && e.singular === morphSigns.singular
                 && e.mood === morphSigns.mood
-                && e.involvement === morphSigns.involvement);
+                && e.involvement === morphSigns.involvement; });
             if (ending) {
                 if (this.conjZ === '^b/b(9)' || this.conjZ === '^b/b(9)СВ') { // идти
                     if (morphSigns.tense === types_1.RusTense.Past) {
@@ -150,9 +162,9 @@ class RusVerbLexeme extends morphology_1.VerbLexeme {
             }
         }
         throw 'Conjugation \'' + this.conjZ + '\' ending not found';
-    }
-    getWordForms() {
-        const wordForms = [];
+    };
+    RusVerbLexeme.prototype.getWordForms = function () {
+        var wordForms = [];
         wordForms.push(this.getWordForm({ infn: true }));
         wordForms.push(this.getWordForm({ tense: types_1.RusTense.Past, singular: true, gender: types_1.RusGender.Masc, mood: types_1.RusMood.Indc }));
         wordForms.push(this.getWordForm({ tense: types_1.RusTense.Past, singular: true, gender: types_1.RusGender.Femn, mood: types_1.RusMood.Indc }));
@@ -181,37 +193,40 @@ class RusVerbLexeme extends morphology_1.VerbLexeme {
             wordForms.push(this.getWordForm({ tense: types_1.RusTense.Pres, singular: false, person: 3, mood: types_1.RusMood.Indc }));
         }
         return wordForms;
-    }
-}
+    };
+    return RusVerbLexeme;
+}(morphology_1.VerbLexeme));
 exports.RusVerbLexeme = RusVerbLexeme;
-exports.RusVerbLexemes = rusVerbsData_1.rusVerbs.map((v) => new RusVerbLexeme(v.stem, v.stem1, v.stem2, v.aspect, v.transitivity, v.conjZ));
-class RusVerb extends morphology_1.Verb {
-    constructor(word, lexeme, morphSigns) {
-        super(word, lexeme);
-        this.infn = morphSigns.infn ? true : false;
-        this.tense = morphSigns.tense;
-        this.singular = morphSigns.singular;
-        this.gender = morphSigns.gender;
-        this.person = morphSigns.person;
-        this.mood = morphSigns.mood;
-        this.involvement = morphSigns.involvement;
+exports.RusVerbLexemes = rusVerbsData_1.rusVerbs.map(function (v) { return new RusVerbLexeme(v.stem, v.stem1, v.stem2, v.aspect, v.transitivity, v.conjZ); });
+var RusVerb = /** @class */ (function (_super) {
+    __extends(RusVerb, _super);
+    function RusVerb(word, lexeme, morphSigns) {
+        var _this = _super.call(this, word, lexeme) || this;
+        _this.infn = morphSigns.infn ? true : false;
+        _this.tense = morphSigns.tense;
+        _this.singular = morphSigns.singular;
+        _this.gender = morphSigns.gender;
+        _this.person = morphSigns.person;
+        _this.mood = morphSigns.mood;
+        _this.involvement = morphSigns.involvement;
+        return _this;
     }
-    getDisplayText() {
-        const lexeme = this.lexeme;
-        const stem = this.word.startsWith(lexeme.stem) ? lexeme.stem :
+    RusVerb.prototype.getDisplayText = function () {
+        var lexeme = this.lexeme;
+        var stem = this.word.startsWith(lexeme.stem) ? lexeme.stem :
             (this.word.startsWith(lexeme.stem1) ? lexeme.stem1 :
                 (this.word.startsWith(lexeme.stem2) ? lexeme.stem2 : ''));
-        const divided = stem + (this.word === stem ? '' : '-' + this.word.slice(stem.length - this.word.length));
-        const tran = lexeme.transitivity === types_1.Transitivity.Tran ? 'перех' : 'неперех';
-        const aspect = lexeme.aspect === types_1.RusAspect.Perf ? 'сов' : 'несов';
-        const basic = (divided !== this.word ? divided + '; ' : '') + 'гл; ' + tran + '; ' +
+        var divided = stem + (this.word === stem ? '' : '-' + this.word.slice(stem.length - this.word.length));
+        var tran = lexeme.transitivity === types_1.Transitivity.Tran ? 'перех' : 'неперех';
+        var aspect = lexeme.aspect === types_1.RusAspect.Perf ? 'сов' : 'несов';
+        var basic = (divided !== this.word ? divided + '; ' : '') + 'гл; ' + tran + '; ' +
             aspect + '; спр: ' + lexeme.conjZ + '; ';
         if (this.infn) {
             return basic + 'инфн';
         }
         else {
-            const num = this.singular ? 'ед.ч.; ' : 'мн.ч.; ';
-            let tense = '';
+            var num = this.singular ? 'ед.ч.; ' : 'мн.ч.; ';
+            var tense = '';
             switch (this.tense) {
                 case types_1.RusTense.Past:
                     tense = 'прош. вр.; ';
@@ -224,7 +239,7 @@ class RusVerb extends morphology_1.Verb {
                     break;
                 default:
             }
-            let gender = '';
+            var gender = '';
             switch (this.gender) {
                 case types_1.RusGender.Masc:
                     gender = 'м.р.; ';
@@ -237,7 +252,7 @@ class RusVerb extends morphology_1.Verb {
                     break;
                 default:
             }
-            let person = '';
+            var person = '';
             switch (this.person) {
                 case 1:
                     person = '1-е л.; ';
@@ -250,7 +265,7 @@ class RusVerb extends morphology_1.Verb {
                     break;
                 default:
             }
-            let mood = '';
+            var mood = '';
             switch (this.mood) {
                 case types_1.RusMood.Impr:
                     mood = 'повелит.';
@@ -259,23 +274,24 @@ class RusVerb extends morphology_1.Verb {
             }
             return basic + tense + num + gender + person + mood;
         }
-    }
-    getSignature() {
-        const lexeme = this.lexeme;
-        const tran = lexeme.transitivity === types_1.Transitivity.Tran ? 'Tran' : 'Intr';
-        const aspect = lexeme.aspect === types_1.RusAspect.Perf ? 'Perf' : 'Impf';
+    };
+    RusVerb.prototype.getSignature = function () {
+        var lexeme = this.lexeme;
+        var tran = lexeme.transitivity === types_1.Transitivity.Tran ? 'Tran' : 'Intr';
+        var aspect = lexeme.aspect === types_1.RusAspect.Perf ? 'Perf' : 'Impf';
         if (this.infn) {
             return 'INFN' + tran + aspect;
         }
         else {
-            const num = this.singular ? 'Sing' : 'Plur';
-            const tense = typeof this.tense === 'undefined' ? '' : types_1.ShortTenseNames[this.tense];
-            const gender = typeof this.gender === 'undefined' ? '' : types_1.ShortGenderNames[this.gender];
-            const person = typeof this.person === 'undefined' ? '' : this.person + 'per';
-            const mood = typeof this.mood === 'undefined' ? '' : types_1.ShortMoodNames[this.mood];
+            var num = this.singular ? 'Sing' : 'Plur';
+            var tense = typeof this.tense === 'undefined' ? '' : types_1.ShortTenseNames[this.tense];
+            var gender = typeof this.gender === 'undefined' ? '' : types_1.ShortGenderNames[this.gender];
+            var person = typeof this.person === 'undefined' ? '' : this.person + 'per';
+            var mood = typeof this.mood === 'undefined' ? '' : types_1.ShortMoodNames[this.mood];
             return 'VERB' + tran + aspect + tense + num + gender + person + mood;
         }
-    }
-}
+    };
+    return RusVerb;
+}(morphology_1.Verb));
 exports.RusVerb = RusVerb;
 //# sourceMappingURL=rusVerb.js.map

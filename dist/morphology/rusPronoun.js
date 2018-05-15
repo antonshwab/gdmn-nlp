@@ -1,46 +1,64 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
-const morphology_1 = require("./morphology");
-const types_1 = require("./types");
-const rusPronounsData_1 = require("./rusPronounsData");
-class RusPronounLexeme extends morphology_1.PronounLexeme {
-    constructor(data) {
-        super(data.words[0]);
-        this.data = data;
+var morphology_1 = require("./morphology");
+var types_1 = require("./types");
+var rusPronounsData_1 = require("./rusPronounsData");
+var RusPronounLexeme = /** @class */ (function (_super) {
+    __extends(RusPronounLexeme, _super);
+    function RusPronounLexeme(data) {
+        var _this = _super.call(this, data.words[0]) || this;
+        _this.data = data;
+        return _this;
     }
-    analyze(word, result) {
-        this.data.words.some((d, idx) => {
-            if (d === word && (!this.data.noNomn || idx !== types_1.RusCase.Nomn)) {
-                result(new RusPronoun(word, this, idx));
+    RusPronounLexeme.prototype.analyze = function (word, result) {
+        var _this = this;
+        this.data.words.some(function (d, idx) {
+            if (d === word && (!_this.data.noNomn || idx !== types_1.RusCase.Nomn)) {
+                result(new RusPronoun(word, _this, idx));
                 return true;
             }
             else {
                 return false;
             }
         });
-    }
-    getWordForm(c) {
+    };
+    RusPronounLexeme.prototype.getWordForm = function (c) {
         return new RusPronoun(this.data.words[c], this, c);
-    }
-    getWordForms() {
-        return this.data.words.map((d, idx) => new RusPronoun(d, this, idx));
-    }
-}
+    };
+    RusPronounLexeme.prototype.getWordForms = function () {
+        var _this = this;
+        return this.data.words.map(function (d, idx) { return new RusPronoun(d, _this, idx); });
+    };
+    return RusPronounLexeme;
+}(morphology_1.PronounLexeme));
 exports.RusPronounLexeme = RusPronounLexeme;
-exports.RusPronounLexemes = rusPronounsData_1.rusPronouns.map(p => new RusPronounLexeme(p));
-class RusPronoun extends morphology_1.Pronoun {
-    constructor(word, lexeme, grammCase) {
-        super(word, lexeme);
-        this.grammCase = grammCase;
+exports.RusPronounLexemes = rusPronounsData_1.rusPronouns.map(function (p) { return new RusPronounLexeme(p); });
+var RusPronoun = /** @class */ (function (_super) {
+    __extends(RusPronoun, _super);
+    function RusPronoun(word, lexeme, grammCase) {
+        var _this = _super.call(this, word, lexeme) || this;
+        _this.grammCase = grammCase;
+        return _this;
     }
-    getDisplayText() {
+    RusPronoun.prototype.getDisplayText = function () {
         return this.word + '; ' + types_1.RusPronounTypeNames[this.lexeme.data.pronounType] +
             ' местоимение; ' + types_1.RusCaseNames[this.grammCase];
-    }
-    getSignature() {
+    };
+    RusPronoun.prototype.getSignature = function () {
         return 'NPRO' + types_1.ShortPronounTypeNames[this.lexeme.data.pronounType] +
             types_1.ShortCaseNames[this.grammCase];
-    }
-}
+    };
+    return RusPronoun;
+}(morphology_1.Pronoun));
 exports.RusPronoun = RusPronoun;
 //# sourceMappingURL=rusPronoun.js.map

@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function isRusConsonant(s, idx = 'whole') {
-    const RusConsonants = 'БВГДЖЗЙКЛМНПРСТФХЦЧШЩ';
+function isRusConsonant(s, idx) {
+    if (idx === void 0) { idx = 'whole'; }
+    var RusConsonants = 'БВГДЖЗЙКЛМНПРСТФХЦЧШЩ';
     switch (idx) {
         case 'whole':
             return RusConsonants.indexOf(s.toUpperCase()) !== -1;

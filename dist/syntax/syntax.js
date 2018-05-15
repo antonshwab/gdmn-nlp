@@ -1,48 +1,85 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
-const idGenerator_1 = require("../utils/idGenerator");
-class Sentence {
-}
+var idGenerator_1 = require("../utils/idGenerator");
+var Sentence = /** @class */ (function () {
+    function Sentence() {
+    }
+    return Sentence;
+}());
 exports.Sentence = Sentence;
-class Phrase {
-    constructor(items) {
+var Phrase = /** @class */ (function () {
+    function Phrase(items) {
         this.items = items;
         this.id = idGenerator_1.getNextID();
     }
-    getText() {
-        return this.items.reduce((prev, p) => prev + p.getText() + ' ', '');
-    }
-    simplify() {
-        const recurs = (parentParent, parent, idx) => {
-            parent.items.forEach((i, x) => {
+    Phrase.prototype.getText = function () {
+        return this.items.reduce(function (prev, p) {
+            return prev + p.getText() + ' ';
+        }, '');
+    };
+    Phrase.prototype.simplify = function () {
+        var _this = this;
+        var recurs = function (parentParent, parent, idx) {
+            parent.items.forEach(function (i, x) {
                 if (i.constructor === parent.constructor) {
                     recurs(parent, i, x);
                 }
             });
             if (parent.items.length === 1) {
-                const temp = parent.items[0];
+                var temp = parent.items[0];
                 parent.items = [];
                 parentParent.items[idx] = temp;
             }
         };
-        this.items.forEach((i, idx) => {
-            if (i.constructor === this.constructor) {
-                recurs(this, i, idx);
+        this.items.forEach(function (i, idx) {
+            if (i.constructor === _this.constructor) {
+                recurs(_this, i, idx);
             }
         });
-    }
-}
+    };
+    return Phrase;
+}());
 exports.Phrase = Phrase;
-class VP extends Phrase {
-}
+var VP = /** @class */ (function (_super) {
+    __extends(VP, _super);
+    function VP() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return VP;
+}(Phrase));
 exports.VP = VP;
-class NP extends Phrase {
-}
+var NP = /** @class */ (function (_super) {
+    __extends(NP, _super);
+    function NP() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return NP;
+}(Phrase));
 exports.NP = NP;
-class ANP extends NP {
-}
+var ANP = /** @class */ (function (_super) {
+    __extends(ANP, _super);
+    function ANP() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return ANP;
+}(NP));
 exports.ANP = ANP;
-class PP extends NP {
-}
+var PP = /** @class */ (function (_super) {
+    __extends(PP, _super);
+    function PP() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return PP;
+}(NP));
 exports.PP = PP;
 //# sourceMappingURL=syntax.js.map

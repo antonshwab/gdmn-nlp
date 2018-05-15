@@ -1,7 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
-const morphology_1 = require("./morphology");
-const types_1 = require("./types");
+var morphology_1 = require("./morphology");
+var types_1 = require("./types");
 exports.rusPrepositions = [
     {
         prepositionType: types_1.PrepositionType.Place,
@@ -28,37 +38,45 @@ exports.rusPrepositions = [
         words: ['о', 'по', 'про', 'за', 'в', 'на', 'с', 'насчет']
     }
 ];
-class RusPrepositionLexeme extends morphology_1.PrepositionLexeme {
-    constructor(preposition, prepositionType) {
-        super(preposition);
-        this.prepositionType = prepositionType;
+var RusPrepositionLexeme = /** @class */ (function (_super) {
+    __extends(RusPrepositionLexeme, _super);
+    function RusPrepositionLexeme(preposition, prepositionType) {
+        var _this = _super.call(this, preposition) || this;
+        _this.prepositionType = prepositionType;
+        return _this;
     }
-    analyze(word, result) {
+    RusPrepositionLexeme.prototype.analyze = function (word, result) {
         if (this.stem === word) {
             result(new RusPreposition(word, this));
         }
-    }
-    getWordForm() {
+    };
+    RusPrepositionLexeme.prototype.getWordForm = function () {
         return new RusPreposition(this.stem, this);
-    }
-    getWordForms() {
+    };
+    RusPrepositionLexeme.prototype.getWordForms = function () {
         return [new RusPreposition(this.stem, this)];
-    }
-}
+    };
+    return RusPrepositionLexeme;
+}(morphology_1.PrepositionLexeme));
 exports.RusPrepositionLexeme = RusPrepositionLexeme;
-exports.RusPrepositionLexemes = exports.rusPrepositions.reduce((prev, p) => {
-    p.words.forEach(w => prev.push(new RusPrepositionLexeme(w, p.prepositionType)));
+exports.RusPrepositionLexemes = exports.rusPrepositions.reduce(function (prev, p) {
+    p.words.forEach(function (w) { return prev.push(new RusPrepositionLexeme(w, p.prepositionType)); });
     return prev;
 }, []);
-class RusPreposition extends morphology_1.Preposition {
-    getDisplayText() {
+var RusPreposition = /** @class */ (function (_super) {
+    __extends(RusPreposition, _super);
+    function RusPreposition() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    RusPreposition.prototype.getDisplayText = function () {
         return this.word + '; предлог; ' +
             types_1.RusPrepositionTypeNames[this.lexeme.prepositionType];
-    }
-    getSignature() {
+    };
+    RusPreposition.prototype.getSignature = function () {
         return 'PREP' +
             types_1.ShortPrepositionTypeNames[this.lexeme.prepositionType];
-    }
-}
+    };
+    return RusPreposition;
+}(morphology_1.Preposition));
 exports.RusPreposition = RusPreposition;
 //# sourceMappingURL=rusPreposition.js.map
