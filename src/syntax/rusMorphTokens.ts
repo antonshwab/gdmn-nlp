@@ -28,14 +28,24 @@ export const morphTokens = (() => {
     )
   );
 
+  /**
+   * Прилагательные, единственное число.
+   */
   [RusAdjectiveCategory.Qual, RusAdjectiveCategory.Pron].forEach( category =>
-    [undefined, RusGender.Masc, RusGender.Femn, RusGender.Neut].forEach( gender =>
-      [true, false].forEach( singular =>
-        [undefined, RusCase.Nomn, RusCase.Gent, RusCase.Datv, RusCase.Accs, RusCase.Ablt, RusCase.Loct].forEach( grammCase => {
-          signatures.push(RusAdjective.getSignature(false, category, gender, singular, grammCase));
-        })
-      )
+    [RusGender.Masc, RusGender.Femn, RusGender.Neut].forEach( gender =>
+      [RusCase.Nomn, RusCase.Gent, RusCase.Datv, RusCase.Accs, RusCase.Ablt, RusCase.Loct].forEach( grammCase => {
+        signatures.push(RusAdjective.getSignature(false, category, gender, true, grammCase));
+      })
     )
+  );
+
+  /**
+   * Прилагательные, множественное число.
+   */
+  [RusAdjectiveCategory.Qual, RusAdjectiveCategory.Pron].forEach( category =>
+    [RusCase.Nomn, RusCase.Gent, RusCase.Datv, RusCase.Accs, RusCase.Ablt, RusCase.Loct].forEach( grammCase => {
+      signatures.push(RusAdjective.getSignature(false, category, undefined, false, grammCase));
+    })
   );
 
   return signatures.reduce(
