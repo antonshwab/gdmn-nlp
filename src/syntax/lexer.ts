@@ -1,8 +1,8 @@
 import { IToken, TokenType, createToken, Lexer } from 'chevrotain';
 import { Word } from '../morphology/morphology';
-import { tokenize } from '../morphology/token';
+import { tokenize } from '../syntax/token';
 import { morphAnalyzer } from '../morphology/morphAnalyzer';
-import { IMorphToken, morphTokens } from './morphTokens';
+import { IMorphToken, morphTokens } from './rusMorphTokens';
 
 export function scan(text: string): IMorphToken[][]
 {

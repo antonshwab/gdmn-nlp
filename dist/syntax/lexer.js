@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const token_1 = require("../morphology/token");
+const token_1 = require("../syntax/token");
 const morphAnalyzer_1 = require("../morphology/morphAnalyzer");
-const morphTokens_1 = require("./morphTokens");
+const rusMorphTokens_1 = require("./rusMorphTokens");
 function scan(text) {
     function createTokenInstance(w) {
-        const tokType = morphTokens_1.morphTokens[w.getSignature()];
+        const tokType = rusMorphTokens_1.morphTokens[w.getSignature()];
         if (!tokType) {
             throw new Error(`Unknown type signature ${w.getSignature()} of word ${w.word}`);
         }

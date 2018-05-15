@@ -7,7 +7,7 @@ import {
   IRecognitionException,
   TokenType
 } from 'chevrotain';
-import { ITokenTypes, morphTokens } from './morphTokens';
+import { ITokenTypes, morphTokens } from './rusMorphTokens';
 import { scan } from './lexer';
 import { VP, NP, PP, ANP, SetParsedText, Phrase } from '..';
 

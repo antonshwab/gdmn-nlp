@@ -13,7 +13,7 @@ export * from './morphology/rusPronounsData';
 export * from './morphology/rusVerb';
 export * from './morphology/rusVerbEndings';
 export * from './morphology/rusVerbsData';
-export * from './morphology/token';
+export * from './syntax/token';
 export * from './morphology/types';
 export * from './morphology/utility';
 export * from './syntax/syntax';
