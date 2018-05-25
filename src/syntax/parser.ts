@@ -9,7 +9,7 @@ import {
 } from 'chevrotain';
 import { ITokenTypes, morphTokens } from './rusMorphTokens';
 import { scan } from './lexer';
-import { VP, NP, PP, ANP, SetParsedText, Phrase } from '..';
+import { VP, NP, PP, ANP, SetParsedText, Phrase, ImperativeVP } from '..';
 
 class VPParser extends Parser {
   constructor(input: IToken[]) {
@@ -111,7 +111,7 @@ class VPVisitor extends BaseVPVisitor {
     const imperativeVerb = this.visit(ctx.imperativeVerb);
     const imperativeNP = this.visit(ctx.imperativeNP);
 
-    return new VP([imperativeVerb, imperativeNP]);
+    return new ImperativeVP(imperativeVerb, imperativeNP);
   }
 
   public imperativeVerb = (ctx: any) => {
@@ -190,20 +190,25 @@ export type SetParsedText = {
 };
 
 export function parsePhrase(text: string): SetParsedText {
-  let value;
   let parsedText: string[] = [];
+  let phrase: Phrase | undefined = undefined;
 
   scan(text).some( t => {
     vpParser.input = t;
-    value = vpParser.sentence();
+    const value = vpParser.sentence();
     parsedText = [t.reduce( (x, y) => x + ' ' + y.word.getSignature(), '' )];
-    return !vpParser.errors.length;
+    if (value && !vpParser.errors.length) {
+      phrase = toVPInstance.visit(value);
+      return true;
+    } else {
+      return false;
+    }
   })
 
-  if (value) {
+  if (phrase) {
     return {
       parsedText,
-      phrase: toVPInstance.visit(value)
+      phrase
     }
   } else {
     return {

@@ -1,4 +1,4 @@
-import { Word } from '../morphology/morphology';
+import { Word, Verb } from '../morphology/morphology';
 import { getNextID } from '../utils/idGenerator';
 
 export class Sentence {}
@@ -46,6 +46,28 @@ export class Phrase {
 }
 
 export class VP extends Phrase {}
+
+export class ImperativeVP extends VP {
+  constructor (imperativeVerb: Verb, imperativeNP?: NP) {
+    if (imperativeNP) {
+      super([imperativeVerb, imperativeNP]);
+    } else {
+      super([imperativeVerb]);
+    }
+  }
+
+  get imperativeVerb(): Verb {
+    return this.items[0] as Verb;
+  }
+
+  get imperativeNP(): NP | undefined {
+    if (!this.items[1]) {
+      return undefined;
+    } else {
+      return this.items[1] as NP;
+    }
+  }
+}
 
 export class NP extends Phrase {}
 

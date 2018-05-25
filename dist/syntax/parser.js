@@ -97,7 +97,7 @@ var VPVisitor = /** @class */ (function (_super) {
         _this.imperativeVP = function (ctx) {
             var imperativeVerb = _this.visit(ctx.imperativeVerb);
             var imperativeNP = _this.visit(ctx.imperativeNP);
-            return new __1.VP([imperativeVerb, imperativeNP]);
+            return new __1.ImperativeVP(imperativeVerb, imperativeNP);
         };
         _this.imperativeVerb = function (ctx) {
             return ctx.VERBTranPerfSingImpr[0].word;
@@ -165,18 +165,24 @@ var VPVisitor = /** @class */ (function (_super) {
 ;
 var toVPInstance = new VPVisitor();
 function parsePhrase(text) {
-    var value;
     var parsedText = [];
+    var phrase = undefined;
     lexer_1.scan(text).some(function (t) {
         vpParser.input = t;
-        value = vpParser.sentence();
+        var value = vpParser.sentence();
         parsedText = [t.reduce(function (x, y) { return x + ' ' + y.word.getSignature(); }, '')];
-        return !vpParser.errors.length;
+        if (value && !vpParser.errors.length) {
+            phrase = toVPInstance.visit(value);
+            return true;
+        }
+        else {
+            return false;
+        }
     });
-    if (value) {
+    if (phrase) {
         return {
             parsedText: parsedText,
-            phrase: toVPInstance.visit(value)
+            phrase: phrase
         };
     }
     else {

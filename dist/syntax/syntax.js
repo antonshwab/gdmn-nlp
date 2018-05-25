@@ -58,6 +58,40 @@ var VP = /** @class */ (function (_super) {
     return VP;
 }(Phrase));
 exports.VP = VP;
+var ImperativeVP = /** @class */ (function (_super) {
+    __extends(ImperativeVP, _super);
+    function ImperativeVP(imperativeVerb, imperativeNP) {
+        var _this = this;
+        if (imperativeNP) {
+            _this = _super.call(this, [imperativeVerb, imperativeNP]) || this;
+        }
+        else {
+            _this = _super.call(this, [imperativeVerb]) || this;
+        }
+        return _this;
+    }
+    Object.defineProperty(ImperativeVP.prototype, "imperativeVerb", {
+        get: function () {
+            return this.items[0];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ImperativeVP.prototype, "imperativeNP", {
+        get: function () {
+            if (!this.items[1]) {
+                return undefined;
+            }
+            else {
+                return this.items[1];
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ImperativeVP;
+}(VP));
+exports.ImperativeVP = ImperativeVP;
 var NP = /** @class */ (function (_super) {
     __extends(NP, _super);
     function NP() {
