@@ -14,6 +14,9 @@ var chevrotain_1 = require("chevrotain");
 var rusMorphTokens_1 = require("./rusMorphTokens");
 var lexer_1 = require("./lexer");
 var __1 = require("..");
+/**
+ * Грамматика для фразы типа "Покажи всех клиентов из Минска"
+ */
 var VPParser = /** @class */ (function (_super) {
     __extends(VPParser, _super);
     function VPParser(input) {
@@ -112,7 +115,7 @@ var VPVisitor = /** @class */ (function (_super) {
         };
         _this.qualImperativeNoun = function (ctx) {
             if (ctx.imperativeDets) {
-                return new __1.ANP([_this.visit(ctx.imperativeDets), _this.visit(ctx.imperativeNoun)]);
+                return new __1.ANP(_this.visit(ctx.imperativeDets), _this.visit(ctx.imperativeNoun));
             }
             else {
                 return _this.visit(ctx.imperativeNoun);
@@ -140,7 +143,7 @@ var VPVisitor = /** @class */ (function (_super) {
                                     : undefined;
         };
         _this.pp = function (ctx) {
-            return new __1.PP([_this.visit(ctx.prep), _this.visit(ctx.ppNoun)]);
+            return new __1.PP(_this.visit(ctx.prep), _this.visit(ctx.ppNoun));
         };
         _this.prep = function (ctx) {
             return ctx.PREPPlce[0].word;

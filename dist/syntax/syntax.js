@@ -102,17 +102,45 @@ var NP = /** @class */ (function (_super) {
 exports.NP = NP;
 var ANP = /** @class */ (function (_super) {
     __extends(ANP, _super);
-    function ANP() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function ANP(adjf, noun) {
+        return _super.call(this, [adjf, noun]) || this;
     }
+    Object.defineProperty(ANP.prototype, "adjf", {
+        get: function () {
+            return this.items[0];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ANP.prototype, "noun", {
+        get: function () {
+            return this.items[1];
+        },
+        enumerable: true,
+        configurable: true
+    });
     return ANP;
 }(NP));
 exports.ANP = ANP;
 var PP = /** @class */ (function (_super) {
     __extends(PP, _super);
-    function PP() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function PP(prep, noun) {
+        return _super.call(this, [prep, noun]) || this;
     }
+    Object.defineProperty(PP.prototype, "prep", {
+        get: function () {
+            return this.items[0];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PP.prototype, "noun", {
+        get: function () {
+            return this.items[1];
+        },
+        enumerable: true,
+        configurable: true
+    });
     return PP;
 }(NP));
 exports.PP = PP;

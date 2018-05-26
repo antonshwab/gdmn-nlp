@@ -11,6 +11,9 @@ import { ITokenTypes, morphTokens } from './rusMorphTokens';
 import { scan } from './lexer';
 import { VP, NP, PP, ANP, SetParsedText, Phrase, ImperativeVP } from '..';
 
+/**
+ * Грамматика для фразы типа "Покажи всех клиентов из Минска"
+ */
 class VPParser extends Parser {
   constructor(input: IToken[]) {
     super(input, morphTokens, { outputCst: true });
@@ -128,7 +131,7 @@ class VPVisitor extends BaseVPVisitor {
 
   public qualImperativeNoun = (ctx: any) => {
     if (ctx.imperativeDets) {
-      return new ANP([this.visit(ctx.imperativeDets), this.visit(ctx.imperativeNoun)]);
+      return new ANP(this.visit(ctx.imperativeDets), this.visit(ctx.imperativeNoun));
     } else {
       return this.visit(ctx.imperativeNoun);
     };
@@ -159,7 +162,7 @@ class VPVisitor extends BaseVPVisitor {
   }
 
   public pp = (ctx: any) => {
-    return new PP([this.visit(ctx.prep), this.visit(ctx.ppNoun)]);
+    return new PP(this.visit(ctx.prep), this.visit(ctx.ppNoun));
   }
 
   public prep = (ctx: any) => {

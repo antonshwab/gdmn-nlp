@@ -20,9 +20,7 @@ test("parser", () => {
 });
 
 test('scan', () => {
-
   const tokens = scan('большое поле');
-
   expect(tokens.length).toBe(6);
   expect(tokens[0][0].tokenType!.tokenName).toBe('ADJFQualNeutSingNomn');
   expect(tokens[0][1].tokenType!.tokenName).toBe('NOUNInanNeutSingNomn');

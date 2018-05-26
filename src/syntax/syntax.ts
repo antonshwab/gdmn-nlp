@@ -1,4 +1,4 @@
-import { Word, Verb } from '../morphology/morphology';
+import { Word, Verb, Preposition, Noun, Adjective } from '../morphology/morphology';
 import { getNextID } from '../utils/idGenerator';
 
 export class Sentence {}
@@ -71,6 +71,30 @@ export class ImperativeVP extends VP {
 
 export class NP extends Phrase {}
 
-export class ANP extends NP {}
+export class ANP extends NP {
+  constructor (adjf: Adjective, noun: Noun) {
+    super([adjf, noun]);
+  }
 
-export class PP extends NP {}
+  get adjf(): Adjective {
+    return this.items[0] as Adjective;
+  }
+
+  get noun(): Noun {
+    return this.items[1] as Noun;
+  }
+}
+
+export class PP extends NP {
+  constructor (prep: Preposition, noun: Noun) {
+    super([prep, noun]);
+  }
+
+  get prep(): Preposition {
+    return this.items[0] as Preposition;
+  }
+
+  get noun(): Noun {
+    return this.items[1] as Noun;
+  }
+}
