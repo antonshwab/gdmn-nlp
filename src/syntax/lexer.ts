@@ -4,7 +4,20 @@ import { tokenizer, RusWord, tokenize } from '../syntax/tokenizer';
 import { morphAnalyzer } from '../morphology/morphAnalyzer';
 import { IMorphToken, morphTokens } from './rusMorphTokens';
 
-export function scan(text: string): IMorphToken[][]
+/**
+ * Функция определяет возможные словоформы для каждого
+ * из переданных слов. Например, для слова "дом" это будут
+ * две возможные словормы: ед. ч., м. род, им п. и ед. ч., м.род,
+ * вин. п.
+ *
+ * Затем, комбинаторно строятся все возможные варианты сочетаний
+ * словоформ.
+ *
+ * Функция вовращает массив из массивов словоформ.
+ *
+ * @param text слово, словосочетание или предложение.
+ */
+export function combinatorialMorph(text: string): IMorphToken[][]
 {
   function createTokenInstance(w: Word): IMorphToken {
     const tokType = morphTokens[w.getSignature()];

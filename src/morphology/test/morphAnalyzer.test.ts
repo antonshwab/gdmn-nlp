@@ -3,7 +3,6 @@ import { RusAdjective } from "../rusAdjective";
 import { RusCase } from "../types";
 
 test("morphAnalyzer", () => {
-
   const result = morphAnalyzer('самый');
   expect(result[0]).toBeDefined();
   expect(result[0] instanceof RusAdjective).toBeTruthy();

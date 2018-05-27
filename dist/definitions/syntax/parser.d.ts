@@ -1,6 +1,6 @@
-import { SetParsedText, Phrase } from '..';
-export declare type SetParsedText = {
-    readonly parsedText: string[];
+import { ParsedText, Phrase } from '..';
+export declare type ParsedText = {
+    readonly wordsSignatures: string[];
     readonly phrase?: Phrase;
 };
-export declare function parsePhrase(text: string): SetParsedText;
+export declare function parsePhrase(text: string): ParsedText;

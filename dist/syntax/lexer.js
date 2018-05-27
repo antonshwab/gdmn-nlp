@@ -3,7 +3,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tokenizer_1 = require("../syntax/tokenizer");
 var morphAnalyzer_1 = require("../morphology/morphAnalyzer");
 var rusMorphTokens_1 = require("./rusMorphTokens");
-function scan(text) {
+/**
+ * Функция определяет возможные словоформы для каждого
+ * из переданных слов. Например, для слова "дом" это будут
+ * две возможные словормы: ед. ч., м. род, им п. и ед. ч., м.род,
+ * вин. п.
+ *
+ * Затем, комбинаторно строятся все возможные варианты сочетаний
+ * словоформ.
+ *
+ * Функция вовращает массив из массивов словоформ.
+ *
+ * @param text слово, словосочетание или предложение.
+ */
+function combinatorialMorph(text) {
     function createTokenInstance(w) {
         var tokType = rusMorphTokens_1.morphTokens[w.getSignature()];
         if (!tokType) {
@@ -37,6 +50,6 @@ function scan(text) {
     }
     return cmbn;
 }
-exports.scan = scan;
+exports.combinatorialMorph = combinatorialMorph;
 ;
 //# sourceMappingURL=lexer.js.map

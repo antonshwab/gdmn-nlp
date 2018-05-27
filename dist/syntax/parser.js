@@ -15,7 +15,7 @@ var rusMorphTokens_1 = require("./rusMorphTokens");
 var lexer_1 = require("./lexer");
 var __1 = require("..");
 /**
- * Грамматика для фразы типа "Покажи всех клиентов из Минска"
+ * Грамматика для фразы типа "Покажи все организации из Минска"
  */
 var VPParser = /** @class */ (function (_super) {
     __extends(VPParser, _super);
@@ -168,12 +168,12 @@ var VPVisitor = /** @class */ (function (_super) {
 ;
 var toVPInstance = new VPVisitor();
 function parsePhrase(text) {
-    var parsedText = [];
+    var wordsSignatures = [];
     var phrase = undefined;
-    lexer_1.scan(text).some(function (t) {
+    lexer_1.combinatorialMorph(text).some(function (t) {
         vpParser.input = t;
         var value = vpParser.sentence();
-        parsedText = [t.reduce(function (x, y) { return x + ' ' + y.word.getSignature(); }, '')];
+        wordsSignatures = [t.reduce(function (x, y) { return x + ' ' + y.word.getSignature(); }, '')];
         if (value && !vpParser.errors.length) {
             phrase = toVPInstance.visit(value);
             return true;
@@ -184,13 +184,13 @@ function parsePhrase(text) {
     });
     if (phrase) {
         return {
-            parsedText: parsedText,
+            wordsSignatures: wordsSignatures,
             phrase: phrase
         };
     }
     else {
         return {
-            parsedText: parsedText
+            wordsSignatures: wordsSignatures
         };
     }
 }

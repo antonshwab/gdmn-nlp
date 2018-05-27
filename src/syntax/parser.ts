@@ -8,11 +8,11 @@ import {
   TokenType
 } from 'chevrotain';
 import { ITokenTypes, morphTokens } from './rusMorphTokens';
-import { scan } from './lexer';
-import { VP, NP, PP, ANP, SetParsedText, Phrase, ImperativeVP } from '..';
+import { combinatorialMorph } from './lexer';
+import { VP, NP, PP, ANP, ParsedText, Phrase, ImperativeVP } from '..';
 
 /**
- * Грамматика для фразы типа "Покажи всех клиентов из Минска"
+ * Грамматика для фразы типа "Покажи все организации из Минска"
  */
 class VPParser extends Parser {
   constructor(input: IToken[]) {
@@ -187,19 +187,19 @@ class VPVisitor extends BaseVPVisitor {
 
 const toVPInstance = new VPVisitor();
 
-export type SetParsedText = {
-  readonly parsedText: string[];
+export type ParsedText = {
+  readonly wordsSignatures: string[];
   readonly phrase?: Phrase;
 };
 
-export function parsePhrase(text: string): SetParsedText {
-  let parsedText: string[] = [];
+export function parsePhrase(text: string): ParsedText {
+  let wordsSignatures: string[] = [];
   let phrase: Phrase | undefined = undefined;
 
-  scan(text).some( t => {
+  combinatorialMorph(text).some( t => {
     vpParser.input = t;
     const value = vpParser.sentence();
-    parsedText = [t.reduce( (x, y) => x + ' ' + y.word.getSignature(), '' )];
+    wordsSignatures = [t.reduce( (x, y) => x + ' ' + y.word.getSignature(), '' )];
     if (value && !vpParser.errors.length) {
       phrase = toVPInstance.visit(value);
       return true;
@@ -210,12 +210,12 @@ export function parsePhrase(text: string): SetParsedText {
 
   if (phrase) {
     return {
-      parsedText,
+      wordsSignatures,
       phrase
     }
   } else {
     return {
-      parsedText
+      wordsSignatures
     }
   }
 }

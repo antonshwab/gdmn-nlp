@@ -1,10 +1,10 @@
 import { parsePhrase } from "../parser";
 import { Word } from "../../morphology/morphology";
 import { Phrase } from "../syntax";
-import { scan } from "../lexer";
+import { combinatorialMorph } from "../lexer";
 
 test("parser", () => {
-  const result = parsePhrase('покажи всех клиентов из минска');
+  const result = parsePhrase('покажи все организации из минска');
   const vp = result.phrase;
   expect(vp).toBeDefined();
   const verb = vp!.items[0] as Word;
@@ -13,14 +13,14 @@ test("parser", () => {
   const np = vp!.items[1] as Phrase;
   const anp = np!.items[0] as Phrase;
   const pp = np!.items[1] as Phrase;
-  expect((anp!.items[0] as Word).word).toEqual('всех');
-  expect((anp!.items[1] as Word).word).toEqual('клиентов');
+  expect((anp!.items[0] as Word).word).toEqual('все');
+  expect((anp!.items[1] as Word).word).toEqual('организации');
   expect((pp!.items[0] as Word).word).toEqual('из');
   expect((pp!.items[1] as Word).word).toEqual('минска');
 });
 
-test('scan', () => {
-  const tokens = scan('большое поле');
+test('combinatorialMorph', () => {
+  const tokens = combinatorialMorph('большое поле');
   expect(tokens.length).toBe(6);
   expect(tokens[0][0].tokenType!.tokenName).toBe('ADJFQualNeutSingNomn');
   expect(tokens[0][1].tokenType!.tokenName).toBe('NOUNInanNeutSingNomn');
