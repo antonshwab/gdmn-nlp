@@ -17,7 +17,7 @@ exports.PunctuationMark = chevrotain_1.createToken({
 });
 exports.RusWord = chevrotain_1.createToken({
     name: 'RusWord',
-    pattern: /[А-Яа-я]+/
+    pattern: /(?:[А-Яа-я]+-[А-Яа-я]+)|(?:[А-Яа-я]+)/
 });
 exports.Other = chevrotain_1.createToken({
     name: 'Other',

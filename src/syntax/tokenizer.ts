@@ -19,7 +19,7 @@ export const PunctuationMark = createToken({
 
 export const RusWord = createToken({
   name: 'RusWord',
-  pattern: /[А-Яа-я]+/
+  pattern: /(?:[А-Яа-я]+-[А-Яа-я]+)|(?:[А-Яа-я]+)/
 });
 
 export const Other = createToken({
