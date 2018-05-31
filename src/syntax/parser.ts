@@ -199,7 +199,7 @@ export function parsePhrase(text: string): ParsedText {
   combinatorialMorph(text).some( t => {
     vpParser.input = t;
     const value = vpParser.sentence();
-    wordsSignatures = [t.reduce( (x, y) => x + ' ' + y.word.getSignature(), '' )];
+    wordsSignatures = t.map( y => y.word.getSignature() );
     if (value && !vpParser.errors.length) {
       phrase = toVPInstance.visit(value);
       return true;

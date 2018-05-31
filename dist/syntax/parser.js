@@ -173,7 +173,7 @@ function parsePhrase(text) {
     lexer_1.combinatorialMorph(text).some(function (t) {
         vpParser.input = t;
         var value = vpParser.sentence();
-        wordsSignatures = [t.reduce(function (x, y) { return x + ' ' + y.word.getSignature(); }, '')];
+        wordsSignatures = t.map(function (y) { return y.word.getSignature(); });
         if (value && !vpParser.errors.length) {
             phrase = toVPInstance.visit(value);
             return true;
