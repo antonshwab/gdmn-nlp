@@ -1,3 +1,12 @@
+  // делать
+  {
+    stem: 'дела',
+    stem1: '',
+    stem2: '',
+    aspect: RusAspect.Impf,
+    transitivity: Transitivity.Tran,
+    conjZ: '1a'
+  },
   // стачать
   {
     stem: 'стача',
@@ -7,6 +16,15 @@
     transitivity: Transitivity.Tran,
     conjZ: '1aСВ'
   },
+  // делаться
+  {
+    stem: 'дела',
+    stem1: '',
+    stem2: '',
+    aspect: RusAspect.Impf,
+    transitivity: Transitivity.Intr,
+    conjZ: '1a-ся'
+  },
   // примелькаться
   {
     stem: 'примелька',
@@ -15,6 +33,15 @@
     aspect: RusAspect.Perf,
     transitivity: Transitivity.Intr,
     conjZ: '1a-сяСВ'
+  },
+  // требовать
+  {
+    stem: 'требова',
+    stem1: 'требу',
+    stem2: '',
+    aspect: RusAspect.Impf,
+    transitivity: Transitivity.Tran,
+    conjZ: '2a'
   },
   // жевать
   {

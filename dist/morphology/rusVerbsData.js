@@ -2,6 +2,31 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var types_1 = require("./types");
 exports.rusVerbs = [
+    /**
+     * глаголы ниже добавлены вручную.
+     */
+    // продемонстрировать
+    {
+        stem: 'продемонстрирова',
+        stem1: 'продемонстриру',
+        stem2: '',
+        aspect: types_1.RusAspect.Perf,
+        transitivity: types_1.Transitivity.Tran,
+        conjZ: '2a'
+    },
+    /**
+     * глаголы ниже взяты из проекта wiktionary из демо данных для
+     * спряжений по Зализняку.
+     */
+    // делать
+    {
+        stem: 'дела',
+        stem1: '',
+        stem2: '',
+        aspect: types_1.RusAspect.Impf,
+        transitivity: types_1.Transitivity.Tran,
+        conjZ: '1a'
+    },
     // стачать
     {
         stem: 'стача',
@@ -11,6 +36,15 @@ exports.rusVerbs = [
         transitivity: types_1.Transitivity.Tran,
         conjZ: '1aСВ'
     },
+    // делаться
+    {
+        stem: 'дела',
+        stem1: '',
+        stem2: '',
+        aspect: types_1.RusAspect.Impf,
+        transitivity: types_1.Transitivity.Intr,
+        conjZ: '1a-ся'
+    },
     // примелькаться
     {
         stem: 'примелька',
@@ -19,6 +53,15 @@ exports.rusVerbs = [
         aspect: types_1.RusAspect.Perf,
         transitivity: types_1.Transitivity.Intr,
         conjZ: '1a-сяСВ'
+    },
+    // требовать
+    {
+        stem: 'требова',
+        stem1: 'требу',
+        stem2: '',
+        aspect: types_1.RusAspect.Impf,
+        transitivity: types_1.Transitivity.Tran,
+        conjZ: '2a'
     },
     // жевать
     {

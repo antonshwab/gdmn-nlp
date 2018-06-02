@@ -1,6 +1,32 @@
 import { RusAspect, Transitivity, RusVerbInterface } from './types';
 
 export const rusVerbs: RusVerbInterface[] = [
+  /**
+   * глаголы ниже добавлены вручную.
+   */
+  // продемонстрировать
+  {
+    stem: 'продемонстрирова',
+    stem1: 'продемонстриру',
+    stem2: '',
+    aspect: RusAspect.Perf,
+    transitivity: Transitivity.Tran,
+    conjZ: '2a'
+  },
+
+  /**
+   * глаголы ниже взяты из проекта wiktionary из демо данных для
+   * спряжений по Зализняку.
+   */
+  // делать
+  {
+    stem: 'дела',
+    stem1: '',
+    stem2: '',
+    aspect: RusAspect.Impf,
+    transitivity: Transitivity.Tran,
+    conjZ: '1a'
+  },
   // стачать
   {
     stem: 'стача',
@@ -10,6 +36,15 @@ export const rusVerbs: RusVerbInterface[] = [
     transitivity: Transitivity.Tran,
     conjZ: '1aСВ'
   },
+  // делаться
+  {
+    stem: 'дела',
+    stem1: '',
+    stem2: '',
+    aspect: RusAspect.Impf,
+    transitivity: Transitivity.Intr,
+    conjZ: '1a-ся'
+  },
   // примелькаться
   {
     stem: 'примелька',
@@ -18,6 +53,15 @@ export const rusVerbs: RusVerbInterface[] = [
     aspect: RusAspect.Perf,
     transitivity: Transitivity.Intr,
     conjZ: '1a-сяСВ'
+  },
+  // требовать
+  {
+    stem: 'требова',
+    stem1: 'требу',
+    stem2: '',
+    aspect: RusAspect.Impf,
+    transitivity: Transitivity.Tran,
+    conjZ: '2a'
   },
   // жевать
   {

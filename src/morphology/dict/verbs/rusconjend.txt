@@ -1,3 +1,105 @@
+  // делать (дела)
+  {
+    conjZ: '1a',
+    aspect: RusAspect.Impf,
+    transitivity: Transitivity.Tran,
+    suffix: 'ть',
+    endings: [
+      // делаю
+      {
+        ending: 'ю',
+        tense: RusTense.Pres,
+        singular: true,
+        person: 1,
+        mood: RusMood.Indc
+      },
+      // делаем
+      {
+        ending: 'ем',
+        tense: RusTense.Pres,
+        singular: false,
+        person: 1,
+        mood: RusMood.Indc
+      },
+      // делаешь
+      {
+        ending: 'ешь',
+        tense: RusTense.Pres,
+        singular: true,
+        person: 2,
+        mood: RusMood.Indc
+      },
+      // делаете
+      {
+        ending: 'ете',
+        tense: RusTense.Pres,
+        singular: false,
+        person: 2,
+        mood: RusMood.Indc
+      },
+      // делает
+      {
+        ending: 'ет',
+        tense: RusTense.Pres,
+        singular: true,
+        person: 3,
+        mood: RusMood.Indc
+      },
+      // делают
+      {
+        ending: 'ют',
+        tense: RusTense.Pres,
+        singular: false,
+        person: 3,
+        mood: RusMood.Indc
+      },
+      // делал
+      {
+        ending: 'л',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Masc,
+        mood: RusMood.Indc
+      },
+      // делала
+      {
+        ending: 'ла',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Femn,
+        mood: RusMood.Indc
+      },
+      // делало
+      {
+        ending: 'ло',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Neut,
+        mood: RusMood.Indc
+      },
+      // делали
+      {
+        ending: 'ли',
+        tense: RusTense.Past,
+        singular: false,
+        mood: RusMood.Indc
+      },
+      // делай
+      {
+        ending: 'й',
+        singular: true,
+        mood: RusMood.Impr,
+        involvement: Involvement.Excl
+      },
+      // делайте
+      {
+        ending: 'йте',
+        singular: false,
+        mood: RusMood.Impr,
+        involvement: Involvement.Excl
+      },
+    ]
+  },
   // стачать (стача)
   {
     conjZ: '1aСВ',
@@ -114,6 +216,108 @@
       },
     ]
   },
+  // делаться (дела)
+  {
+    conjZ: '1a-ся',
+    aspect: RusAspect.Impf,
+    transitivity: Transitivity.Intr,
+    suffix: 'ть',
+    endings: [
+      // делаюсь
+      {
+        ending: 'юсь',
+        tense: RusTense.Pres,
+        singular: true,
+        person: 1,
+        mood: RusMood.Indc
+      },
+      // делаемся
+      {
+        ending: 'емся',
+        tense: RusTense.Pres,
+        singular: false,
+        person: 1,
+        mood: RusMood.Indc
+      },
+      // делаешься
+      {
+        ending: 'ешься',
+        tense: RusTense.Pres,
+        singular: true,
+        person: 2,
+        mood: RusMood.Indc
+      },
+      // делаетесь
+      {
+        ending: 'етесь',
+        tense: RusTense.Pres,
+        singular: false,
+        person: 2,
+        mood: RusMood.Indc
+      },
+      // делается
+      {
+        ending: 'ется',
+        tense: RusTense.Pres,
+        singular: true,
+        person: 3,
+        mood: RusMood.Indc
+      },
+      // делаются
+      {
+        ending: 'ются',
+        tense: RusTense.Pres,
+        singular: false,
+        person: 3,
+        mood: RusMood.Indc
+      },
+      // делался
+      {
+        ending: 'лся',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Masc,
+        mood: RusMood.Indc
+      },
+      // делалась
+      {
+        ending: 'лась',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Femn,
+        mood: RusMood.Indc
+      },
+      // делалось
+      {
+        ending: 'лось',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Neut,
+        mood: RusMood.Indc
+      },
+      // делались
+      {
+        ending: 'лись',
+        tense: RusTense.Past,
+        singular: false,
+        mood: RusMood.Indc
+      },
+      // делайся
+      {
+        ending: 'йся',
+        singular: true,
+        mood: RusMood.Impr,
+        involvement: Involvement.Excl
+      },
+      // делайтесь
+      {
+        ending: 'йтесь',
+        singular: false,
+        mood: RusMood.Impr,
+        involvement: Involvement.Excl
+      },
+    ]
+  },
   // примелькаться (примелька)
   {
     conjZ: '1a-сяСВ',
@@ -224,6 +428,108 @@
       // примелькайтесь
       {
         ending: 'йтесь',
+        singular: false,
+        mood: RusMood.Impr,
+        involvement: Involvement.Excl
+      },
+    ]
+  },
+  // требовать (требова,требу)
+  {
+    conjZ: '2a',
+    aspect: RusAspect.Impf,
+    transitivity: Transitivity.Tran,
+    suffix: 'ть',
+    endings: [
+      // требую
+      {
+        ending: 'ю',
+        tense: RusTense.Pres,
+        singular: true,
+        person: 1,
+        mood: RusMood.Indc
+      },
+      // требуем
+      {
+        ending: 'ем',
+        tense: RusTense.Pres,
+        singular: false,
+        person: 1,
+        mood: RusMood.Indc
+      },
+      // требуешь
+      {
+        ending: 'ешь',
+        tense: RusTense.Pres,
+        singular: true,
+        person: 2,
+        mood: RusMood.Indc
+      },
+      // требуете
+      {
+        ending: 'ете',
+        tense: RusTense.Pres,
+        singular: false,
+        person: 2,
+        mood: RusMood.Indc
+      },
+      // требует
+      {
+        ending: 'ет',
+        tense: RusTense.Pres,
+        singular: true,
+        person: 3,
+        mood: RusMood.Indc
+      },
+      // требуют
+      {
+        ending: 'ют',
+        tense: RusTense.Pres,
+        singular: false,
+        person: 3,
+        mood: RusMood.Indc
+      },
+      // требовал
+      {
+        ending: 'л',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Masc,
+        mood: RusMood.Indc
+      },
+      // требовала
+      {
+        ending: 'ла',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Femn,
+        mood: RusMood.Indc
+      },
+      // требовало
+      {
+        ending: 'ло',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Neut,
+        mood: RusMood.Indc
+      },
+      // требовали
+      {
+        ending: 'ли',
+        tense: RusTense.Past,
+        singular: false,
+        mood: RusMood.Indc
+      },
+      // требуй
+      {
+        ending: 'й',
+        singular: true,
+        mood: RusMood.Impr,
+        involvement: Involvement.Excl
+      },
+      // требуйте
+      {
+        ending: 'йте',
         singular: false,
         mood: RusMood.Impr,
         involvement: Involvement.Excl
