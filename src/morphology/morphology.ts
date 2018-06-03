@@ -3,10 +3,14 @@ import { getNextID } from '../utils/idGenerator';
 export class Lexeme {
   constructor (public readonly stem: string = '', public readonly stem1: string = '', public readonly stem2: string = '') { }
 
+  public matchStems(word: string): boolean {
+    return word.startsWith(this.stem)
+      || (!!this.stem1 && word.startsWith(this.stem1))
+      || (!!this.stem2 && word.startsWith(this.stem2));
+  }
+
   public analyze(word: string, result: (w: Word) => void): void {
-    if (word.startsWith(this.stem)
-      || (this.stem1 && word.startsWith(this.stem1))
-      || (this.stem2 && word.startsWith(this.stem2)))
+    if (this.matchStems(word))
     {
       this.getWordForms().filter( f => f.word === word ).forEach( f => result(f) );
     }

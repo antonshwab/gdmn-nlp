@@ -3,6 +3,7 @@ export declare class Lexeme {
     readonly stem1: string;
     readonly stem2: string;
     constructor(stem?: string, stem1?: string, stem2?: string);
+    matchStems(word: string): boolean;
     analyze(word: string, result: (w: Word) => void): void;
     getWordForms(): Words;
 }

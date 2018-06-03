@@ -774,6 +774,15 @@ exports.rusVerbs = [
         transitivity: types_1.Transitivity.Tran,
         conjZ: '6cX'
     },
+    // вывести
+    {
+        stem: 'выве',
+        stem1: '',
+        stem2: '',
+        aspect: types_1.RusAspect.Perf,
+        transitivity: types_1.Transitivity.Tran,
+        conjZ: '7a(9)-дСВ'
+    },
     // вытереть
     {
         stem: 'вытер',

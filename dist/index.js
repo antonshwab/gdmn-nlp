@@ -23,4 +23,5 @@ __export(require("./morphology/types"));
 __export(require("./morphology/utility"));
 __export(require("./syntax/syntax"));
 __export(require("./syntax/parser"));
+__export(require("./semantics/types"));
 //# sourceMappingURL=index.js.map

@@ -9067,6 +9067,122 @@ exports.RusConjugationZEndings = [
             },
         ]
     },
+    // вывести (выве)
+    {
+        conjZ: '7a(9)-дСВ',
+        aspect: types_1.RusAspect.Perf,
+        transitivity: types_1.Transitivity.Tran,
+        suffix: 'сти',
+        endings: [
+            // вывел
+            {
+                ending: 'л',
+                tense: types_1.RusTense.Past,
+                singular: true,
+                gender: types_1.RusGender.Masc,
+                mood: types_1.RusMood.Indc
+            },
+            // вывела
+            {
+                ending: 'ла',
+                tense: types_1.RusTense.Past,
+                singular: true,
+                gender: types_1.RusGender.Femn,
+                mood: types_1.RusMood.Indc
+            },
+            // вывело
+            {
+                ending: 'ло',
+                tense: types_1.RusTense.Past,
+                singular: true,
+                gender: types_1.RusGender.Neut,
+                mood: types_1.RusMood.Indc
+            },
+            // вывели
+            {
+                ending: 'ли',
+                tense: types_1.RusTense.Past,
+                singular: false,
+                mood: types_1.RusMood.Indc
+            },
+            // выведу
+            {
+                ending: 'ду',
+                tense: types_1.RusTense.Futr,
+                singular: true,
+                person: 1,
+                mood: types_1.RusMood.Indc
+            },
+            // выведем
+            {
+                ending: 'дем',
+                tense: types_1.RusTense.Futr,
+                singular: false,
+                person: 1,
+                mood: types_1.RusMood.Indc
+            },
+            // выведешь
+            {
+                ending: 'дешь',
+                tense: types_1.RusTense.Futr,
+                singular: true,
+                person: 2,
+                mood: types_1.RusMood.Indc
+            },
+            // выведете
+            {
+                ending: 'дете',
+                tense: types_1.RusTense.Futr,
+                singular: false,
+                person: 2,
+                mood: types_1.RusMood.Indc
+            },
+            // выведет
+            {
+                ending: 'дет',
+                tense: types_1.RusTense.Futr,
+                singular: true,
+                person: 3,
+                mood: types_1.RusMood.Indc
+            },
+            // выведут
+            {
+                ending: 'дут',
+                tense: types_1.RusTense.Futr,
+                singular: false,
+                person: 3,
+                mood: types_1.RusMood.Indc
+            },
+            // выведем
+            {
+                ending: 'дем',
+                singular: true,
+                mood: types_1.RusMood.Impr,
+                involvement: types_1.Involvement.Incl
+            },
+            // выведемте
+            {
+                ending: 'демте',
+                singular: false,
+                mood: types_1.RusMood.Impr,
+                involvement: types_1.Involvement.Incl
+            },
+            // выведи
+            {
+                ending: 'ди',
+                singular: true,
+                mood: types_1.RusMood.Impr,
+                involvement: types_1.Involvement.Excl
+            },
+            // выведите
+            {
+                ending: 'дите',
+                singular: false,
+                mood: types_1.RusMood.Impr,
+                involvement: types_1.Involvement.Excl
+            },
+        ]
+    },
     // вытереть (вытер,вытр)
     {
         conjZ: '9aСВ',

@@ -9067,6 +9067,122 @@ export const RusConjugationZEndings: RusConjugationZEnding[] =
       },
     ]
   },
+  // вывести (выве)
+  {
+    conjZ: '7a(9)-дСВ',
+    aspect: RusAspect.Perf,
+    transitivity: Transitivity.Tran,
+    suffix: 'сти',
+    endings: [
+      // вывел
+      {
+        ending: 'л',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Masc,
+        mood: RusMood.Indc
+      },
+      // вывела
+      {
+        ending: 'ла',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Femn,
+        mood: RusMood.Indc
+      },
+      // вывело
+      {
+        ending: 'ло',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Neut,
+        mood: RusMood.Indc
+      },
+      // вывели
+      {
+        ending: 'ли',
+        tense: RusTense.Past,
+        singular: false,
+        mood: RusMood.Indc
+      },
+      // выведу
+      {
+        ending: 'ду',
+        tense: RusTense.Futr,
+        singular: true,
+        person: 1,
+        mood: RusMood.Indc
+      },
+      // выведем
+      {
+        ending: 'дем',
+        tense: RusTense.Futr,
+        singular: false,
+        person: 1,
+        mood: RusMood.Indc
+      },
+      // выведешь
+      {
+        ending: 'дешь',
+        tense: RusTense.Futr,
+        singular: true,
+        person: 2,
+        mood: RusMood.Indc
+      },
+      // выведете
+      {
+        ending: 'дете',
+        tense: RusTense.Futr,
+        singular: false,
+        person: 2,
+        mood: RusMood.Indc
+      },
+      // выведет
+      {
+        ending: 'дет',
+        tense: RusTense.Futr,
+        singular: true,
+        person: 3,
+        mood: RusMood.Indc
+      },
+      // выведут
+      {
+        ending: 'дут',
+        tense: RusTense.Futr,
+        singular: false,
+        person: 3,
+        mood: RusMood.Indc
+      },
+      // выведем
+      {
+        ending: 'дем',
+        singular: true,
+        mood: RusMood.Impr,
+        involvement: Involvement.Incl
+      },
+      // выведемте
+      {
+        ending: 'демте',
+        singular: false,
+        mood: RusMood.Impr,
+        involvement: Involvement.Incl
+      },
+      // выведи
+      {
+        ending: 'ди',
+        singular: true,
+        mood: RusMood.Impr,
+        involvement: Involvement.Excl
+      },
+      // выведите
+      {
+        ending: 'дите',
+        singular: false,
+        mood: RusMood.Impr,
+        involvement: Involvement.Excl
+      },
+    ]
+  },
   // вытереть (вытер,вытр)
   {
     conjZ: '9aСВ',

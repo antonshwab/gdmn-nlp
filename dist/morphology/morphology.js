@@ -20,10 +20,13 @@ var Lexeme = /** @class */ (function () {
         this.stem1 = stem1;
         this.stem2 = stem2;
     }
+    Lexeme.prototype.matchStems = function (word) {
+        return word.startsWith(this.stem)
+            || (!!this.stem1 && word.startsWith(this.stem1))
+            || (!!this.stem2 && word.startsWith(this.stem2));
+    };
     Lexeme.prototype.analyze = function (word, result) {
-        if (word.startsWith(this.stem)
-            || (this.stem1 && word.startsWith(this.stem1))
-            || (this.stem2 && word.startsWith(this.stem2))) {
+        if (this.matchStems(word)) {
             this.getWordForms().filter(function (f) { return f.word === word; }).forEach(function (f) { return result(f); });
         }
     };

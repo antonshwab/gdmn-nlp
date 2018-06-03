@@ -18,3 +18,4 @@ export * from './morphology/types';
 export * from './morphology/utility';
 export * from './syntax/syntax';
 export * from './syntax/parser';
+export * from './semantics/types';
