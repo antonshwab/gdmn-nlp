@@ -29,11 +29,14 @@ var Transitivity;
     Transitivity[Transitivity["Tran"] = 0] = "Tran";
     Transitivity[Transitivity["Intr"] = 1] = "Intr";
 })(Transitivity = exports.Transitivity || (exports.Transitivity = {}));
+/**
+ * Наклонение глагола.
+ */
 var RusMood;
 (function (RusMood) {
     RusMood[RusMood["Indc"] = 0] = "Indc";
     RusMood[RusMood["Cond"] = 1] = "Cond";
-    RusMood[RusMood["Impr"] = 2] = "Impr";
+    RusMood[RusMood["Impr"] = 2] = "Impr"; // Imperative   -- повелительное "пиши!"
 })(RusMood = exports.RusMood || (exports.RusMood = {}));
 exports.ShortMoodNames = ['Indc', 'Cond', 'Impr'];
 var RusTense;

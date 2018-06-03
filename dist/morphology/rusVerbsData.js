@@ -5,15 +5,6 @@ exports.rusVerbs = [
     /**
      * глаголы ниже добавлены вручную.
      */
-    // продемонстрировать
-    {
-        stem: 'продемонстрирова',
-        stem1: 'продемонстриру',
-        stem2: '',
-        aspect: types_1.RusAspect.Perf,
-        transitivity: types_1.Transitivity.Tran,
-        conjZ: '2a'
-    },
     /**
      * глаголы ниже взяты из проекта wiktionary из демо данных для
      * спряжений по Зализняку.
@@ -53,6 +44,15 @@ exports.rusVerbs = [
         aspect: types_1.RusAspect.Perf,
         transitivity: types_1.Transitivity.Intr,
         conjZ: '1a-сяСВ'
+    },
+    // продемонстрировать
+    {
+        stem: 'продемонстрирова',
+        stem1: 'продемонстриру',
+        stem2: '',
+        aspect: types_1.RusAspect.Perf,
+        transitivity: types_1.Transitivity.Tran,
+        conjZ: '2a'
     },
     // требовать
     {

@@ -47,6 +47,9 @@ export declare enum Transitivity {
     Tran = 0,
     Intr = 1,
 }
+/**
+ * Наклонение глагола.
+ */
 export declare enum RusMood {
     Indc = 0,
     Cond = 1,

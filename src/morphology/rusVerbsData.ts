@@ -4,15 +4,6 @@ export const rusVerbs: RusVerbInterface[] = [
   /**
    * глаголы ниже добавлены вручную.
    */
-  // продемонстрировать
-  {
-    stem: 'продемонстрирова',
-    stem1: 'продемонстриру',
-    stem2: '',
-    aspect: RusAspect.Perf,
-    transitivity: Transitivity.Tran,
-    conjZ: '2a'
-  },
 
   /**
    * глаголы ниже взяты из проекта wiktionary из демо данных для
@@ -53,6 +44,15 @@ export const rusVerbs: RusVerbInterface[] = [
     aspect: RusAspect.Perf,
     transitivity: Transitivity.Intr,
     conjZ: '1a-сяСВ'
+  },
+  // продемонстрировать
+  {
+    stem: 'продемонстрирова',
+    stem1: 'продемонстриру',
+    stem2: '',
+    aspect: RusAspect.Perf,
+    transitivity: Transitivity.Tran,
+    conjZ: '2a'
   },
   // требовать
   {

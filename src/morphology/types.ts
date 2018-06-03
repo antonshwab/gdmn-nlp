@@ -48,7 +48,14 @@ export interface RusNounMorphSigns {
 }
 export enum RusAspect       {Perf = 0, Impf}
 export enum Transitivity    {Tran = 0, Intr}
-export enum RusMood         {Indc = 0, Cond, Impr}
+/**
+ * Наклонение глагола.
+ */
+export enum RusMood         {
+  Indc = 0, // Indicative   -- изъявительное "я пишу"
+  Cond,     // Conditional  -- условное "писал бы"
+  Impr      // Imperative   -- повелительное "пиши!"
+}
 export const ShortMoodNames = ['Indc', 'Cond', 'Impr'];
 export enum RusTense        {Past = 0, Pres, Futr}
 export const ShortTenseNames = ['Past', 'Pres', 'Futr'];

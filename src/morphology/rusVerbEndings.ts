@@ -438,6 +438,122 @@ export const RusConjugationZEndings: RusConjugationZEnding[] =
       },
     ]
   },
+  // продемонстрировать (продемонстрирова,продемонстриру)
+  {
+    conjZ: '2a',
+    aspect: RusAspect.Perf,
+    transitivity: Transitivity.Tran,
+    suffix: 'ть',
+    endings: [
+      // продемонстрировал
+      {
+        ending: 'л',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Masc,
+        mood: RusMood.Indc
+      },
+      // продемонстрировала
+      {
+        ending: 'ла',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Femn,
+        mood: RusMood.Indc
+      },
+      // продемонстрировало
+      {
+        ending: 'ло',
+        tense: RusTense.Past,
+        singular: true,
+        gender: RusGender.Neut,
+        mood: RusMood.Indc
+      },
+      // продемонстрировали
+      {
+        ending: 'ли',
+        tense: RusTense.Past,
+        singular: false,
+        mood: RusMood.Indc
+      },
+      // продемонстрирую
+      {
+        ending: 'ю',
+        tense: RusTense.Futr,
+        singular: true,
+        person: 1,
+        mood: RusMood.Indc
+      },
+      // продемонстрируем
+      {
+        ending: 'ем',
+        tense: RusTense.Futr,
+        singular: false,
+        person: 1,
+        mood: RusMood.Indc
+      },
+      // продемонстрируешь
+      {
+        ending: 'ешь',
+        tense: RusTense.Futr,
+        singular: true,
+        person: 2,
+        mood: RusMood.Indc
+      },
+      // продемонстрируете
+      {
+        ending: 'ете',
+        tense: RusTense.Futr,
+        singular: false,
+        person: 2,
+        mood: RusMood.Indc
+      },
+      // продемонстрирует
+      {
+        ending: 'ет',
+        tense: RusTense.Futr,
+        singular: true,
+        person: 3,
+        mood: RusMood.Indc
+      },
+      // продемонстрируют
+      {
+        ending: 'ют',
+        tense: RusTense.Futr,
+        singular: false,
+        person: 3,
+        mood: RusMood.Indc
+      },
+      // продемонстрируем
+      {
+        ending: 'ем',
+        singular: true,
+        mood: RusMood.Impr,
+        involvement: Involvement.Incl
+      },
+      // продемонстрируемте
+      {
+        ending: 'емте',
+        singular: false,
+        mood: RusMood.Impr,
+        involvement: Involvement.Incl
+      },
+      // продемонстрируй
+      {
+        ending: 'й',
+        singular: true,
+        mood: RusMood.Impr,
+        involvement: Involvement.Excl
+      },
+      // продемонстрируйте
+      {
+        ending: 'йте',
+        singular: false,
+        mood: RusMood.Impr,
+        involvement: Involvement.Excl
+      },
+    ]
+  },
   // требовать (требова,требу)
   {
     conjZ: '2a',
