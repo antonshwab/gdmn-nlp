@@ -24,3 +24,11 @@ export function str2SemCategory(str: string): SemCategory {
 
   return idx;
 }
+
+export function semCategories2Str(cat: SemCategory[]): string {
+  return cat.map( c => semCategory2Str(c) ).join(',');
+}
+
+export function str2SemCategories(str: string): SemCategory[] {
+  return str.split(',').map( s => str2SemCategory(s) );
+}

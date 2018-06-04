@@ -26,4 +26,12 @@ function str2SemCategory(str) {
     return idx;
 }
 exports.str2SemCategory = str2SemCategory;
+function semCategories2Str(cat) {
+    return cat.map(function (c) { return semCategory2Str(c); }).join(',');
+}
+exports.semCategories2Str = semCategories2Str;
+function str2SemCategories(str) {
+    return str.split(',').map(function (s) { return str2SemCategory(s); });
+}
+exports.str2SemCategories = str2SemCategories;
 //# sourceMappingURL=types.js.map
