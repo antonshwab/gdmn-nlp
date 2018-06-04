@@ -14,7 +14,7 @@ function v(word) {
 ;
 var rusVerbSynonyms = [
     {
-        semContext: types_1.SemContext.queryDB,
+        semContext: types_1.SemContext.QueryDB,
         chains: [
             ['показать', 'вывести', 'продемонстрировать'].map(function (w) { return v(w); })
         ]

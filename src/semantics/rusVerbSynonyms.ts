@@ -17,7 +17,7 @@ export interface IRusVerbSynonyms {
 
 const rusVerbSynonyms: IRusVerbSynonyms[] = [
   {
-    semContext: SemContext.queryDB,
+    semContext: SemContext.QueryDB,
     chains: [
       ['показать', 'вывести', 'продемонстрировать'].map( w => v(w) )
     ]
