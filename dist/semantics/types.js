@@ -9,6 +9,7 @@ var SemContext;
 var SemCategory;
 (function (SemCategory) {
     SemCategory[SemCategory["Place"] = 0] = "Place";
+    SemCategory[SemCategory["Company"] = 1] = "Company";
 })(SemCategory = exports.SemCategory || (exports.SemCategory = {}));
 ;
 exports.semCategoryNames = [

@@ -9,7 +9,7 @@ import {
 } from 'chevrotain';
 import { ITokenTypes, morphTokens } from './rusMorphTokens';
 import { combinatorialMorph } from './lexer';
-import { VP, NP, PP, ANP, ParsedText, Phrase, ImperativeVP } from '..';
+import { VP, NP, PP, ANP, ParsedText, Phrase, ImperativeVP, Noun } from '..';
 
 /**
  * Грамматика для фразы типа "Покажи все организации из Минска"
@@ -123,9 +123,9 @@ class VPVisitor extends BaseVPVisitor {
 
   public imperativeNP = (ctx: any) => {
     if (ctx.pp) {
-      return new NP([this.visit(ctx.qualImperativeNoun), this.visit(ctx.pp)]);
+      return new NP(this.visit(ctx.qualImperativeNoun), this.visit(ctx.pp));
     } else {
-      return new NP([this.visit(ctx.qualImperativeNoun)]);
+      return new NP(this.visit(ctx.qualImperativeNoun));
     }
   }
 

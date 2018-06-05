@@ -4,7 +4,8 @@ export enum SemContext {
 };
 
 export enum SemCategory {
-  Place = 0
+  Place = 0,
+  Company = 1
 };
 
 export const semCategoryNames = [

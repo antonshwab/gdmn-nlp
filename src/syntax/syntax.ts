@@ -69,9 +69,33 @@ export class ImperativeVP extends VP {
   }
 }
 
-export class NP extends Phrase {}
+export class NP extends Phrase {
+  constructor (n: Noun | ANP, pp?: PP) {
+    if (pp) {
+      super([n, pp]);
+    } else {
+      super([n]);
+    }
+  }
 
-export class ANP extends NP {
+  get noun(): Noun | ANP {
+    if (this.items[0] instanceof Noun) {
+      return this.items[0] as Noun;
+    } else {
+      return this.items[0] as ANP;
+    }
+  }
+
+  get pp(): PP | undefined {
+    if (this.items[0] instanceof PP) {
+      return this.items[0] as PP;
+    } else {
+      return undefined;
+    }
+  }
+}
+
+export class ANP extends Phrase {
   constructor (adjf: Adjective, noun: Noun) {
     super([adjf, noun]);
   }
@@ -85,7 +109,7 @@ export class ANP extends NP {
   }
 }
 
-export class PP extends NP {
+export class PP extends Phrase {
   constructor (prep: Preposition, noun: Noun) {
     super([prep, noun]);
   }

@@ -107,10 +107,10 @@ var VPVisitor = /** @class */ (function (_super) {
         };
         _this.imperativeNP = function (ctx) {
             if (ctx.pp) {
-                return new __1.NP([_this.visit(ctx.qualImperativeNoun), _this.visit(ctx.pp)]);
+                return new __1.NP(_this.visit(ctx.qualImperativeNoun), _this.visit(ctx.pp));
             }
             else {
-                return new __1.NP([_this.visit(ctx.qualImperativeNoun)]);
+                return new __1.NP(_this.visit(ctx.qualImperativeNoun));
             }
         };
         _this.qualImperativeNoun = function (ctx) {

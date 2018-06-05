@@ -10,6 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+var morphology_1 = require("../morphology/morphology");
 var idGenerator_1 = require("../utils/idGenerator");
 var Sentence = /** @class */ (function () {
     function Sentence() {
@@ -94,9 +95,40 @@ var ImperativeVP = /** @class */ (function (_super) {
 exports.ImperativeVP = ImperativeVP;
 var NP = /** @class */ (function (_super) {
     __extends(NP, _super);
-    function NP() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function NP(n, pp) {
+        var _this = this;
+        if (pp) {
+            _this = _super.call(this, [n, pp]) || this;
+        }
+        else {
+            _this = _super.call(this, [n]) || this;
+        }
+        return _this;
     }
+    Object.defineProperty(NP.prototype, "noun", {
+        get: function () {
+            if (this.items[0] instanceof morphology_1.Noun) {
+                return this.items[0];
+            }
+            else {
+                return this.items[0];
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NP.prototype, "pp", {
+        get: function () {
+            if (this.items[0] instanceof PP) {
+                return this.items[0];
+            }
+            else {
+                return undefined;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     return NP;
 }(Phrase));
 exports.NP = NP;
@@ -120,7 +152,7 @@ var ANP = /** @class */ (function (_super) {
         configurable: true
     });
     return ANP;
-}(NP));
+}(Phrase));
 exports.ANP = ANP;
 var PP = /** @class */ (function (_super) {
     __extends(PP, _super);
@@ -142,6 +174,6 @@ var PP = /** @class */ (function (_super) {
         configurable: true
     });
     return PP;
-}(NP));
+}(Phrase));
 exports.PP = PP;
 //# sourceMappingURL=syntax.js.map

@@ -17,13 +17,16 @@ export declare class ImperativeVP extends VP {
     readonly imperativeNP: NP | undefined;
 }
 export declare class NP extends Phrase {
+    constructor(n: Noun | ANP, pp?: PP);
+    readonly noun: Noun | ANP;
+    readonly pp: PP | undefined;
 }
-export declare class ANP extends NP {
+export declare class ANP extends Phrase {
     constructor(adjf: Adjective, noun: Noun);
     readonly adjf: Adjective;
     readonly noun: Noun;
 }
-export declare class PP extends NP {
+export declare class PP extends Phrase {
     constructor(prep: Preposition, noun: Noun);
     readonly prep: Preposition;
     readonly noun: Noun;
