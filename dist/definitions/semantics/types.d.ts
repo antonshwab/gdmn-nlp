@@ -1,9 +1,9 @@
 export declare enum SemContext {
     Common = 0,
-    QueryDB = 1
+    QueryDB = 1,
 }
 export declare enum SemCategory {
-    Place = 0
+    Place = 0,
 }
 export declare const semCategoryNames: string[];
 export declare function semCategory2Str(cat: SemCategory): string;

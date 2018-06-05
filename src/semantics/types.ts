@@ -26,9 +26,17 @@ export function str2SemCategory(str: string): SemCategory {
 }
 
 export function semCategories2Str(cat: SemCategory[]): string {
-  return cat.map( c => semCategory2Str(c) ).join(',');
+  if (cat.length) {
+    return cat.map( c => semCategory2Str(c) ).join(',');
+  } else {
+    return '';
+  }
 }
 
 export function str2SemCategories(str: string): SemCategory[] {
-  return str.split(',').map( s => str2SemCategory(s) );
+  if (str) {
+    return str.split(',').map( s => str2SemCategory(s) );
+  } else {
+    return [];
+  }
 }

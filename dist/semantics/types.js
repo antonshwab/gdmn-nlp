@@ -27,11 +27,21 @@ function str2SemCategory(str) {
 }
 exports.str2SemCategory = str2SemCategory;
 function semCategories2Str(cat) {
-    return cat.map(function (c) { return semCategory2Str(c); }).join(',');
+    if (cat.length) {
+        return cat.map(function (c) { return semCategory2Str(c); }).join(',');
+    }
+    else {
+        return '';
+    }
 }
 exports.semCategories2Str = semCategories2Str;
 function str2SemCategories(str) {
-    return str.split(',').map(function (s) { return str2SemCategory(s); });
+    if (str) {
+        return str.split(',').map(function (s) { return str2SemCategory(s); });
+    }
+    else {
+        return [];
+    }
 }
 exports.str2SemCategories = str2SemCategories;
 //# sourceMappingURL=types.js.map
