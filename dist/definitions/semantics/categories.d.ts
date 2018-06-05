@@ -10,7 +10,7 @@ export declare enum SemCategory {
     /**
      * Компания. Коммерческая организация.
      */
-    Company = 2,
+    Company = 2
 }
 export declare const semCategoryNames: string[];
 export declare function semCategory2Str(cat: SemCategory): string;
