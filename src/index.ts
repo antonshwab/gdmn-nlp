@@ -19,4 +19,5 @@ export * from './morphology/utility';
 export * from './syntax/syntax';
 export * from './syntax/parser';
 export * from './semantics/types';
+export * from './semantics/categories';
 export * from './semantics/rusVerbSynonyms';
