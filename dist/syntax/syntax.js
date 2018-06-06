@@ -119,8 +119,8 @@ var NP = /** @class */ (function (_super) {
     });
     Object.defineProperty(NP.prototype, "pp", {
         get: function () {
-            if (this.items[0] instanceof PP) {
-                return this.items[0];
+            if (this.items[1] instanceof PP) {
+                return this.items[1];
             }
             else {
                 return undefined;

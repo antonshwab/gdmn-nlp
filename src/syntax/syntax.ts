@@ -87,8 +87,8 @@ export class NP extends Phrase {
   }
 
   get pp(): PP | undefined {
-    if (this.items[0] instanceof PP) {
-      return this.items[0] as PP;
+    if (this.items[1] instanceof PP) {
+      return this.items[1] as PP;
     } else {
       return undefined;
     }
