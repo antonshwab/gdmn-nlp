@@ -19,7 +19,8 @@ const rusVerbSynonyms: IRusVerbSynonyms[] = [
   {
     semContext: SemContext.QueryDB,
     chains: [
-      ['показать', 'вывести', 'продемонстрировать'].map( w => v(w) )
+      ['показать', 'вывести', 'продемонстрировать'].map( w => v(w) ),
+      ['удалить', 'уничтожить'].map( w => v(w) )
     ]
   }
 ];

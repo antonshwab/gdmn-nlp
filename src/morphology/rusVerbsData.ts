@@ -180,6 +180,15 @@ export const rusVerbs: RusVerbInterface[] = [
     transitivity: Transitivity.Intr,
     conjZ: '3°a((5)(6))-г'
   },
+  // уничтожить
+  {
+    stem: 'уничтож',
+    stem1: '',
+    stem2: '',
+    aspect: RusAspect.Perf,
+    transitivity: Transitivity.Tran,
+    conjZ: '4a'
+  },
   // строить
   {
     stem: 'стро',

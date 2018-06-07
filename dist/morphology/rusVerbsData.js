@@ -180,6 +180,15 @@ exports.rusVerbs = [
         transitivity: types_1.Transitivity.Intr,
         conjZ: '3°a((5)(6))-г'
     },
+    // уничтожить
+    {
+        stem: 'уничтож',
+        stem1: '',
+        stem2: '',
+        aspect: types_1.RusAspect.Perf,
+        transitivity: types_1.Transitivity.Tran,
+        conjZ: '4a'
+    },
     // строить
     {
         stem: 'стро',

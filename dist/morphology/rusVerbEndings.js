@@ -2080,6 +2080,122 @@ exports.RusConjugationZEndings = [
             },
         ]
     },
+    // уничтожить (уничтож)
+    {
+        conjZ: '4a',
+        aspect: types_1.RusAspect.Perf,
+        transitivity: types_1.Transitivity.Tran,
+        suffix: 'ить',
+        endings: [
+            // уничтожил
+            {
+                ending: 'ил',
+                tense: types_1.RusTense.Past,
+                singular: true,
+                gender: types_1.RusGender.Masc,
+                mood: types_1.RusMood.Indc
+            },
+            // уничтожила
+            {
+                ending: 'ила',
+                tense: types_1.RusTense.Past,
+                singular: true,
+                gender: types_1.RusGender.Femn,
+                mood: types_1.RusMood.Indc
+            },
+            // уничтожило
+            {
+                ending: 'ило',
+                tense: types_1.RusTense.Past,
+                singular: true,
+                gender: types_1.RusGender.Neut,
+                mood: types_1.RusMood.Indc
+            },
+            // уничтожили
+            {
+                ending: 'или',
+                tense: types_1.RusTense.Past,
+                singular: false,
+                mood: types_1.RusMood.Indc
+            },
+            // уничтожу
+            {
+                ending: 'у',
+                tense: types_1.RusTense.Futr,
+                singular: true,
+                person: 1,
+                mood: types_1.RusMood.Indc
+            },
+            // уничтожим
+            {
+                ending: 'им',
+                tense: types_1.RusTense.Futr,
+                singular: false,
+                person: 1,
+                mood: types_1.RusMood.Indc
+            },
+            // уничтожишь
+            {
+                ending: 'ишь',
+                tense: types_1.RusTense.Futr,
+                singular: true,
+                person: 2,
+                mood: types_1.RusMood.Indc
+            },
+            // уничтожите
+            {
+                ending: 'ите',
+                tense: types_1.RusTense.Futr,
+                singular: false,
+                person: 2,
+                mood: types_1.RusMood.Indc
+            },
+            // уничтожит
+            {
+                ending: 'ит',
+                tense: types_1.RusTense.Futr,
+                singular: true,
+                person: 3,
+                mood: types_1.RusMood.Indc
+            },
+            // уничтожат
+            {
+                ending: 'ат',
+                tense: types_1.RusTense.Futr,
+                singular: false,
+                person: 3,
+                mood: types_1.RusMood.Indc
+            },
+            // уничтожим
+            {
+                ending: 'им',
+                singular: true,
+                mood: types_1.RusMood.Impr,
+                involvement: types_1.Involvement.Incl
+            },
+            // уничтожимте
+            {
+                ending: 'имте',
+                singular: false,
+                mood: types_1.RusMood.Impr,
+                involvement: types_1.Involvement.Incl
+            },
+            // уничтожь
+            {
+                ending: 'ь',
+                singular: true,
+                mood: types_1.RusMood.Impr,
+                involvement: types_1.Involvement.Excl
+            },
+            // уничтожьте
+            {
+                ending: 'ьте',
+                singular: false,
+                mood: types_1.RusMood.Impr,
+                involvement: types_1.Involvement.Excl
+            },
+        ]
+    },
     // строить (стро)
     {
         conjZ: '4a',
