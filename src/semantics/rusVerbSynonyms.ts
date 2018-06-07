@@ -39,7 +39,7 @@ export function hasMeaning(semContext: SemContext, meaning: string, word: RusVer
   const synonyms = rusVerbSynonyms.find( s => s.semContext === semContext );
 
   return !!synonyms && !!synonyms.chains.find( chain => {
-    return !!chain.find( l => l === meaningLexeme)
+    return !!chain.find( l => l === meaningLexeme )
       && !!chain.find( l => l === word.lexeme );
   });
 }
