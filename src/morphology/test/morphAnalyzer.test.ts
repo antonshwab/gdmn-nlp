@@ -12,30 +12,55 @@ test("прилагательное самый", () => {
   expect((result[1] as RusAdjective).grammCase).toEqual(RusCase.Accs);
 });
 
-test("глагол покажи", () => {
-  const result = morphAnalyzer('покажи');
-  expect(result.length).toEqual(1);
-  expect(result[0] instanceof RusVerb).toBeTruthy();
-  const v = result[0] as RusVerb;
-  expect(v.infn).toEqual(false);
-  expect(v.tense).toBeUndefined();
-  expect(v.singular).toEqual(true);
-  expect(v.person).toBeUndefined();
-  expect(v.gender).toBeUndefined();
-  expect(v.mood).toEqual(RusMood.Impr);
-  expect(v.involvement).toEqual(Involvement.Excl);
-});
+describe('глаголы', () => {
 
-test("глагол продемонстрируй", () => {
-  const result = morphAnalyzer('продемонстрируй');
-  expect(result.length).toEqual(1);
-  expect(result[0] instanceof RusVerb).toBeTruthy();
-  const v = result[0] as RusVerb;
-  expect(v.infn).toEqual(false);
-  expect(v.tense).toBeUndefined();
-  expect(v.singular).toEqual(true);
-  expect(v.person).toBeUndefined();
-  expect(v.gender).toBeUndefined();
-  expect(v.mood).toEqual(RusMood.Impr);
-  expect(v.involvement).toEqual(Involvement.Excl);
+  test("покажи", () => {
+    const result = morphAnalyzer('покажи');
+    expect(result.length).toEqual(1);
+    expect(result[0] instanceof RusVerb).toBeTruthy();
+    const v = result[0] as RusVerb;
+    expect(v.infn).toEqual(false);
+    expect(v.tense).toBeUndefined();
+    expect(v.singular).toEqual(true);
+    expect(v.person).toBeUndefined();
+    expect(v.gender).toBeUndefined();
+    expect(v.mood).toEqual(RusMood.Impr);
+    expect(v.involvement).toEqual(Involvement.Excl);
+  });
+
+  test("продемонстрируй", () => {
+    const result = morphAnalyzer('продемонстрируй');
+    expect(result.length).toEqual(1);
+    expect(result[0] instanceof RusVerb).toBeTruthy();
+    const v = result[0] as RusVerb;
+    expect(v.infn).toEqual(false);
+    expect(v.tense).toBeUndefined();
+    expect(v.singular).toEqual(true);
+    expect(v.person).toBeUndefined();
+    expect(v.gender).toBeUndefined();
+    expect(v.mood).toEqual(RusMood.Impr);
+    expect(v.involvement).toEqual(Involvement.Excl);
+  });
+
+  test("уничтожь", () => {
+    const result = morphAnalyzer('уничтожь');
+    expect(result.length).toEqual(1);
+    expect(result[0] instanceof RusVerb).toBeTruthy();
+    const v = result[0] as RusVerb;
+    expect(v.infn).toEqual(false);
+    expect(v.tense).toBeUndefined();
+    expect(v.singular).toEqual(true);
+    expect(v.person).toBeUndefined();
+    expect(v.gender).toBeUndefined();
+    expect(v.mood).toEqual(RusMood.Impr);
+    expect(v.involvement).toEqual(Involvement.Excl);
+  });
+
+  test("уничтожить", () => {
+    const result = morphAnalyzer('уничтожить');
+    expect(result.length).toEqual(1);
+    expect(result[0] instanceof RusVerb).toBeTruthy();
+    const v = result[0] as RusVerb;
+    expect(v.infn).toEqual(true);
+  });
 });
