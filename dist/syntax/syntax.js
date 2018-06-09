@@ -20,8 +20,11 @@ var Sentence = /** @class */ (function () {
 exports.Sentence = Sentence;
 var Phrase = /** @class */ (function () {
     function Phrase(items) {
-        this.items = items;
         this.id = idGenerator_1.getNextID();
+        if (!items.length || items.find(function (i) { return !i; })) {
+            throw new Error('Invalid phrase items');
+        }
+        this.items = items;
     }
     Phrase.prototype.getText = function () {
         return this.items.reduce(function (prev, p) {

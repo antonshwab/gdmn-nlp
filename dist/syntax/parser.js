@@ -56,7 +56,8 @@ var VPVisitor = /** @class */ (function (_super) {
         _this.imperativeDet = function (ctx) {
             return ctx.ADJFAProPlurAccs ? ctx.ADJFAProPlurAccs[0].word
                 : ctx.ADJFQualPlurAccs ? ctx.ADJFQualPlurAccs[0].word
-                    : undefined;
+                    : ctx.ADJFRelvPlurAccs ? ctx.ADJFRelvPlurAccs[0].word
+                        : undefined;
         };
         _this.imperativeNoun = function (ctx) {
             return _this.visit(ctx.nounAccs);

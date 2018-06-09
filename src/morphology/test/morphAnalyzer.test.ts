@@ -14,6 +14,7 @@ describe("прилагательные", () => {
     const result = morphAnalyzer('минские');
     expect(result.length).toEqual(2);
     expect(result[0].getSignature()).toEqual('ADJFRelvPlurNomn');
+    expect(result[1].getSignature()).toEqual('ADJFRelvPlurAccs');
   });
 
   test("самый", () => {

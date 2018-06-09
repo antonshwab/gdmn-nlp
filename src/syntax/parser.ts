@@ -63,6 +63,7 @@ class VPVisitor extends BaseVPVisitor {
   public imperativeDet = (ctx: any) => {
     return ctx.ADJFAProPlurAccs ? ctx.ADJFAProPlurAccs[0].word
       : ctx.ADJFQualPlurAccs ? ctx.ADJFQualPlurAccs[0].word
+      : ctx.ADJFRelvPlurAccs ? ctx.ADJFRelvPlurAccs[0].word
       : undefined;
   }
 

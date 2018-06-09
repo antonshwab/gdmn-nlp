@@ -24,6 +24,42 @@ describe("parser", () => {
     const result = parsePhrase('покажи минские организации');
     const vp = result.phrase;
     expect(vp).toBeDefined();
+    const verb = vp!.items[0] as Word;
+    expect(verb).toBeDefined();
+    expect(verb.word).toEqual('покажи');
+    const np = vp!.items[1] as Phrase;
+    const anp = np!.items[0] as Phrase;
+    const pp = np!.items[1] as Phrase;
+    expect((anp!.items[0] as Word).word).toEqual('минские');
+    expect((anp!.items[1] as Word).word).toEqual('организации');
+  });
+
+  test("vp3", () => {
+    const result = parsePhrase('покажи все организации');
+    const vp = result.phrase;
+    expect(vp).toBeDefined();
+    const verb = vp!.items[0] as Word;
+    expect(verb).toBeDefined();
+    expect(verb.word).toEqual('покажи');
+    const np = vp!.items[1] as Phrase;
+    const anp = np!.items[0] as Phrase;
+    const pp = np!.items[1] as Phrase;
+    expect((anp!.items[0] as Word).word).toEqual('все');
+    expect((anp!.items[1] as Word).word).toEqual('организации');
+  });
+
+  test("vp4", () => {
+    const result = parsePhrase('покажи лучшие организации');
+    const vp = result.phrase;
+    expect(vp).toBeDefined();
+    const verb = vp!.items[0] as Word;
+    expect(verb).toBeDefined();
+    expect(verb.word).toEqual('покажи');
+    const np = vp!.items[1] as Phrase;
+    const anp = np!.items[0] as Phrase;
+    const pp = np!.items[1] as Phrase;
+    expect((anp!.items[0] as Word).word).toEqual('лучшие');
+    expect((anp!.items[1] as Word).word).toEqual('организации');
   });
 });
 

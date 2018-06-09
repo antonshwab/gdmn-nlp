@@ -6,9 +6,16 @@ export class Sentence {}
 export type PhraseItem = Word | Phrase;
 
 export class Phrase {
+  public items: PhraseItem[];
   readonly id: number = getNextID();
 
-  constructor (public items: PhraseItem[]) {}
+  constructor (items: PhraseItem[]) {
+    if (!items.length || items.find( i => !i ) ) {
+      throw new Error('Invalid phrase items');
+    }
+
+    this.items = items;
+  }
 
   getText(): string {
     return this.items.reduce(
