@@ -2,36 +2,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var types_1 = require("./types");
 exports.rusAdjectives = [
-    // самый
-    {
-        stem: 'сам',
-        stem1: '',
-        stem2: '',
-        category: types_1.RusAdjectiveCategory.Pron,
-        declensionZ: '1a'
-    },
-    // крупнейший
-    {
-        stem: 'крупнейш',
-        stem1: '',
-        stem2: '',
-        category: types_1.RusAdjectiveCategory.Qual,
-        declensionZ: '4a'
-    },
-    // лучший
-    {
-        stem: 'лучш',
-        stem1: '',
-        stem2: '',
-        category: types_1.RusAdjectiveCategory.Qual,
-        declensionZ: '4a'
-    },
     // абрикосовый
     {
         stem: 'абрикосов',
         stem1: '',
         stem2: '',
         category: types_1.RusAdjectiveCategory.Rel,
+        declensionZ: '1a'
+    },
+    // самый
+    {
+        stem: 'сам',
+        stem1: '',
+        stem2: '',
+        category: types_1.RusAdjectiveCategory.Pron,
         declensionZ: '1a'
     },
     // новый
@@ -66,9 +50,33 @@ exports.rusAdjectives = [
         category: types_1.RusAdjectiveCategory.Qual,
         declensionZ: '3a'
     },
+    // минский
+    {
+        stem: 'минск',
+        stem1: '',
+        stem2: '',
+        category: types_1.RusAdjectiveCategory.Rel,
+        declensionZ: '3a'
+    },
     // похожий
     {
         stem: 'похож',
+        stem1: '',
+        stem2: '',
+        category: types_1.RusAdjectiveCategory.Qual,
+        declensionZ: '4a'
+    },
+    // крупнейший
+    {
+        stem: 'крупнейш',
+        stem1: '',
+        stem2: '',
+        category: types_1.RusAdjectiveCategory.Qual,
+        declensionZ: '4a'
+    },
+    // лучший
+    {
+        stem: 'лучш',
         stem1: '',
         stem2: '',
         category: types_1.RusAdjectiveCategory.Qual,

@@ -119,8 +119,8 @@ export type RusDeclensionAdjectiveZ =
   '1a'        |'1a/c\''    |'1a\''      |'2a'        |'3a'        |'4a'        |
   '4a-ся'     |'5a'        |'6a'        |'1b'        |'1b/c'      |'3b'        |
   '4b'        |'1*a'       |'1*a\''     |'1a/b'      |'1a/с'      |'1*a/c'     |
-  '1a/c\''    |'1*b'       |'2*a'       |'2*b'       |'2a/c'      |'3a/c'      |
-  '3*a'       |'3a/c"^'    |'3*a\''     |'3*a/c'     |'3*a/c\'';
+  '1*b'       |'2*a'       |'2*b'       |'2a/c'      |'3a/c'      |'3*a'       |
+  '3a/c"^'    |'3*a\''     |'3*a/c'     |'3*a/c\'';
 export enum RusAdjectiveCategory {Qual = 0, Poss, Rel, Pron}
 export const RusAdjectiveCategoryNames   = ['кач.', 'притяж.', 'относ.', 'местоимен.'];
 export const ShortAdjectiveCategoryNames = ['Qual', 'Poss', 'Relv', 'APro'];

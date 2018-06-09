@@ -33,7 +33,7 @@ exports.morphTokens = (function () {
     /**
      * Прилагательные, множественное число.
      */
-    [types_1.RusAdjectiveCategory.Qual, types_1.RusAdjectiveCategory.Pron].forEach(function (category) {
+    [types_1.RusAdjectiveCategory.Qual, types_1.RusAdjectiveCategory.Pron, types_1.RusAdjectiveCategory.Rel].forEach(function (category) {
         return [types_1.RusCase.Nomn, types_1.RusCase.Gent, types_1.RusCase.Datv, types_1.RusCase.Accs, types_1.RusCase.Ablt, types_1.RusCase.Loct].forEach(function (grammCase) {
             signatures.push(__1.RusAdjective.getSignature(false, category, undefined, false, grammCase));
         });

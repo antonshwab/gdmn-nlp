@@ -40,7 +40,8 @@ var VPParser = /** @class */ (function (_super) {
         _this.imperativeDet = _this.RULE('imperativeDet', function () {
             _this.OR([
                 { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.ADJFAProPlurAccs); } },
-                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.ADJFQualPlurAccs); } }
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.ADJFQualPlurAccs); } },
+                { ALT: function () { return _this.CONSUME(rusMorphTokens_1.morphTokens.ADJFRelvPlurAccs); } },
             ]);
         });
         _this.imperativeNoun = _this.RULE('imperativeNoun', function () { return _this.SUBRULE(_this.nounAccs); });

@@ -1,36 +1,20 @@
 import { RusAdjectiveInterface, RusAdjectiveCategory } from './types';
 
 export const rusAdjectives: RusAdjectiveInterface[] = [
-  // самый
-  {
-    stem: 'сам',
-    stem1: '',
-    stem2: '',
-    category: RusAdjectiveCategory.Pron,
-    declensionZ: '1a'
-  },
-  // крупнейший
-  {
-    stem: 'крупнейш',
-    stem1: '',
-    stem2: '',
-    category: RusAdjectiveCategory.Qual,
-    declensionZ: '4a'
-  },
-  // лучший
-  {
-    stem: 'лучш',
-    stem1: '',
-    stem2: '',
-    category: RusAdjectiveCategory.Qual,
-    declensionZ: '4a'
-  },
   // абрикосовый
   {
     stem: 'абрикосов',
     stem1: '',
     stem2: '',
     category: RusAdjectiveCategory.Rel,
+    declensionZ: '1a'
+  },
+  // самый
+  {
+    stem: 'сам',
+    stem1: '',
+    stem2: '',
+    category: RusAdjectiveCategory.Pron,
     declensionZ: '1a'
   },
   // новый
@@ -65,9 +49,33 @@ export const rusAdjectives: RusAdjectiveInterface[] = [
     category: RusAdjectiveCategory.Qual,
     declensionZ: '3a'
   },
+  // минский
+  {
+    stem: 'минск',
+    stem1: '',
+    stem2: '',
+    category: RusAdjectiveCategory.Rel,
+    declensionZ: '3a'
+  },
   // похожий
   {
     stem: 'похож',
+    stem1: '',
+    stem2: '',
+    category: RusAdjectiveCategory.Qual,
+    declensionZ: '4a'
+  },
+  // крупнейший
+  {
+    stem: 'крупнейш',
+    stem1: '',
+    stem2: '',
+    category: RusAdjectiveCategory.Qual,
+    declensionZ: '4a'
+  },
+  // лучший
+  {
+    stem: 'лучш',
     stem1: '',
     stem2: '',
     category: RusAdjectiveCategory.Qual,

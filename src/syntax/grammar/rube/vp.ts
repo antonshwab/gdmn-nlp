@@ -38,7 +38,8 @@ export class VPParser extends Parser {
   public imperativeDet = this.RULE('imperativeDet', () => {
     this.OR([
       { ALT: () => this.CONSUME(morphTokens.ADJFAProPlurAccs) },
-      { ALT: () => this.CONSUME(morphTokens.ADJFQualPlurAccs) }
+      { ALT: () => this.CONSUME(morphTokens.ADJFQualPlurAccs) },
+      { ALT: () => this.CONSUME(morphTokens.ADJFRelvPlurAccs) },
     ]);
   });
 

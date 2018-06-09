@@ -3,13 +3,27 @@ import { RusAdjective } from "../rusAdjective";
 import { RusCase, RusMood, Involvement } from "../types";
 import { RusVerb } from "../rusVerb";
 
-test("прилагательное самый", () => {
-  const result = morphAnalyzer('самый');
-  expect(result.length).toEqual(2);
-  expect(result[0] instanceof RusAdjective).toBeTruthy();
-  expect((result[0] as RusAdjective).grammCase).toEqual(RusCase.Nomn);
-  expect(result[1] instanceof RusAdjective).toBeTruthy();
-  expect((result[1] as RusAdjective).grammCase).toEqual(RusCase.Accs);
+describe("прилагательные", () => {
+  test("минский", () => {
+    const result = morphAnalyzer('минский');
+    expect(result.length).toEqual(2);
+    expect(result[0].getSignature()).toEqual('ADJFRelvMascSingNomn');
+  });
+
+  test("минские", () => {
+    const result = morphAnalyzer('минские');
+    expect(result.length).toEqual(2);
+    expect(result[0].getSignature()).toEqual('ADJFRelvPlurNomn');
+  });
+
+  test("самый", () => {
+    const result = morphAnalyzer('самый');
+    expect(result.length).toEqual(2);
+    expect(result[0] instanceof RusAdjective).toBeTruthy();
+    expect((result[0] as RusAdjective).grammCase).toEqual(RusCase.Nomn);
+    expect(result[1] instanceof RusAdjective).toBeTruthy();
+    expect((result[1] as RusAdjective).grammCase).toEqual(RusCase.Accs);
+  });
 });
 
 describe('глаголы', () => {

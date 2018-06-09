@@ -42,7 +42,7 @@ export const morphTokens = (() => {
   /**
    * Прилагательные, множественное число.
    */
-  [RusAdjectiveCategory.Qual, RusAdjectiveCategory.Pron].forEach( category =>
+  [RusAdjectiveCategory.Qual, RusAdjectiveCategory.Pron, RusAdjectiveCategory.Rel].forEach( category =>
     [RusCase.Nomn, RusCase.Gent, RusCase.Datv, RusCase.Accs, RusCase.Ablt, RusCase.Loct].forEach( grammCase => {
       signatures.push(RusAdjective.getSignature(false, category, undefined, false, grammCase));
     })

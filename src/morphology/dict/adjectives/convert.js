@@ -68,7 +68,11 @@ while (line = liner.next()) {
   })
 }
 
-fs.writeFileSync('./rusdeclend.txt', adjs.reduce( (p, l) => {
+fs.writeFileSync('./rusdeclend.txt', adjs.reduce( (p, l, idx) => {
+  if (adjs.find( (a, idx2) => idx2 < idx && a[0] === l[0] )) {
+    return p;
+  }
+
   const d = l[0].replace('\'', '\\\'');
   // основы в исходных данных могут повторяться. отсеиваем повторы
   // и сортируем по длине. от длинных к коротким
@@ -129,6 +133,7 @@ fs.writeFileSync('./rusadjf.txt', adjs.reduce( (p, l) => {
     let category = 'RusAdjectiveCategory.Rel';
     if (l[8][0].morphSigns.find( s => s === 'Qual' )) category = 'RusAdjectiveCategory.Qual';
     if (l[8][0].morphSigns.find( s => s === 'Poss' )) category = 'RusAdjectiveCategory.Poss';
+    if (l[8][0].morphSigns.find( s => s.startsWith('Apro') )) category = 'RusAdjectiveCategory.Pron';
     let s =
       ''.padEnd(2) + '// ' + l[7] + '\n' +
       ''.padEnd(2) + '{\n' +
@@ -160,10 +165,17 @@ fs.writeFileSync('./rusadjslist.txt', adjs.reduce(
   )
 );
 
+let counter = 0;
+
 fs.writeFileSync('./rusdecladjs.txt', adjs.reduce(
     (p, v, idx) => {
+      if (adjs.find( (a, idx2) => idx2 < idx && a[0] === v[0] )) {
+        return p;
+      }
+
       let d = v[0].replace('\'', '\\\'');
-      return p + '\'' + d + '\'' + ''.padEnd(10 - d.length) + '|' + ((idx + 1) % 6 === 0 ? '\n' : '')
+      counter = counter + 1;
+      return p + '\'' + d + '\'' + ''.padEnd(10 - d.length) + '|' + (counter % 6 === 0 ? '\n' : '')
     },
     ''
   )

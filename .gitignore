@@ -60,3 +60,5 @@ typings/
 dist/**/*.js.map
 
 dict.opcorpora.txt
+
+launch.json

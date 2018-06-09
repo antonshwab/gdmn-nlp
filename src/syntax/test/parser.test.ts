@@ -3,20 +3,28 @@ import { Word } from "../../morphology/morphology";
 import { Phrase } from "../syntax";
 import { combinatorialMorph } from "../lexer";
 
-test("parser", () => {
-  const result = parsePhrase('покажи все организации из минска');
-  const vp = result.phrase;
-  expect(vp).toBeDefined();
-  const verb = vp!.items[0] as Word;
-  expect(verb).toBeDefined();
-  expect(verb.word).toEqual('покажи');
-  const np = vp!.items[1] as Phrase;
-  const anp = np!.items[0] as Phrase;
-  const pp = np!.items[1] as Phrase;
-  expect((anp!.items[0] as Word).word).toEqual('все');
-  expect((anp!.items[1] as Word).word).toEqual('организации');
-  expect((pp!.items[0] as Word).word).toEqual('из');
-  expect((pp!.items[1] as Word).word).toEqual('минска');
+describe("parser", () => {
+  test("vp", () => {
+    const result = parsePhrase('покажи все организации из минска');
+    const vp = result.phrase;
+    expect(vp).toBeDefined();
+    const verb = vp!.items[0] as Word;
+    expect(verb).toBeDefined();
+    expect(verb.word).toEqual('покажи');
+    const np = vp!.items[1] as Phrase;
+    const anp = np!.items[0] as Phrase;
+    const pp = np!.items[1] as Phrase;
+    expect((anp!.items[0] as Word).word).toEqual('все');
+    expect((anp!.items[1] as Word).word).toEqual('организации');
+    expect((pp!.items[0] as Word).word).toEqual('из');
+    expect((pp!.items[1] as Word).word).toEqual('минска');
+  });
+
+  test("vp2", () => {
+    const result = parsePhrase('покажи минские организации');
+    const vp = result.phrase;
+    expect(vp).toBeDefined();
+  });
 });
 
 test('combinatorialMorph', () => {
