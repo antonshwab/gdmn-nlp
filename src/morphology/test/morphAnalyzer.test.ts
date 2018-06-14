@@ -1,13 +1,23 @@
 import { morphAnalyzer } from "../morphAnalyzer";
-import { RusAdjective } from "../rusAdjective";
+import { RusAdjective, RusAdjectiveLexeme } from "../rusAdjective";
 import { RusCase, RusMood, Involvement } from "../types";
 import { RusVerb } from "../rusVerb";
+
+describe("существительные", () => {
+  test("минск", () => {
+    const minsk = morphAnalyzer('минск');
+    expect(minsk.length).toEqual(2);
+  });
+});
 
 describe("прилагательные", () => {
   test("минский", () => {
     const result = morphAnalyzer('минский');
     expect(result.length).toEqual(2);
     expect(result[0].getSignature()).toEqual('ADJFRelvMascSingNomn');
+
+    const [minsk] = morphAnalyzer('минск');
+    expect((result[0].lexeme as RusAdjectiveLexeme).getNounLexeme()).toEqual(minsk.lexeme);
   });
 
   test("минские", () => {

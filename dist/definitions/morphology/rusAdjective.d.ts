@@ -1,5 +1,6 @@
 import { RusDeclensionAdjectiveZ, RusAdjectiveCategory, RusAdjectiveMorphSigns, RusGender, RusCase } from './types';
 import { AdjectiveLexeme, Word, Adjective, Words } from './morphology';
+import { RusNounLexeme } from './rusNoun';
 export declare class RusAdjectiveLexeme extends AdjectiveLexeme {
     readonly category: RusAdjectiveCategory;
     readonly declensionZ: RusDeclensionAdjectiveZ;
@@ -7,6 +8,7 @@ export declare class RusAdjectiveLexeme extends AdjectiveLexeme {
     hasShortForm(): boolean;
     getWordForm(morphSigns: RusAdjectiveMorphSigns): Word;
     getWordForms(): Words;
+    getNounLexeme(): RusNounLexeme | undefined;
 }
 export declare const RusAdjectiveLexemes: RusAdjectiveLexeme[];
 export declare class RusAdjective extends Adjective {

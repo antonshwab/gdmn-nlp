@@ -4,6 +4,7 @@ import { RusDeclensionAdjectiveZ, RusAdjectiveCategory, RusAdjectiveMorphSigns,
 import { AdjectiveLexeme, Word, Adjective, Words } from './morphology';
 import { RusDeclensionAdjectiveZEndings } from './rusAdjectiveEndings';
 import { rusAdjectives } from './rusAdjectivesData';
+import { RusNounLexeme, RusNounLexemes } from './rusNoun';
 
 export class RusAdjectiveLexeme extends AdjectiveLexeme {
   public readonly category: RusAdjectiveCategory;
@@ -127,6 +128,14 @@ export class RusAdjectiveLexeme extends AdjectiveLexeme {
     }
 
     return wordForms;
+  }
+
+  public getNounLexeme(): RusNounLexeme | undefined {
+    if (this.category !== RusAdjectiveCategory.Rel) {
+      throw new Error(`Only elative adjectives are made from nouns`);
+    }
+
+    return RusNounLexemes.find( l => l.stem === this.stem );
   }
 }
 

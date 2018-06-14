@@ -14,6 +14,7 @@ var types_1 = require("./types");
 var morphology_1 = require("./morphology");
 var rusAdjectiveEndings_1 = require("./rusAdjectiveEndings");
 var rusAdjectivesData_1 = require("./rusAdjectivesData");
+var rusNoun_1 = require("./rusNoun");
 var RusAdjectiveLexeme = /** @class */ (function (_super) {
     __extends(RusAdjectiveLexeme, _super);
     function RusAdjectiveLexeme(stem, stem1, stem2, category, declensionZ) {
@@ -133,6 +134,13 @@ var RusAdjectiveLexeme = /** @class */ (function (_super) {
             wordForms.push(this.getWordForm({ singular: false, short: true }));
         }
         return wordForms;
+    };
+    RusAdjectiveLexeme.prototype.getNounLexeme = function () {
+        var _this = this;
+        if (this.category !== types_1.RusAdjectiveCategory.Rel) {
+            throw new Error("Only elative adjectives are made from nouns");
+        }
+        return rusNoun_1.RusNounLexemes.find(function (l) { return l.stem === _this.stem; });
     };
     return RusAdjectiveLexeme;
 }(morphology_1.AdjectiveLexeme));
