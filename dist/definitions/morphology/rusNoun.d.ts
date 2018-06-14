@@ -1,11 +1,12 @@
 import { RusGender, RusDeclension, RusDeclensionZ, RusCase, RusNounMorphSigns } from './types';
 import { NounLexeme, Noun, Word, Words } from './morphology';
+import { SemCategory } from '../semantics/categories';
 export declare class RusNounLexeme extends NounLexeme {
     readonly animate: boolean;
     readonly gender: RusGender;
     readonly declension: RusDeclension;
     readonly declensionZ: RusDeclensionZ;
-    constructor(stem: string, stem1: string, stem2: string, animacy: boolean, gender: RusGender, declension: RusDeclension, declensionZ: RusDeclensionZ);
+    constructor(stem: string, stem1: string, stem2: string, semCategories: SemCategory[], animacy: boolean, gender: RusGender, declension: RusDeclension, declensionZ: RusDeclensionZ);
     getWordForm(morphSigns: RusNounMorphSigns): Word;
     hasPlural(): boolean;
     getWordForms(): Words;

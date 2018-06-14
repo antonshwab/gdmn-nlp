@@ -1039,7 +1039,7 @@
     gender: RusGender.Femn,
     declensionZ: '8*b\'',
     singular: ['ь', 'и', 'и', 'ь', 'ью', 'и'],
-    plural: ['и', 'ей', 'ям', 'ей', 'ями', 'ях']
+    plural: ['и', 'ей', 'ям', 'и', 'ями', 'ях']
   },
   {
     animate: false,

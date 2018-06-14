@@ -5,6 +5,8 @@ import {
 import { RusDeclensionZEndings } from './rusNounEndings';
 import { NounLexeme, Noun, Word, Words } from './morphology';
 import { rusNouns } from './rusNounsData';
+import { SemCategory } from '../semantics/categories';
+import { RusNounSemCategory } from '../semantics/rusNounSemCategory';
 
 export class RusNounLexeme extends NounLexeme {
   public readonly animate: boolean;
@@ -13,10 +15,11 @@ export class RusNounLexeme extends NounLexeme {
   public readonly declensionZ: RusDeclensionZ;
 
   constructor (stem: string, stem1: string, stem2: string,
+    semCategories: SemCategory[],
     animacy: boolean, gender: RusGender,
     declension: RusDeclension, declensionZ: RusDeclensionZ)
   {
-    super(stem, stem1, stem2);
+    super(stem, stem1, stem2, semCategories);
     this.animate = animacy;
     this.gender = gender;
     this.declension = declension;
@@ -163,7 +166,12 @@ export class RusNounLexeme extends NounLexeme {
 }
 
 export const RusNounLexemes: RusNounLexeme[] = rusNouns.map(
-  (n) => new RusNounLexeme(n.stem, n.stem1, n.stem2, n.animate, n.gender, n.declension, n.declensionZ)
+  n => {
+    const sc = RusNounSemCategory[n.stem];
+
+    return new RusNounLexeme(n.stem, n.stem1, n.stem2,
+      sc ? sc : [], n.animate, n.gender, n.declension, n.declensionZ);
+  }
 );
 
 export class RusNoun extends Noun {

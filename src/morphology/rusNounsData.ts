@@ -1,6 +1,6 @@
-import { RusGender, RusNounInterface } from './types';
+import { RusGender, IRusNoun } from './types';
 
-export const rusNouns: RusNounInterface[] = [
+export const rusNouns: IRusNoun[] = [
   {
     stem: 'мясокомбинат',
     stem1: '',

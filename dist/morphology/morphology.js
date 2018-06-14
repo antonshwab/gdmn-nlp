@@ -12,13 +12,15 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var idGenerator_1 = require("../utils/idGenerator");
 var Lexeme = /** @class */ (function () {
-    function Lexeme(stem, stem1, stem2) {
+    function Lexeme(stem, stem1, stem2, semCategories) {
         if (stem === void 0) { stem = ''; }
         if (stem1 === void 0) { stem1 = ''; }
         if (stem2 === void 0) { stem2 = ''; }
+        if (semCategories === void 0) { semCategories = []; }
         this.stem = stem;
         this.stem1 = stem1;
         this.stem2 = stem2;
+        this.semCategories = semCategories;
     }
     Lexeme.prototype.matchStems = function (word) {
         return word.startsWith(this.stem)

@@ -1,8 +1,10 @@
+import { SemCategory } from '../semantics/categories';
 export declare class Lexeme {
     readonly stem: string;
     readonly stem1: string;
     readonly stem2: string;
-    constructor(stem?: string, stem1?: string, stem2?: string);
+    readonly semCategories: SemCategory[];
+    constructor(stem?: string, stem1?: string, stem2?: string, semCategories?: SemCategory[]);
     matchStems(word: string): boolean;
     analyze(word: string, result: (w: Word) => void): void;
     getWordForms(): Words;

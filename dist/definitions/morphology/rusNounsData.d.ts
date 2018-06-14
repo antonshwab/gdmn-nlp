@@ -1,2 +1,2 @@
-import { RusNounInterface } from './types';
-export declare const rusNouns: RusNounInterface[];
+import { IRusNoun } from './types';
+export declare const rusNouns: IRusNoun[];

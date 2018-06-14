@@ -26,7 +26,7 @@ export declare type RusDeclensionZEnding = {
     singular: string[];
     plural: string[];
 };
-export interface RusNounInterface {
+export interface IRusNoun {
     readonly stem: string;
     readonly stem1: string;
     readonly stem2: string;

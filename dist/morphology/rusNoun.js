@@ -14,10 +14,11 @@ var types_1 = require("./types");
 var rusNounEndings_1 = require("./rusNounEndings");
 var morphology_1 = require("./morphology");
 var rusNounsData_1 = require("./rusNounsData");
+var rusNounSemCategory_1 = require("../semantics/rusNounSemCategory");
 var RusNounLexeme = /** @class */ (function (_super) {
     __extends(RusNounLexeme, _super);
-    function RusNounLexeme(stem, stem1, stem2, animacy, gender, declension, declensionZ) {
-        var _this = _super.call(this, stem, stem1, stem2) || this;
+    function RusNounLexeme(stem, stem1, stem2, semCategories, animacy, gender, declension, declensionZ) {
+        var _this = _super.call(this, stem, stem1, stem2, semCategories) || this;
         _this.animate = animacy;
         _this.gender = gender;
         _this.declension = declension;
@@ -156,7 +157,10 @@ var RusNounLexeme = /** @class */ (function (_super) {
     return RusNounLexeme;
 }(morphology_1.NounLexeme));
 exports.RusNounLexeme = RusNounLexeme;
-exports.RusNounLexemes = rusNounsData_1.rusNouns.map(function (n) { return new RusNounLexeme(n.stem, n.stem1, n.stem2, n.animate, n.gender, n.declension, n.declensionZ); });
+exports.RusNounLexemes = rusNounsData_1.rusNouns.map(function (n) {
+    var sc = rusNounSemCategory_1.RusNounSemCategory[n.stem];
+    return new RusNounLexeme(n.stem, n.stem1, n.stem2, sc ? sc : [], n.animate, n.gender, n.declension, n.declensionZ);
+});
 var RusNoun = /** @class */ (function (_super) {
     __extends(RusNoun, _super);
     function RusNoun(word, lexeme, grammCase, singular) {

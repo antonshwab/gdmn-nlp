@@ -1045,7 +1045,7 @@ exports.RusDeclensionZEndings = [
         gender: types_1.RusGender.Femn,
         declensionZ: '8*b\'',
         singular: ['ь', 'и', 'и', 'ь', 'ью', 'и'],
-        plural: ['и', 'ей', 'ям', 'ей', 'ями', 'ях']
+        plural: ['и', 'ей', 'ям', 'и', 'ями', 'ях']
     },
     {
         animate: false,
@@ -1382,6 +1382,6 @@ exports.RusDeclensionZEndings = [
         declensionZ: '3*b(1)(2)',
         singular: ['о', 'а', 'у', 'о', 'ом', 'е'],
         plural: ['и', 'ов', 'ам', 'и', 'ами', 'ах']
-    }
+    },
 ];
 //# sourceMappingURL=rusNounEndings.js.map

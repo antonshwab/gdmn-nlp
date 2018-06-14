@@ -1,7 +1,13 @@
 import { getNextID } from '../utils/idGenerator';
+import { SemCategory } from '../semantics/categories';
 
 export class Lexeme {
-  constructor (public readonly stem: string = '', public readonly stem1: string = '', public readonly stem2: string = '') { }
+  constructor (
+    public readonly stem: string = '',
+    public readonly stem1: string = '',
+    public readonly stem2: string = '',
+    public readonly semCategories: SemCategory[] = []
+  ) { }
 
   public matchStems(word: string): boolean {
     return word.startsWith(this.stem)
