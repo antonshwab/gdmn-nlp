@@ -8,8 +8,10 @@ import {
   TokenType
 } from 'chevrotain';
 import { combinatorialMorph } from './lexer';
-import { VP, NP, PP, ANP, ParsedText, Phrase, ImperativeVP, Noun } from '..';
+import { VP, NP, PP, ANP, ParsedText, Phrase, ImperativeVP, Noun, RusVerb, RusNoun } from '..';
 import { VPParser } from './grammar/RUBE/vp';
+import { RusAdjective } from '../morphology/rusAdjective';
+import { RusPreposition } from '../morphology/rusPreposition';
 
 const vpParser = new VPParser([]);
 
@@ -33,7 +35,7 @@ class VPVisitor extends BaseVPVisitor {
     const imperativeVerb = this.visit(ctx.imperativeVerb);
     const imperativeNP = this.visit(ctx.imperativeNP);
 
-    return new ImperativeVP(imperativeVerb, imperativeNP);
+    return new ImperativeVP<RusVerb, RusNoun, RusAdjective, RusPreposition>(imperativeVerb, imperativeNP);
   }
 
   public imperativeVerb = (ctx: any) => {
@@ -42,15 +44,15 @@ class VPVisitor extends BaseVPVisitor {
 
   public imperativeNP = (ctx: any) => {
     if (ctx.pp) {
-      return new NP(this.visit(ctx.qualImperativeNoun), this.visit(ctx.pp));
+      return new NP<RusNoun, RusAdjective, RusPreposition>(this.visit(ctx.qualImperativeNoun), this.visit(ctx.pp));
     } else {
-      return new NP(this.visit(ctx.qualImperativeNoun));
+      return new NP<RusNoun, RusAdjective, RusPreposition>(this.visit(ctx.qualImperativeNoun));
     }
   }
 
   public qualImperativeNoun = (ctx: any) => {
     if (ctx.imperativeDets) {
-      return new ANP(this.visit(ctx.imperativeDets), this.visit(ctx.imperativeNoun));
+      return new ANP<RusAdjective, RusNoun>(this.visit(ctx.imperativeDets), this.visit(ctx.imperativeNoun));
     } else {
       return this.visit(ctx.imperativeNoun);
     };
@@ -82,7 +84,7 @@ class VPVisitor extends BaseVPVisitor {
   }
 
   public pp = (ctx: any) => {
-    return new PP(this.visit(ctx.prep), this.visit(ctx.ppNoun));
+    return new PP<RusPreposition, RusNoun>(this.visit(ctx.prep), this.visit(ctx.ppNoun));
   }
 
   public prep = (ctx: any) => {
