@@ -1,15 +1,17 @@
 import { Word, Verb, Preposition, Noun, Adjective } from '../morphology/morphology';
 import { getNextID } from '../utils/idGenerator';
+import { RusPreposition } from '../morphology/rusPreposition';
+import { RusVerb, RusAdjective, RusNoun } from '..';
 
 export class Sentence {}
 
-export type PhraseItem = Word | Phrase;
+export type PhraseItem<V extends Verb, N extends Noun, A extends Adjective, P extends Preposition> = V | N | A | P | Phrase<V, N, A, P>;
 
-export class Phrase {
-  public items: PhraseItem[];
+export class Phrase<V extends Verb, N extends Noun, A extends Adjective, P extends Preposition> {
+  public items: PhraseItem<V, N, A, P>[];
   readonly id: number = getNextID();
 
-  constructor (items: PhraseItem[]) {
+  constructor (items: PhraseItem<V, N, A, P>[]) {
     if (!items.length || items.find( i => !i ) ) {
       throw new Error('Invalid phrase items');
     }
@@ -26,11 +28,11 @@ export class Phrase {
   }
 
   simplify() {
-    const recurs = (parentParent: Phrase, parent: Phrase, idx: number) => {
+    const recurs = (parentParent: Phrase<V, N, A, P>, parent: Phrase<V, N, A, P>, idx: number) => {
       parent.items.forEach(
         (i, x) => {
           if (i.constructor === parent.constructor) {
-            recurs(parent, i as Phrase, x);
+            recurs(parent, i as Phrase<V, N, A, P>, x);
           }
         }
       );
@@ -45,17 +47,17 @@ export class Phrase {
     this.items.forEach(
       (i, idx) => {
         if (i.constructor === this.constructor) {
-          recurs(this, i as Phrase, idx);
+          recurs(this, i as Phrase<V, N, A, P>, idx);
         }
       }
     );
   }
 }
 
-export class VP extends Phrase {}
+export class VP<V extends Verb, N extends Noun, A extends Adjective, P extends Preposition> extends Phrase<V, N, A, P> {}
 
-export class ImperativeVP<V extends Verb, N extends Noun, A extends Adjective, P extends Preposition> extends VP {
-  constructor (imperativeVerb: V, imperativeNP?: NP<N, A, P>) {
+export class ImperativeVP<V extends Verb, N extends Noun, A extends Adjective, P extends Preposition> extends VP<V, N, A, P> {
+  constructor (imperativeVerb: V, imperativeNP?: NP<V, N, A, P>) {
     if (imperativeNP) {
       super([imperativeVerb, imperativeNP]);
     } else {
@@ -67,17 +69,17 @@ export class ImperativeVP<V extends Verb, N extends Noun, A extends Adjective, P
     return this.items[0] as V;
   }
 
-  get imperativeNP(): NP<N, A, P> | undefined {
+  get imperativeNP(): NP<V, N, A, P> | undefined {
     if (!this.items[1]) {
       return undefined;
     } else {
-      return this.items[1] as NP<N, A, P>;
+      return this.items[1] as NP<V, N, A, P>;
     }
   }
 }
 
-export class NP<N extends Noun, A extends Adjective, P extends Preposition> extends Phrase {
-  constructor (n: N | ANP<A, N>, pp?: PP<P, N>) {
+export class NP<V extends Verb, N extends Noun, A extends Adjective, P extends Preposition> extends Phrase<V, N, A, P> {
+  constructor (n: N | ANP<V, N, A, P>, pp?: PP<V, N, A, P>) {
     if (pp) {
       super([n, pp]);
     } else {
@@ -85,24 +87,24 @@ export class NP<N extends Noun, A extends Adjective, P extends Preposition> exte
     }
   }
 
-  get noun(): N | ANP<A, N> {
+  get noun(): N | ANP<V, N, A, P> {
     if (this.items[0] instanceof Noun) {
       return this.items[0] as N;
     } else {
-      return this.items[0] as ANP<A, N>;
+      return this.items[0] as ANP<V, N, A, P>;
     }
   }
 
-  get pp(): PP<P, N> | undefined {
+  get pp(): PP<V, N, A, P> | undefined {
     if (this.items[1] instanceof PP) {
-      return this.items[1] as PP<P, N>;
+      return this.items[1] as PP<V, N, A, P>;
     } else {
       return undefined;
     }
   }
 }
 
-export class ANP<A extends Adjective, N extends Noun> extends Phrase {
+export class ANP<V extends Verb, N extends Noun, A extends Adjective, P extends Preposition> extends Phrase<V, N, A, P> {
   constructor (adjf: A, noun: N) {
     super([adjf, noun]);
   }
@@ -116,7 +118,7 @@ export class ANP<A extends Adjective, N extends Noun> extends Phrase {
   }
 }
 
-export class PP<P extends Preposition, N extends Noun> extends Phrase {
+export class PP<V extends Verb, N extends Noun, A extends Adjective, P extends Preposition> extends Phrase<V, N, A, P> {
   constructor (prep: P, noun: N) {
     super([prep, noun]);
   }
