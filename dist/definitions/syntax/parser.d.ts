@@ -1,8 +1,6 @@
-import { ParsedText, Phrase, RusVerb, RusNoun } from '..';
-import { RusAdjective } from '../morphology/rusAdjective';
-import { RusPreposition } from '../morphology/rusPreposition';
+import { ParsedText, Phrase } from '..';
 export declare type ParsedText = {
     readonly wordsSignatures: string[];
-    readonly phrase?: Phrase<RusVerb, RusNoun, RusAdjective, RusPreposition>;
+    readonly phrase?: Phrase;
 };
 export declare function parsePhrase(text: string): ParsedText;

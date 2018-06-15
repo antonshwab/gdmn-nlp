@@ -8,10 +8,8 @@ import {
   TokenType
 } from 'chevrotain';
 import { combinatorialMorph } from './lexer';
-import { VP, NP, PP, ANP, ParsedText, Phrase, ImperativeVP, Noun, RusVerb, RusNoun } from '..';
+import { VP, NP, PP, ANP, ParsedText, Phrase, ImperativeVP, Noun } from '..';
 import { VPParser } from './grammar/RUBE/vp';
-import { RusAdjective } from '../morphology/rusAdjective';
-import { RusPreposition } from '../morphology/rusPreposition';
 
 const vpParser = new VPParser([]);
 
@@ -35,7 +33,7 @@ class VPVisitor extends BaseVPVisitor {
     const imperativeVerb = this.visit(ctx.imperativeVerb);
     const imperativeNP = this.visit(ctx.imperativeNP);
 
-    return new ImperativeVP<RusVerb, RusNoun, RusAdjective, RusPreposition>(imperativeVerb, imperativeNP);
+    return new ImperativeVP(imperativeVerb, imperativeNP);
   }
 
   public imperativeVerb = (ctx: any) => {
@@ -44,15 +42,15 @@ class VPVisitor extends BaseVPVisitor {
 
   public imperativeNP = (ctx: any) => {
     if (ctx.pp) {
-      return new NP<RusVerb, RusNoun, RusAdjective, RusPreposition>(this.visit(ctx.qualImperativeNoun), this.visit(ctx.pp));
+      return new NP(this.visit(ctx.qualImperativeNoun), this.visit(ctx.pp));
     } else {
-      return new NP<RusVerb, RusNoun, RusAdjective, RusPreposition>(this.visit(ctx.qualImperativeNoun));
+      return new NP(this.visit(ctx.qualImperativeNoun));
     }
   }
 
   public qualImperativeNoun = (ctx: any) => {
     if (ctx.imperativeDets) {
-      return new ANP<RusVerb, RusNoun, RusAdjective, RusPreposition>(this.visit(ctx.imperativeDets), this.visit(ctx.imperativeNoun));
+      return new ANP(this.visit(ctx.imperativeDets), this.visit(ctx.imperativeNoun));
     } else {
       return this.visit(ctx.imperativeNoun);
     };
@@ -84,7 +82,7 @@ class VPVisitor extends BaseVPVisitor {
   }
 
   public pp = (ctx: any) => {
-    return new PP<RusVerb, RusNoun, RusAdjective, RusPreposition>(this.visit(ctx.prep), this.visit(ctx.ppNoun));
+    return new PP(this.visit(ctx.prep), this.visit(ctx.ppNoun));
   }
 
   public prep = (ctx: any) => {
@@ -111,12 +109,12 @@ const toVPInstance = new VPVisitor();
 
 export type ParsedText = {
   readonly wordsSignatures: string[];
-  readonly phrase?: Phrase<RusVerb, RusNoun, RusAdjective, RusPreposition>;
+  readonly phrase?: Phrase;
 };
 
 export function parsePhrase(text: string): ParsedText {
   let wordsSignatures: string[] = [];
-  let phrase: Phrase<RusVerb, RusNoun, RusAdjective, RusPreposition> | undefined = undefined;
+  let phrase: Phrase | undefined = undefined;
 
   combinatorialMorph(text).some( t => {
     vpParser.input = t;
