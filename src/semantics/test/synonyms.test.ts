@@ -9,7 +9,7 @@ describe('синонимы', () => {
     expect(hasMeaning(SemContext.QueryDB, 'показать', (v as RusVerb))).toBeTruthy();
 
     const p = morphAnalyzer('продемонстрируй')[0];
-    expect(hasMeaning(SemContext.QueryDB, 'покажи', (v as RusVerb))).toBeTruthy();
+    expect(hasMeaning(SemContext.QueryDB, 'покажи', (p as RusVerb))).toBeTruthy();
   });
 
   test("синонимы для слова удалить", () => {
