@@ -1,33 +1,33 @@
-import { createToken, Lexer, IToken } from 'chevrotain';
+import { createToken, Lexer, IToken, TokenType } from 'chevrotain';
 
-export const WhiteSpace = createToken({
+export const WhiteSpace: TokenType = createToken({
   name: 'WhiteSpace',
   pattern: /[ \t]+/,
   line_breaks: false
 });
 
-export const LineBreak = createToken({
+export const LineBreak: TokenType = createToken({
   name: 'LineBreak',
   pattern: /[\n\r]+/,
   line_breaks: true
 });
 
-export const PunctuationMark = createToken({
+export const PunctuationMark: TokenType = createToken({
   name: 'PunctuationMark',
   pattern: /[.,?!]{1}/
 });
 
-export const CyrillicWord = createToken({
+export const CyrillicWord: TokenType = createToken({
   name: 'CyrillicWord',
   pattern: /(?:[А-Яа-я]+-[А-Яа-я]+)|(?:[А-Яа-я]+)/
 });
 
-export const Other = createToken({
+export const Other: TokenType = createToken({
   name: 'Other',
   pattern: /[A-Za-z0-9]+/
 })
 
-const allTokens = [
+const allTokens: TokenType[] = [
   LineBreak,
   WhiteSpace,
   PunctuationMark,
