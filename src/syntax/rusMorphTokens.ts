@@ -1,10 +1,10 @@
 import { Lexer, createToken, IToken, TokenType } from "chevrotain";
-import { Word } from "../morphology/morphology";
+import { AnyWord } from "../morphology/morphology";
 import { RusGender, RusCase, RusAdjectiveCategory } from "../morphology/types";
 import { RusNoun, RusAdjective } from "..";
 
 export interface IMorphToken extends IToken {
-  word: Word;
+  word: AnyWord;
 };
 
 export interface ITokenTypes {

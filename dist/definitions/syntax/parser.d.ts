@@ -1,6 +1,6 @@
-import { ParsedText, Phrase } from '..';
+import { ParsedText, Phrase, AnyWord } from '..';
 export declare type ParsedText = {
     readonly wordsSignatures: string[];
-    readonly phrase?: Phrase;
+    readonly phrase?: Phrase<AnyWord>;
 };
 export declare function parsePhrase(text: string): ParsedText;

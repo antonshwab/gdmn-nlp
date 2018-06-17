@@ -32,9 +32,6 @@ var Lexeme = /** @class */ (function () {
             this.getWordForms().filter(function (f) { return f.word === word; }).forEach(function (f) { return result(f); });
         }
     };
-    Lexeme.prototype.getWordForms = function () {
-        return [];
-    };
     return Lexeme;
 }());
 exports.Lexeme = Lexeme;

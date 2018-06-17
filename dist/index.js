@@ -23,6 +23,7 @@ __export(require("./morphology/types"));
 __export(require("./morphology/utility"));
 __export(require("./syntax/syntax"));
 __export(require("./syntax/parser"));
+__export(require("./syntax/rusSyntax"));
 __export(require("./semantics/types"));
 __export(require("./semantics/categories"));
 __export(require("./semantics/rusVerbSynonyms"));

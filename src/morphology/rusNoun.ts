@@ -3,7 +3,7 @@ import {
   RusCaseNames, RusGenderNames, RusNounMorphSigns, ShortCaseNames, ShortGenderNames
 } from './types';
 import { RusDeclensionZEndings } from './rusNounEndings';
-import { NounLexeme, Noun, Word, Words } from './morphology';
+import { NounLexeme, Noun } from './morphology';
 import { rusNouns } from './rusNounsData';
 import { SemCategory } from '../semantics/categories';
 import { RusNounSemCategory } from '../semantics/rusNounSemCategory';
@@ -26,7 +26,7 @@ export class RusNounLexeme extends NounLexeme {
     this.declensionZ = declensionZ;
   }
 
-  public getWordForm(morphSigns: RusNounMorphSigns): Word {
+  public getWordForm(morphSigns: RusNounMorphSigns): RusNoun {
     const { c, singular } = morphSigns;
     const ending = RusDeclensionZEndings.find( (e) => e.declensionZ === this.declensionZ &&
       e.gender === this.gender && e.animate === this.animate );
@@ -148,8 +148,8 @@ export class RusNounLexeme extends NounLexeme {
     return typeof ending !== 'undefined' && ending.plural.length > 0;
   }
 
-  public getWordForms(): Words {
-    const wordForms: Words = [];
+  public getWordForms(): RusNoun[] {
+    const wordForms: RusNoun[] = [];
 
     for (let c = RusCase.Nomn; c <= RusCase.Loct; c++) {
       wordForms.push(this.getWordForm({ c, singular: true }));
@@ -174,7 +174,7 @@ export const RusNounLexemes: RusNounLexeme[] = rusNouns.map(
   }
 );
 
-export class RusNoun extends Noun {
+export class RusNoun extends Noun<RusNounLexeme> {
   public readonly grammCase: RusCase;
   public readonly singular: boolean;
 
@@ -185,7 +185,7 @@ export class RusNoun extends Noun {
   }
 
   getDisplayText (): string {
-    const lexeme = this.lexeme as RusNounLexeme;
+    const lexeme = this.lexeme;
     const stem = this.word.startsWith(lexeme.stem) ? lexeme.stem :
       (this.word.startsWith(lexeme.stem1) ? lexeme.stem1 :
       (this.word.startsWith(lexeme.stem2) ? lexeme.stem2 : ''));
@@ -210,7 +210,7 @@ export class RusNoun extends Noun {
   }
 
   getSignature (): string {
-    const lexeme = this.lexeme as RusNounLexeme;
+    const lexeme = this.lexeme;
     return RusNoun.getSignature(lexeme.animate, lexeme.gender, this.singular, this.grammCase);
   }
 }

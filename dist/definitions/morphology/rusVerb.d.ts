@@ -1,5 +1,5 @@
 import { RusAspect, Transitivity, RusConjugationZ, RusTense, RusGender, RusPersons, RusMood, Involvement, RusVerbMorphSigns, RusConjugationZEnding } from './types';
-import { VerbLexeme, Word, Verb, Words } from './morphology';
+import { VerbLexeme, Verb } from './morphology';
 export declare class RusVerbLexeme extends VerbLexeme {
     readonly aspect: RusAspect;
     readonly transitivity: Transitivity;
@@ -7,11 +7,11 @@ export declare class RusVerbLexeme extends VerbLexeme {
     readonly conjZEnding: RusConjugationZEnding | undefined;
     constructor(stem: string, stem1: string, stem2: string, aspect: RusAspect, transitivity: Transitivity, conjZ: RusConjugationZ);
     hasImprMood(): boolean;
-    getWordForm(morphSigns: RusVerbMorphSigns): Word;
-    getWordForms(): Words;
+    getWordForm(morphSigns: RusVerbMorphSigns): RusVerb;
+    getWordForms(): RusVerb[];
 }
 export declare const RusVerbLexemes: RusVerbLexeme[];
-export declare class RusVerb extends Verb {
+export declare class RusVerb extends Verb<RusVerbLexeme> {
     readonly infn: boolean;
     readonly tense: RusTense | undefined;
     readonly singular: boolean | undefined;

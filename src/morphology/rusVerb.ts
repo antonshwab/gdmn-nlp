@@ -1,7 +1,7 @@
 import { RusAspect, Transitivity, RusConjugationZ, RusTense, RusGender,
   RusPersons, RusMood, Involvement, RusVerbMorphSigns, RusConjugationZEnding,
   ShortGenderNames, ShortTenseNames, ShortMoodNames } from './types';
-import { VerbLexeme, Word, Verb, Words } from './morphology';
+import { VerbLexeme, Verb } from './morphology';
 import { rusVerbs } from './rusVerbsData';
 import { RusConjugationZEndings } from './rusVerbEndings';
 import { isRusConsonant } from './utility';
@@ -33,7 +33,7 @@ export class RusVerbLexeme extends VerbLexeme {
     return (typeof this.conjZEnding.endings.find( e => e.mood === RusMood.Impr ) !== 'undefined');
   }
 
-  public getWordForm(morphSigns: RusVerbMorphSigns): Word {
+  public getWordForm(morphSigns: RusVerbMorphSigns): RusVerb {
     if (morphSigns.infn) {
       if (!this.conjZEnding) {
         throw 'Conjugation \'' + this.conjZ + '\' not found';
@@ -202,8 +202,8 @@ export class RusVerbLexeme extends VerbLexeme {
     throw 'Conjugation \'' + this.conjZ + '\' ending not found';
   }
 
-  public getWordForms(): Words {
-    const wordForms: Words = [];
+  public getWordForms(): RusVerb[] {
+    const wordForms: RusVerb[] = [];
 
     wordForms.push(this.getWordForm({ infn: true }));
     wordForms.push(this.getWordForm({ tense: RusTense.Past, singular: true, gender: RusGender.Masc, mood: RusMood.Indc }));
@@ -237,7 +237,7 @@ export const RusVerbLexemes: RusVerbLexeme[] = rusVerbs.map(
   (v) => new RusVerbLexeme(v.stem, v.stem1, v.stem2, v.aspect, v.transitivity, v.conjZ)
 );
 
-export class RusVerb extends Verb {
+export class RusVerb extends Verb<RusVerbLexeme> {
   public readonly infn: boolean;
   public readonly tense: RusTense | undefined;
   public readonly singular: boolean | undefined;
@@ -258,7 +258,7 @@ export class RusVerb extends Verb {
   }
 
   getDisplayText (): string {
-    const lexeme = this.lexeme as RusVerbLexeme;
+    const lexeme = this.lexeme;
     const stem = this.word.startsWith(lexeme.stem) ? lexeme.stem :
       (this.word.startsWith(lexeme.stem1) ? lexeme.stem1 :
       (this.word.startsWith(lexeme.stem2) ? lexeme.stem2 : ''));
@@ -328,7 +328,7 @@ export class RusVerb extends Verb {
   }
 
   getSignature (): string {
-    const lexeme = this.lexeme as RusVerbLexeme;
+    const lexeme = this.lexeme;
     const tran = lexeme.transitivity === Transitivity.Tran ? 'Tran' : 'Intr';
     const aspect = lexeme.aspect === RusAspect.Perf ? 'Perf' : 'Impf';
 

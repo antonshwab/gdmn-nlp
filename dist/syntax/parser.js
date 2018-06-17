@@ -28,22 +28,22 @@ var VPVisitor = /** @class */ (function (_super) {
         _this.imperativeVP = function (ctx) {
             var imperativeVerb = _this.visit(ctx.imperativeVerb);
             var imperativeNP = _this.visit(ctx.imperativeNP);
-            return new __1.ImperativeVP(imperativeVerb, imperativeNP);
+            return new __1.RusImperativeVP(imperativeVerb, imperativeNP);
         };
         _this.imperativeVerb = function (ctx) {
             return ctx.VERBTranPerfSingImpr[0].word;
         };
         _this.imperativeNP = function (ctx) {
             if (ctx.pp) {
-                return new __1.NP(_this.visit(ctx.qualImperativeNoun), _this.visit(ctx.pp));
+                return new __1.RusNP(_this.visit(ctx.qualImperativeNoun), _this.visit(ctx.pp));
             }
             else {
-                return new __1.NP(_this.visit(ctx.qualImperativeNoun));
+                return new __1.RusNP(_this.visit(ctx.qualImperativeNoun));
             }
         };
         _this.qualImperativeNoun = function (ctx) {
             if (ctx.imperativeDets) {
-                return new __1.ANP(_this.visit(ctx.imperativeDets), _this.visit(ctx.imperativeNoun));
+                return new __1.RusANP(_this.visit(ctx.imperativeDets), _this.visit(ctx.imperativeNoun));
             }
             else {
                 return _this.visit(ctx.imperativeNoun);
@@ -72,7 +72,7 @@ var VPVisitor = /** @class */ (function (_super) {
                                     : undefined;
         };
         _this.pp = function (ctx) {
-            return new __1.PP(_this.visit(ctx.prep), _this.visit(ctx.ppNoun));
+            return new __1.RusPP(_this.visit(ctx.prep), _this.visit(ctx.ppNoun));
         };
         _this.prep = function (ctx) {
             return ctx.PREPPlce[0].word;

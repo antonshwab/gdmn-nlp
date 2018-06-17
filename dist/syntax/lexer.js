@@ -31,7 +31,7 @@ function combinatorialMorph(text) {
         };
     }
     var words = tokenizer_1.tokenize(text).reduce(function (p, t) {
-        if (t.tokenType === tokenizer_1.RusWord) {
+        if (t.tokenType === tokenizer_1.CyrillicWord) {
             p.push(morphAnalyzer_1.morphAnalyzer(t.image));
         }
         return p;

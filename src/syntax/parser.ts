@@ -1,14 +1,5 @@
-import {
-  createToken,
-  Lexer,
-  Parser,
-  IToken,
-  ILexingError,
-  IRecognitionException,
-  TokenType
-} from 'chevrotain';
 import { combinatorialMorph } from './lexer';
-import { VP, NP, PP, ANP, ParsedText, Phrase, ImperativeVP, Noun } from '..';
+import { RusNP, RusPP, RusANP, ParsedText, Phrase, RusImperativeVP, AnyWord } from '..';
 import { VPParser } from './grammar/RUBE/vp';
 
 const vpParser = new VPParser([]);
@@ -33,7 +24,7 @@ class VPVisitor extends BaseVPVisitor {
     const imperativeVerb = this.visit(ctx.imperativeVerb);
     const imperativeNP = this.visit(ctx.imperativeNP);
 
-    return new ImperativeVP(imperativeVerb, imperativeNP);
+    return new RusImperativeVP(imperativeVerb, imperativeNP);
   }
 
   public imperativeVerb = (ctx: any) => {
@@ -42,15 +33,15 @@ class VPVisitor extends BaseVPVisitor {
 
   public imperativeNP = (ctx: any) => {
     if (ctx.pp) {
-      return new NP(this.visit(ctx.qualImperativeNoun), this.visit(ctx.pp));
+      return new RusNP(this.visit(ctx.qualImperativeNoun), this.visit(ctx.pp));
     } else {
-      return new NP(this.visit(ctx.qualImperativeNoun));
+      return new RusNP(this.visit(ctx.qualImperativeNoun));
     }
   }
 
   public qualImperativeNoun = (ctx: any) => {
     if (ctx.imperativeDets) {
-      return new ANP(this.visit(ctx.imperativeDets), this.visit(ctx.imperativeNoun));
+      return new RusANP(this.visit(ctx.imperativeDets), this.visit(ctx.imperativeNoun));
     } else {
       return this.visit(ctx.imperativeNoun);
     };
@@ -82,7 +73,7 @@ class VPVisitor extends BaseVPVisitor {
   }
 
   public pp = (ctx: any) => {
-    return new PP(this.visit(ctx.prep), this.visit(ctx.ppNoun));
+    return new RusPP(this.visit(ctx.prep), this.visit(ctx.ppNoun));
   }
 
   public prep = (ctx: any) => {
@@ -109,12 +100,12 @@ const toVPInstance = new VPVisitor();
 
 export type ParsedText = {
   readonly wordsSignatures: string[];
-  readonly phrase?: Phrase;
+  readonly phrase?: Phrase<AnyWord>;
 };
 
 export function parsePhrase(text: string): ParsedText {
   let wordsSignatures: string[] = [];
-  let phrase: Phrase | undefined = undefined;
+  let phrase: Phrase<AnyWord> | undefined = undefined;
 
   combinatorialMorph(text).some( t => {
     vpParser.input = t;

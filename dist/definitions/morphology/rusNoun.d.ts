@@ -1,5 +1,5 @@
 import { RusGender, RusDeclension, RusDeclensionZ, RusCase, RusNounMorphSigns } from './types';
-import { NounLexeme, Noun, Word, Words } from './morphology';
+import { NounLexeme, Noun } from './morphology';
 import { SemCategory } from '../semantics/categories';
 export declare class RusNounLexeme extends NounLexeme {
     readonly animate: boolean;
@@ -7,12 +7,12 @@ export declare class RusNounLexeme extends NounLexeme {
     readonly declension: RusDeclension;
     readonly declensionZ: RusDeclensionZ;
     constructor(stem: string, stem1: string, stem2: string, semCategories: SemCategory[], animacy: boolean, gender: RusGender, declension: RusDeclension, declensionZ: RusDeclensionZ);
-    getWordForm(morphSigns: RusNounMorphSigns): Word;
+    getWordForm(morphSigns: RusNounMorphSigns): RusNoun;
     hasPlural(): boolean;
-    getWordForms(): Words;
+    getWordForms(): RusNoun[];
 }
 export declare const RusNounLexemes: RusNounLexeme[];
-export declare class RusNoun extends Noun {
+export declare class RusNoun extends Noun<RusNounLexeme> {
     readonly grammCase: RusCase;
     readonly singular: boolean;
     constructor(word: string, lexeme: RusNounLexeme, grammCase: RusCase, singular: boolean);

@@ -1,7 +1,7 @@
 import { IToken, TokenType } from "chevrotain";
-import { Word } from "../morphology/morphology";
+import { AnyWord } from "../morphology/morphology";
 export interface IMorphToken extends IToken {
-    word: Word;
+    word: AnyWord;
 }
 export interface ITokenTypes {
     [name: string]: TokenType;

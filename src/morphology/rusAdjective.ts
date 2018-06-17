@@ -1,7 +1,7 @@
 import { RusDeclensionAdjectiveZ, RusAdjectiveCategory, RusAdjectiveMorphSigns,
   RusGender, RusCase, RusCaseNames, RusGenderNames, RusAdjectiveCategoryNames,
   ShortCaseNames, ShortGenderNames, ShortAdjectiveCategoryNames } from './types';
-import { AdjectiveLexeme, Word, Adjective, Words } from './morphology';
+import { AdjectiveLexeme, Adjective } from './morphology';
 import { RusDeclensionAdjectiveZEndings } from './rusAdjectiveEndings';
 import { rusAdjectives } from './rusAdjectivesData';
 import { RusNounLexeme, RusNounLexemes } from './rusNoun';
@@ -30,7 +30,7 @@ export class RusAdjectiveLexeme extends AdjectiveLexeme {
     }
   }
 
-  public getWordForm(morphSigns: RusAdjectiveMorphSigns): Word {
+  public getWordForm(morphSigns: RusAdjectiveMorphSigns): RusAdjective {
     const declZEnding = RusDeclensionAdjectiveZEndings.find( (e) => e.declensionZ === this.declensionZ );
 
     if (!declZEnding) { throw 'Unknown declensionZ ending'; }
@@ -101,8 +101,8 @@ export class RusAdjectiveLexeme extends AdjectiveLexeme {
     }
   }
 
-  public getWordForms(): Words {
-    const wordForms: Words = [];
+  public getWordForms(): RusAdjective[] {
+    const wordForms: RusAdjective[] = [];
 
     for (let c = RusCase.Nomn; c <= RusCase.Loct; c++) {
       if (c === RusCase.Accs) {
@@ -143,7 +143,7 @@ export const RusAdjectiveLexemes: RusAdjectiveLexeme[] = rusAdjectives.map(
   (v) => new RusAdjectiveLexeme(v.stem, v.stem1, v.stem2, v.category, v.declensionZ)
 );
 
-export class RusAdjective extends Adjective {
+export class RusAdjective extends Adjective<RusAdjectiveLexeme> {
   public readonly singular: boolean;
   public readonly gender: RusGender | undefined;
   public readonly grammCase: RusCase | undefined;
@@ -160,7 +160,7 @@ export class RusAdjective extends Adjective {
   }
 
   getDisplayText (): string {
-    const lexeme = this.lexeme as RusAdjectiveLexeme;
+    const lexeme = this.lexeme;
     const stem = this.word.startsWith(lexeme.stem) ? lexeme.stem :
       (this.word.startsWith(lexeme.stem1) ? lexeme.stem1 :
       (this.word.startsWith(lexeme.stem2) ? lexeme.stem2 : ''));
@@ -193,7 +193,7 @@ export class RusAdjective extends Adjective {
   }
 
   getSignature (): string {
-    const lexeme = this.lexeme as RusAdjectiveLexeme;
+    const lexeme = this.lexeme;
     return RusAdjective.getSignature(this.short, lexeme.category, this.gender, this.singular, this.grammCase);
   }
 }

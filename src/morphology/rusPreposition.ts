@@ -1,4 +1,4 @@
-import { PrepositionLexeme, Preposition, Word, Words } from './morphology';
+import { PrepositionLexeme, Preposition, Word } from './morphology';
 import { PrepositionType, RusPrepositionTypeNames, ShortPrepositionTypeNames } from './types';
 
 export const rusPrepositions = [
@@ -36,17 +36,17 @@ export class RusPrepositionLexeme extends PrepositionLexeme {
     this.prepositionType = prepositionType;
   }
 
-  public analyze(word: string, result: (w: Word) => void): void {
+  public analyze(word: string, result: (w: Word<RusPrepositionLexeme>) => void): void {
     if (this.stem === word) {
       result(new RusPreposition(word, this));
     }
   }
 
-  public getWordForm(): Word {
+  public getWordForm(): RusPreposition {
     return new RusPreposition(this.stem, this);
   }
 
-  public getWordForms(): Words {
+  public getWordForms(): RusPreposition[] {
     return [new RusPreposition(this.stem, this)];
   }
 }
@@ -59,14 +59,14 @@ export const RusPrepositionLexemes = rusPrepositions.reduce(
   [] as RusPrepositionLexeme[]
 );
 
-export class RusPreposition extends Preposition {
+export class RusPreposition extends Preposition<RusPrepositionLexeme> {
   getDisplayText (): string {
     return this.word + '; предлог; ' +
-      RusPrepositionTypeNames[(this.lexeme as RusPrepositionLexeme).prepositionType];
+      RusPrepositionTypeNames[this.lexeme.prepositionType];
   }
 
   getSignature (): string {
     return 'PREP' +
-      ShortPrepositionTypeNames[(this.lexeme as RusPrepositionLexeme).prepositionType];
+      ShortPrepositionTypeNames[this.lexeme.prepositionType];
   }
 }

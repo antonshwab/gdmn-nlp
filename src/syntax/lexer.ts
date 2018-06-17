@@ -1,6 +1,5 @@
-import { IToken, TokenType, createToken, Lexer } from 'chevrotain';
-import { Word } from '../morphology/morphology';
-import { tokenizer, RusWord, tokenize } from '../syntax/tokenizer';
+import { AnyWord } from '../morphology/morphology';
+import { CyrillicWord, tokenize } from '../syntax/tokenizer';
 import { morphAnalyzer } from '../morphology/morphAnalyzer';
 import { IMorphToken, morphTokens } from './rusMorphTokens';
 
@@ -19,7 +18,7 @@ import { IMorphToken, morphTokens } from './rusMorphTokens';
  */
 export function combinatorialMorph(text: string): IMorphToken[][]
 {
-  function createTokenInstance(w: Word): IMorphToken {
+  function createTokenInstance(w: AnyWord): IMorphToken {
     const tokType = morphTokens[w.getSignature()];
 
     if (!tokType) {
@@ -37,12 +36,12 @@ export function combinatorialMorph(text: string): IMorphToken[][]
 
   const words = tokenize(text).reduce(
     (p, t) => {
-      if (t.tokenType === RusWord) {
+      if (t.tokenType === CyrillicWord) {
         p.push(morphAnalyzer(t.image));
       }
       return p;
     },
-    [] as Word[][]);
+    [] as AnyWord[][]);
 
   const cmbn: IMorphToken[][] = [];
 

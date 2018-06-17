@@ -1,7 +1,7 @@
 import { getNextID } from '../utils/idGenerator';
 import { SemCategory } from '../semantics/categories';
 
-export class Lexeme {
+export abstract class Lexeme {
   constructor (
     public readonly stem: string = '',
     public readonly stem1: string = '',
@@ -15,48 +15,48 @@ export class Lexeme {
       || (!!this.stem2 && word.startsWith(this.stem2));
   }
 
-  public analyze(word: string, result: (w: Word) => void): void {
+  public analyze(word: string, result: (w: AnyWord) => void): void {
     if (this.matchStems(word))
     {
       this.getWordForms().filter( f => f.word === word ).forEach( f => result(f) );
     }
   }
 
-  public getWordForms(): Words {
-    return [];
-  }
+  public abstract getWordForms(): AnyWords;
 }
 
-export class ConjunctionLexeme extends Lexeme { }
+export abstract class ConjunctionLexeme extends Lexeme { }
 
-export class NounLexeme extends Lexeme { }
+export abstract class NounLexeme extends Lexeme { }
 
-export class VerbLexeme extends Lexeme { }
+export abstract class VerbLexeme extends Lexeme { }
 
-export class AdjectiveLexeme extends Lexeme { }
+export abstract class AdjectiveLexeme extends Lexeme { }
 
-export class PrepositionLexeme extends Lexeme { }
+export abstract class PrepositionLexeme extends Lexeme { }
 
-export class PronounLexeme extends Lexeme { }
+export abstract class PronounLexeme extends Lexeme { }
 
-export class Word {
+export abstract class Word<L extends Lexeme> {
   readonly id: number = getNextID();
-  constructor (public readonly word: string, public readonly lexeme: Lexeme) { }
+  constructor (public readonly word: string, public readonly lexeme: L) { }
   getText (): string { return this.word; }
   getDisplayText (): string { return this.getText(); }
   getSignature (): string { return ''; }
 }
 
-export class Conjunction extends Word { }
+export abstract class Conjunction<L extends ConjunctionLexeme> extends Word<L> { }
 
-export class Noun extends Word { }
+export abstract class Noun<L extends NounLexeme> extends Word<L> { }
 
-export class Verb extends Word { }
+export abstract class Verb<L extends VerbLexeme> extends Word<L> { }
 
-export class Adjective extends Word { }
+export abstract class Adjective<L extends AdjectiveLexeme> extends Word<L> { }
 
-export class Preposition extends Word { }
+export abstract class Preposition<L extends PrepositionLexeme> extends Word<L> { }
 
-export class Pronoun extends Word { }
+export abstract class Pronoun<L extends PrepositionLexeme> extends Word<L> { }
 
-export type Words = Word[];
+export type AnyWord = Word<Lexeme>;
+
+export type AnyWords = AnyWord[];

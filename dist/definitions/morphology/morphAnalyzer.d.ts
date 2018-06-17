@@ -1,2 +1,2 @@
-import { Words } from './morphology';
-export declare function morphAnalyzer(word: string): Words;
+import { AnyWords } from './morphology';
+export declare function morphAnalyzer(word: string): AnyWords;

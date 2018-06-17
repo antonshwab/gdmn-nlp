@@ -15,8 +15,8 @@ exports.PunctuationMark = chevrotain_1.createToken({
     name: 'PunctuationMark',
     pattern: /[.,?!]{1}/
 });
-exports.RusWord = chevrotain_1.createToken({
-    name: 'RusWord',
+exports.CyrillicWord = chevrotain_1.createToken({
+    name: 'CyrillicWord',
     pattern: /(?:[А-Яа-я]+-[А-Яа-я]+)|(?:[А-Яа-я]+)/
 });
 exports.Other = chevrotain_1.createToken({
@@ -27,7 +27,7 @@ var allTokens = [
     exports.LineBreak,
     exports.WhiteSpace,
     exports.PunctuationMark,
-    exports.RusWord,
+    exports.CyrillicWord,
     exports.Other
 ];
 exports.tokenizer = new chevrotain_1.Lexer(allTokens);

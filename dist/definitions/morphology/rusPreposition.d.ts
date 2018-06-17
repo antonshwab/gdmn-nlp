@@ -1,4 +1,4 @@
-import { PrepositionLexeme, Preposition, Word, Words } from './morphology';
+import { PrepositionLexeme, Preposition, Word } from './morphology';
 import { PrepositionType } from './types';
 export declare const rusPrepositions: {
     prepositionType: PrepositionType;
@@ -7,12 +7,12 @@ export declare const rusPrepositions: {
 export declare class RusPrepositionLexeme extends PrepositionLexeme {
     readonly prepositionType: PrepositionType;
     constructor(preposition: string, prepositionType: PrepositionType);
-    analyze(word: string, result: (w: Word) => void): void;
-    getWordForm(): Word;
-    getWordForms(): Words;
+    analyze(word: string, result: (w: Word<RusPrepositionLexeme>) => void): void;
+    getWordForm(): RusPreposition;
+    getWordForms(): RusPreposition[];
 }
 export declare const RusPrepositionLexemes: RusPrepositionLexeme[];
-export declare class RusPreposition extends Preposition {
+export declare class RusPreposition extends Preposition<RusPrepositionLexeme> {
     getDisplayText(): string;
     getSignature(): string;
 }

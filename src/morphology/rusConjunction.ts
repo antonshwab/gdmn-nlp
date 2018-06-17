@@ -1,18 +1,18 @@
-import { ConjunctionLexeme, Conjunction, Words, Word } from './morphology';
+import { ConjunctionLexeme, Conjunction } from './morphology';
 
 export class RusConjunctionLexeme extends ConjunctionLexeme {
 
-  public analyze(word: string, result: (w: Word) => void): void {
+  public analyze(word: string, result: (w: RusConjunction) => void): void {
     if (this.stem === word) {
       result(new RusConjunction(word, this));
     }
   }
 
-  public getWordForm(): Word {
+  public getWordForm(): RusConjunction {
     return new RusConjunction(this.stem, this);
   }
 
-  public getWordForms(): Words {
+  public getWordForms(): RusConjunction[] {
     return [new RusConjunction(this.stem, this)];
   }
 }
@@ -23,7 +23,7 @@ export const RusConjunctionLexemes: RusConjunctionLexeme[] = rusConjunctions.map
   с => new RusConjunctionLexeme(с)
 );
 
-export class RusConjunction extends Conjunction {
+export class RusConjunction extends Conjunction<RusConjunctionLexeme> {
   getDisplayText (): string {
     return this.word + '; союз';
   }
