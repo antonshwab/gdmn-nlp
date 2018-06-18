@@ -11,9 +11,14 @@ var SemCategory;
      */
     SemCategory[SemCategory["Place"] = 1] = "Place";
     /**
+     * Любая организация. Коммерческая, некомерческая,
+     * правительственное учреждение, школа, университет и т.п.
+     */
+    SemCategory[SemCategory["Organization"] = 2] = "Organization";
+    /**
      * Компания. Коммерческая организация.
      */
-    SemCategory[SemCategory["Company"] = 2] = "Company";
+    SemCategory[SemCategory["Company"] = 3] = "Company";
 })(SemCategory = exports.SemCategory || (exports.SemCategory = {}));
 ;
 exports.semCategoryNames = [

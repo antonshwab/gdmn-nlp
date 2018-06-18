@@ -8,9 +8,14 @@ export declare enum SemCategory {
      */
     Place = 1,
     /**
+     * Любая организация. Коммерческая, некомерческая,
+     * правительственное учреждение, школа, университет и т.п.
+     */
+    Organization = 2,
+    /**
      * Компания. Коммерческая организация.
      */
-    Company = 2
+    Company = 3
 }
 export declare const semCategoryNames: string[];
 export declare function semCategory2Str(cat: SemCategory): string;

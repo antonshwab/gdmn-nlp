@@ -5,5 +5,6 @@ export interface IRusNounSemCategory {
 }
 
 export const RusNounSemCategory: IRusNounSemCategory = {
-  'минск': [SemCategory.Place]
+  'минск': [SemCategory.Place],
+  'организаци': [SemCategory.Organization]
 };
