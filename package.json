@@ -26,8 +26,8 @@
     "jest": "^23.1.0",
     "line-by-line": "^0.1.6",
     "n-readlines": "^1.0.0",
-    "ts-jest": "^22.4.4",
-    "ts-node": "^6.1.1",
+    "ts-jest": "^23.0.1",
+    "ts-node": "^7.0.0",
     "typescript": "^2.9.2"
   },
   "dependencies": {
